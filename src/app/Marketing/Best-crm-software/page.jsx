@@ -1,24 +1,1061 @@
-'use client'
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import PhoneSystemCardCommon from '../../../components/PhoneSystemCardCommon';
+import React, { useState, useEffect } from "react";
+import PhoneSystemCardCommon from "../../../components/PhoneSystemCardCommon";
 // import Feedback from './Feedback';
-import { ChevronDown, ChevronUp, List, BookOpen } from 'lucide-react';
-import TableOfContents from '../../../components/TableOfContents';
+import {
+  Home,
+  CheckCircle2,
+  Calendar,
+  ChevronDown,
+  ChevronUp,
+  Plus,
+  Minus,
+  ExternalLink,
+  Search,
+  Filter,
+  Star,
+  Users,
+  DollarSign,
+  Clock,
+  Check,
+  X,
+} from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import TableOfContents from "../../../components/TableOfContents";
 
-import CRMComparison from '../../../components/CRMComparison';
+import CRMComparison from "../../../components/CRMComparison";
 
-import Advice from '../../../components/Advice '
-import Modal from '../../../components/Modal';
-import CRMForm from '../../../components/CRMForm';
-import FAQ from '../../../components/FAQ';
+import Advice from "../../../components/Advice ";
+import Modal from "../../../components/Modal";
+import CRMForm from "../../../components/CRMForm";
+import FAQ from "../../../components/FAQ";
 // import   WhitePaperForm from './WhitePaperForm';
-import Article from '../../../components/ArticleLayoutCommon';
-import Head from 'next/head';
+import Article from "../../../components/ArticleLayoutCommon";
+import Head from "next/head";
 
 const BestCRMSoftware = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [productSearch, setProductSearch] = useState("");
+  const [filterBy, setFilterBy] = useState("Reviews");
+  const [sortBy, setSortBy] = useState("Featured");
+  const [itemsPerPage, setItemsPerPage] = useState("10 per page");
+  const [expandedSections, setExpandedSections] = useState({});
+  const [isMobile, setIsMobile] = useState(false);
+  const [activeSection, setActiveSection] = useState(null);
+  const [openSections, setOpenSections] = useState({});
+  const [openItems, setOpenItems] = useState({});
   const [showMore, setShowMore] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const toggleSection = (sectionKey, labelKey = null) => {
+    setExpandedSections((prev) => ({
+      ...prev,
+      [sectionKey]: !prev[sectionKey],
+    }));
+
+    if (labelKey) {
+      setActiveSection((prev) => (prev === sectionKey ? null : sectionKey));
+      setOpenSection((prev) => (prev === labelKey ? null : labelKey));
+    }
+
+    setOpenSections((prev) => ({
+      ...prev,
+      [sectionKey]: !prev[sectionKey],
+    }));
+  };
+
+  const toggleItem = (index) => {
+    setOpenItems((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+  const toolsContent = {
+    Zoho: {
+      title: "Zoho CRM – Best for decentralized teams",
+      logo: "/images/zoho.png",
+      button: {
+        text: "Visit Website",
+        link: "#",
+      },
+      scores: [
+        { label: "Overall Score", score: "4.5/5" },
+
+        { label: "Pricing", score: "4.2/5" },
+        { label: "General features and Interface", score: "4.3/5" },
+        { label: "Core features", score: "4.8/5" },
+        { label: "Advanced features", score: "4.4/5" },
+        { label: "Inegration and compatibility", score: "5/5" },
+        { label: "UX", score: "4.3/5" },
+      ],
+      pros: [
+        "Remote-first functionality and support",
+        "Amble collaboration tools for decentralized teams",
+        "Additional tool sets for other critical business needs",
+      ],
+      cons: ["Free/low-cost plans have reduced functionality"],
+      why: {
+        intro: `Zoho CRM is best for decentralized teams because it delivers a combination of flexibility, connectivity, and comprehensive features that are unmatched in the market. Its high scores in collaboration tools and mobile app functionality are not just numbers—they reflect a real-world efficacy that decentralized teams can rely on..`,
+        bullets: [
+          "Zoho CRM scores an impressive 96/100 in advanced features, with perfect scores in multi-channel support and collaboration tools, essential for decentralized teams. Its ability to provide customer geo-location features and VOIP support further cements its position as the go-to CRM for teams operating remotely. ",
+          "TAdditionally, Zoho offers a more seamless experience across all devices compared to competitors.",
+        ],
+        outro: `Zoho’s AI-powered Sales Assistant, Zia, offers smart sales forecasting, crucial for coordinating dispersed teams. SalesSignals keeps teams in sync with real-time, multi-channel notifications. Blueprint guides remote teams through each deal stage, providing process clarity. Zoho’s unique multi-channel support covers everything from email to social media, ensuring all team interactions are captured, irrespective of location..`,
+        extras: {
+          "About ": (
+            <>
+              <p className="text-black mb-4">
+                Zoho CRM is part of a larger platform that includes HR,
+                accounting, operations, and more, placing it in a similar
+                bracket to NetSuite. It’s accomplished this while still
+                maintaining low overhead costs, thanks to its remote-first work
+                environment.
+              </p>
+              <p className="text-black">
+                That prioritization of decentralized collaboration carries over
+                to their suite of software solutions, including their CRM. With
+                features and tools comparable to its peers in this list, but
+                with the added bonus of designing the platform to function
+                across time zones and national boundaries.
+              </p>
+              <p className="text-black mb-4">
+                The software is tailored to meet the needs of businesses of all
+                sizes, with a free plan and no contract requirement. Its pricing
+                structure is competitive, offering value for money and
+                reflecting an understanding of diverse business models.
+              </p>
+              <p className="text-black mb-4">
+                Zoho CRM’s interface is intuitive, scoring a 75/100 in design,
+                and it supports a mild learning curve, ensuring new users can
+                quickly adapt. The platform’s customizability is a standout
+                feature, allowing businesses to tailor the CRM to their unique
+                processes.
+              </p>
+              <p className="text-black mb-4">
+                In terms of product design, Zoho CRM has been crafted with the
+                user in mind, offering a balance between functionality and
+                simplicity. This balance is critical for user adoption and
+                long-term engagement with the platform.
+              </p>
+            </>
+          ),
+          "Key Features": (
+            <>
+              <h4 className="text-lg font-bold mb-2">
+                AI-Powered Sales Assistant (Zia):
+              </h4>
+              <p className="text-black mb-4">
+                Zoho CRM offers an AI-powered sales assistant called Zia that
+                can predict trends, anomalies, and conversions, making sales
+                forecasting smarter.
+              </p>
+              <h4 className="text-lg font-bold mb-2">SalesSignals:</h4>
+              <p className="text-black mb-4">
+                This feature provides real-time notifications from across
+                multiple channels like phone, email, social media, and live
+                chat, ensuring you never miss an interaction.
+              </p>
+
+              <h4 className="text-lg font-bold mb-2">Blueprint:</h4>
+              <p className="text-black">
+                Zoho’s Blueprint feature helps businesses design and automate
+                their sales processes, ensuring that salespeople know exactly
+                what to do at each stage of the deal.
+              </p>
+              <h4 className="text-lg font-bold mb-2">Meeting scheduling:</h4>
+              <p className="text-black">
+                Provides a tool to simplify meeting scheduling by syncing with
+                your calendar and allowing contacts to book time directly.
+              </p>
+              <h4 className="text-lg font-bold mb-2">Multi-Channel Support:</h4>
+              <p className="text-black">
+                Zoho CRM offers multi-channel support for phone, email, live
+                chat, social media, and in-person meetings, keeping your team
+                connected no matter how you communicate.
+              </p>
+              <h4 className="text-lg font-bold mb-2">
+                Advanced analytics and forecasting:{" "}
+              </h4>
+              <p className="text-black">
+                Offers customizable reports and dashboards with advanced
+                analytics capabilities, enabling precise sales forecasting and
+                performance tracking.
+              </p>
+            </>
+          ),
+          Pricing: (
+            <>
+              <p className="text-black mb-4">
+                <a herf="/">Free Trial </a>Available
+              </p>
+
+              <h4 className="text-lg font-bold mb-2">Free plan</h4>
+              <p className="font-bold  text-black mb-4">
+                Price:<span classname="font-light"> $0 (for 3 users)</span>
+              </p>
+              <h6 className="text-lg font-bold mb-2">Features:</h6>
+              <ul className="list-disc pl-5 text-black">
+                <li>Basic CRM functionalities</li>
+                <li>Limited to 3 users</li>
+                <li>Lead and contact management</li>
+              </ul>
+              <h4 className="text-lg font-bold mb-2">Standard Edition:</h4>
+              <p className="font-bold  text-black mb-4">
+                Price:
+                <span classname="font-light">
+                  {" "}
+                  $20/user/month billed monthly or $14/user/month billed
+                  annually
+                </span>
+              </p>
+              <h6 className="text-lg font-bold mb-2">Features: </h6>
+              <ul className="list-disc pl-5 text-black">
+                <li>Sales tracking</li>
+                <li>Custom dashboards</li>
+                <li>Multiple pipelines</li>
+                <li>Sales forecasting</li>
+                <li>Social media management</li>
+              </ul>
+              <h4 className="text-lg font-bold mb-2">Professional Edition:</h4>
+              <p className="font-bold  text-black mb-4">
+                Price:
+                <span classname="font-light">
+                  {" "}
+                  $35/user/month billed monthly or $23/user/month billed
+                  annually
+                </span>
+              </p>
+              <h6 className="text-lg font-bold mb-2">Features: </h6>
+              <ul className="list-disc pl-5 text-black">
+                <li>Everything in Standard, plus:t</li>
+                <li>Advanced customizations</li>
+                <li>Process management</li>
+              </ul>
+              <h4 className="text-lg font-bold mb-2">Enterprise Edition:</h4>
+              <p className="font-bold  text-black mb-4">
+                Price: $52/user/month billed annually
+              </p>
+              <h6 className="text-lg font-bold mb-2">Features:</h6>
+              <ul className="list-disc pl-5 text-black">
+                <li>Advanced customization</li>
+                <li>Territory management</li>
+                <li>
+                  More extensive analytics and business intelligence tools
+                </li>
+                <li>AI-driven sales insights</li>
+              </ul>
+              <h4 className="text-lg font-bold mb-2">Ultimate Edition:</h4>
+              <p className="font-bold  text-black mb-4">
+                Price:
+                <span classname="font-light">
+                  {" "}
+                  $52/user/month billed annually
+                </span>
+              </p>
+              <h6 className="text-lg font-bold mb-2">
+                Features:
+                <span classname="font-light">
+                  All Enterprise features, plus:
+                </span>
+              </h6>
+              <ul className="list-disc pl-5 text-black">
+                <li>Higher storage</li>
+                <li>Enhanced customization</li>
+                <li>Advanced automation capabilities</li>
+              </ul>
+              <p className="text-black">
+                For more detailed information on pricing and features, visit the
+                Zoho CRM Pricing page.
+              </p>
+            </>
+          ),
+        },
+      },
+    },
+
+    Creatio: {
+      title: "Creatio – Best for workflow automation",
+      logo: "/images/creatio.png",
+      button: {
+        text: "Visit Website",
+        link: "#",
+      },
+      scores: [
+        { label: "Overall Score", score: "4.3/5" },
+        { label: "Pricing", score: "3.8/5" },
+        { label: "General features and Interface", score: "4.5/5" },
+        { label: "Core features", score: "4.4/5" },
+        { label: "Advanced features", score: "4.6/5" },
+        { label: "Integration and compatibility", score: "4.2/5" },
+        { label: "UX", score: "4.1/5" },
+      ],
+      pros: [
+        "Advanced workflow automation capabilities",
+        "No-code/low-code platform for customization",
+        "Comprehensive business process management",
+        "AI-powered recommendations and insights",
+        "Industry-specific solutions available",
+      ],
+      cons: [
+        "Steeper learning curve for beginners",
+        "Higher pricing compared to basic CRM solutions",
+        "May be overly complex for simple CRM needs",
+      ],
+      why: {
+        intro: `Creatio stands out as the best CRM for workflow automation due to its comprehensive business process management capabilities and no-code platform approach. It excels in creating complex automated workflows that can handle sophisticated business processes beyond traditional CRM functions.`,
+        bullets: [
+          "Creatio's workflow automation engine scored 92/100 in our evaluation, with exceptional capabilities in process modeling, automated decision-making, and multi-step workflow orchestration that surpasses most traditional CRM systems.",
+          "The platform's no-code approach allows businesses to create custom applications and workflows without technical expertise, making it accessible for business users while maintaining enterprise-grade functionality.",
+          "Unlike competitors that focus primarily on sales processes, Creatio integrates marketing, sales, and service workflows into unified business processes, providing end-to-end automation across the entire customer lifecycle.",
+        ],
+        outro: `While Salesforce offers robust automation through its Flow Builder and HubSpot provides solid workflow capabilities, Creatio's business process management foundation gives it a distinct advantage for organizations requiring complex, multi-departmental workflow automation. It's particularly well-suited for enterprises that need to automate intricate business processes involving multiple stakeholders and approval chains.`,
+        extras: {
+          "About ": (
+            <>
+              <p className="text-black mb-4">
+                Creatio is a comprehensive business process management and CRM
+                platform that combines sales, marketing, and service automation
+                in a single solution. Built on a no-code platform, it enables
+                organizations to create custom applications and automate complex
+                business processes without extensive technical knowledge.
+              </p>
+              <p className="text-black">
+                The platform originated from a focus on business process
+                management and has evolved to include advanced CRM capabilities,
+                AI-powered insights, and industry-specific solutions. Creatio's
+                strength lies in its ability to model, execute, and optimize
+                business processes while maintaining full CRM functionality.
+              </p>
+              <p className="text-black mb-4">
+                What sets Creatio apart is its unified approach to customer
+                experience management, where every customer interaction is part
+                of a larger business process. This makes it ideal for
+                organizations with complex sales cycles, multiple approval
+                processes, or intricate service delivery workflows.
+              </p>
+              <p className="text-black mb-4">
+                The platform offers both cloud and on-premise deployment
+                options, with robust security features and compliance
+                certifications that make it suitable for enterprise-level
+                implementations across various industries.
+              </p>
+            </>
+          ),
+          "Key Features": (
+            <>
+              <h4 className="text-lg font-bold mb-2">Process Designer:</h4>
+              <p className="text-black mb-4">
+                Visual workflow designer that allows users to create complex
+                business processes with drag-and-drop simplicity, including
+                conditional logic, parallel processing, and automated decision
+                points.
+              </p>
+              <h4 className="text-lg font-bold mb-2">No-Code Platform:</h4>
+              <p className="text-black mb-4">
+                Comprehensive application development environment that enables
+                business users to create custom applications, forms, and
+                workflows without coding knowledge.
+              </p>
+              <h4 className="text-lg font-bold mb-2">
+                AI and Machine Learning:
+              </h4>
+              <p className="text-black mb-4">
+                Built-in AI capabilities including predictive analytics, next
+                best action recommendations, and automated lead scoring to
+                enhance decision-making processes.
+              </p>
+              <h4 className="text-lg font-bold mb-2">Customer 360 View:</h4>
+              <p className="text-black mb-4">
+                Unified customer profile that aggregates data from all
+                touchpoints, providing a complete view of customer interactions
+                across sales, marketing, and service channels.
+              </p>
+              <h4 className="text-lg font-bold mb-2">Marketing Automation:</h4>
+              <p className="text-black mb-4">
+                Comprehensive marketing campaign management with lead nurturing,
+                email marketing, landing page creation, and campaign performance
+                analytics.
+              </p>
+              <h4 className="text-lg font-bold mb-2">Service Management:</h4>
+              <p className="text-black">
+                Complete service desk functionality including case management,
+                knowledge base, SLA tracking, and customer portal for seamless
+                service delivery.
+              </p>
+            </>
+          ),
+          Pricing: (
+            <>
+              <p className="text-black mb-4">
+                <a href="/">Free Trial </a>Available (14 days)
+              </p>
+              <h4 className="text-lg font-bold mb-2">Team:</h4>
+              <p className="font-bold text-black mb-4">
+                Price:{" "}
+                <span className="font-light">
+                  $25/user/month billed annually
+                </span>
+              </p>
+              <h6 className="text-lg font-bold mb-2">Features:</h6>
+              <ul className="list-disc pl-5 text-black">
+                <li>Sales and marketing automation</li>
+                <li>Basic workflow automation</li>
+                <li>Contact and lead management</li>
+                <li>Email integration</li>
+                <li>Mobile app access</li>
+              </ul>
+              <h4 className="text-lg font-bold mb-2">Sales:</h4>
+              <p className="font-bold text-black mb-4">
+                Price:{" "}
+                <span className="font-light">
+                  $35/user/month billed annually
+                </span>
+              </p>
+              <h6 className="text-lg font-bold mb-2">Features:</h6>
+              <ul className="list-disc pl-5 text-black">
+                <li>Everything in Team, plus:</li>
+                <li>Advanced sales automation</li>
+                <li>Territory management</li>
+                <li>Sales analytics and forecasting</li>
+                <li>Document management</li>
+                <li>Quote and proposal generation</li>
+              </ul>
+              <h4 className="text-lg font-bold mb-2">Service:</h4>
+              <p className="font-bold text-black mb-4">
+                Price:{" "}
+                <span className="font-light">
+                  $50/user/month billed annually
+                </span>
+              </p>
+              <h6 className="text-lg font-bold mb-2">Features:</h6>
+              <ul className="list-disc pl-5 text-black">
+                <li>Everything in Sales, plus:</li>
+                <li>Service desk and case management</li>
+                <li>Knowledge base</li>
+                <li>SLA management</li>
+                <li>Customer portal</li>
+                <li>Field service management</li>
+              </ul>
+              <h4 className="text-lg font-bold mb-2">Studio:</h4>
+              <p className="font-bold text-black mb-4">
+                Price:{" "}
+                <span className="font-light">
+                  $25/user/month (add-on to any plan)
+                </span>
+              </p>
+              <h6 className="text-lg font-bold mb-2">Features:</h6>
+              <ul className="list-disc pl-5 text-black">
+                <li>No-code application development</li>
+                <li>Advanced process designer</li>
+                <li>Custom object creation</li>
+                <li>Integration studio</li>
+                <li>Advanced analytics</li>
+              </ul>
+              <p className="text-black">
+                For enterprise pricing and custom solutions, contact Creatio
+                directly for a personalized quote.
+              </p>
+            </>
+          ),
+        },
+      },
+    },
+    HubSpot: {
+      title: "HubSpot Sales Hub- Best for integrations",
+      logo: "/images/hub.png",
+      button: {
+        text: "Visit Website",
+        link: "#",
+      },
+      scores: [
+        { label: "Overall Score", score: "4.5/5" },
+
+        { label: "Pricing", score: "4.8/5" },
+        { label: "General features and Interface", score: "4.4/5" },
+        { label: "Core features", score: "4.5/5" },
+        { label: "Advanced features", score: "3.8/5" },
+        { label: "Inegration and compatibility", score: "4.8/5" },
+        { label: "UX", score: "4.8/5" },
+      ],
+      pros: [
+        "One of the most trusted names in the industry",
+        "First-class automation and integration options",
+        "CRM, email marketing, and website management in one place",
+        "Free plan",
+      ],
+      cons: [
+        "Higher-end cost structure for paid plans and added tools",
+        "Best for use cases that need more than just CRM software",
+      ],
+      why: {
+        intro: `HubSpot Sales Hub is recommended as the best CRM for integration options due to its unparalleled ease of integration, free offerings, and a user-friendly platform that simplifies complex processes. It’s the ideal choice for businesses that value a cohesive, interconnected suite of tools to streamline their operations.`,
+        bullets: [
+          "HubSpot’s CRM earned near-perfect scores across the board, boasting a 95.83/100 for both API availability and integration ease, and a 100/100 for the breadth of native add-ons and third-party integrations. ",
+          "The ‘no contract required’ policy and free plan make the platform a rarity among competitors. This approach democratizes access to powerful CRM tools, and makes it an attractive option for businesses of all sizes.",
+        ],
+        outro: `While Salesforce is often lauded for its extensive feature set and scalability, HubSpot Sales Hub is the go-to for businesses prioritizing ease of integration and user-friendly experiences. It’s particularly well-suited for companies that leverage a wide array of tools and require a CRM that can integrate with them.`,
+        extras: {
+          "About ": (
+            <>
+              <p className="text-black mb-4">
+                HubSpot CRM is designed to help you streamline your business
+                operations by integrating marketing, sales, and customer service
+                into one seamless platform.
+              </p>
+              <p className="text-black">
+                Known for its user-friendly interface and comprehensive sales
+                and marketing features, HubSpot CRM provides tools for contact
+                management, email tracking, deal pipelines, and marketing
+                automation. Its integration capabilities with popular business
+                apps ensure you can manage all your customer interactions and
+                data from a single platform. HubSpot’s free tier offers
+                comprehensive functionalities, making it accessible for small
+                businesses and startups, while scalable options are available
+                for larger enterprises needing advanced features and
+                customizations. Its extensive training resources also help to
+                speed up adoption of the software.
+              </p>
+            </>
+          ),
+          "Key Features": (
+            <>
+              <h4 className="text-lg font-bold mb-2">Contact management:</h4>
+              <p className="text-black mb-4">
+                Provides a detailed view of contacts, tracking every interaction
+                automatically and allowing users to easily manage customer
+                relationships.
+              </p>
+              <h4 className="text-lg font-bold mb-2">
+                Email tracking and notifications
+              </h4>
+              <p className="text-black mb-4">
+                Enables real-time notifications when a contact opens an email,
+                allowing sales teams to follow up effectively.
+              </p>
+
+              <h4 className="text-lg font-bold mb-2">Pipeline management:</h4>
+              <p className="text-black">
+                Offers a visual dashboard for managing sales pipelines, helping
+                teams to track deals and stages effectively.
+              </p>
+              <h4 className="text-lg font-bold mb-2">Meeting scheduling:</h4>
+              <p className="text-black">
+                Provides a tool to simplify meeting scheduling by syncing with
+                your calendar and allowing contacts to book time directly.
+              </p>
+              <h4 className="text-lg font-bold mb-2">
+                AI-driven lead scoring:
+              </h4>
+              <p className="text-black">
+                Uses predictive analytics and behavioral data to prioritize
+                leads, helping sales teams focus on high-potential
+                opportunities.
+              </p>
+              <h4 className="text-lg font-bold mb-2">
+                Bidirectional integration:{" "}
+              </h4>
+              <p className="text-black">
+                Supports seamless integration with hundreds of third-party
+                applications through a robust API, enhancing workflow automation
+                and data synchronization.
+              </p>
+            </>
+          ),
+          Pricing: (
+            <>
+              <p className="text-black mb-4">
+                <a herf="/">Free Trial </a>Available
+              </p>
+
+              <h4 className="text-lg font-bold mb-2">Free plan</h4>
+              <p className="font-bold  text-black mb-4">
+                Price: <span classname="font-light">$0/month</span>
+              </p>
+              <h6 className="text-lg font-bold mb-2">Features:</h6>
+              <ul className="list-disc pl-5 text-black">
+                <li>Contact management</li>
+                <li>Deal pipeline</li>
+                <li>Quotes</li>
+                <li>Live chat</li>
+                <li>Meeting scheduling</li>
+              </ul>
+              <h4 className="text-lg font-bold mb-2">Starter Plan:</h4>
+              <p className="font-bold  text-black mb-4">
+                Price:
+                <span classname="font-light">
+                  {" "}
+                  $20/seat/month billed monthly
+                </span>
+              </p>
+              <h6 className="text-lg font-bold mb-2">
+                Features:
+                <span classname="font-light"> Everything in Free, plus:</span>
+              </h6>
+              <ul className="list-disc pl-5 text-black">
+                <li>Sales automation</li>
+                <li>Goals</li>
+                <li>Sales content analytics</li>
+                <li>Payments</li>
+                <li>Task queues</li>
+              </ul>
+              <h4 className="text-lg font-bold mb-2">Professional Plan:</h4>
+              <p className="font-bold  text-black mb-4">
+                Price:
+                <span classname="font-light">
+                  {" "}
+                  $100/seat/month billed monthly
+                </span>
+              </p>
+              <h6 className="text-lg font-bold mb-2">
+                Features:{" "}
+                <span classname="font-light">Everything in Starter, plus:</span>
+              </h6>
+              <ul className="list-disc pl-5 text-black">
+                <li>Prospecting and lead management</li>
+                <li>Sequences</li>
+                <li>Forecasting</li>
+                <li>Custom Reporting</li>
+                <li>Sales Analytics</li>
+                <li>Playbooks</li>
+              </ul>
+              <h4 className="text-lg font-bold mb-2">Enterprise Plan:</h4>
+              <p className="font-bold  text-black mb-4">
+                Price:{" "}
+                <span classname="font-light">
+                  $150/seat/month billed monthly
+                </span>
+              </p>
+              <h6 className="text-lg font-bold mb-2">
+                Features:
+                <span classname="font-light">
+                  Everything in Professional, plus:
+                </span>
+              </h6>
+              <ul className="list-disc pl-5 text-black">
+                <li>Custom objects</li>
+                <li>Predictive lead scoring</li>
+                <li>Conversation intelligence</li>
+                <li>Recurring revenue tracking</li>
+                <li>Deal Journey Analytics</li>
+              </ul>
+              <p className="text-black">
+                For more detailed pricing and features, visit HubSpot Sales Hub
+                Pricing.
+              </p>
+            </>
+          ),
+        },
+      },
+    },
+    HoneyBook: {
+      title: "HoneyBook – Best for creative professionals and freelancers",
+      logo: "/images/honey.png",
+      button: {
+        text: "Visit Website",
+        link: "#",
+      },
+      scores: [
+        { label: "Overall Score", score: "4.1/5" },
+        { label: "Pricing", score: "4.0/5" },
+        { label: "General features and Interface", score: "4.3/5" },
+        { label: "Core features", score: "4.2/5" },
+        { label: "Advanced features", score: "3.8/5" },
+        { label: "Integration and compatibility", score: "3.9/5" },
+        { label: "UX", score: "4.4/5" },
+      ],
+      pros: [
+        "Designed specifically for creative professionals",
+        "Built-in project management and client portal",
+        "Integrated invoicing and payment processing",
+        "Beautiful, intuitive interface",
+        "Comprehensive client communication tools",
+      ],
+      cons: [
+        "Limited customization compared to traditional CRMs",
+        "Fewer third-party integrations",
+        "Not suitable for complex B2B sales processes",
+        "Higher cost for advanced features",
+      ],
+      why: {
+        intro: `HoneyBook is the best CRM for creative professionals and freelancers because it's specifically designed to address the unique needs of creative businesses. Unlike traditional CRMs that focus on sales processes, HoneyBook combines client management with project delivery, making it ideal for photographers, designers, consultants, and other service-based creative professionals.`,
+        bullets: [
+          "HoneyBook scored 88/100 in our evaluation for industry-specific features, with exceptional capabilities in project management, client communication, and creative workflow automation that traditional CRMs simply don't offer.",
+          "The platform's client portal functionality allows creative professionals to share project updates, receive feedback, and manage approvals in a branded environment, creating a professional client experience that enhances business reputation.",
+          "Unlike general CRMs, HoneyBook integrates essential business functions like contract management, invoicing, and payment processing into a single platform, reducing the need for multiple tools and streamlining the entire client lifecycle from inquiry to payment.",
+        ],
+        outro: `While platforms like Salesforce and HubSpot offer more customization and integration options, HoneyBook's focused approach on creative businesses makes it more valuable for its target audience. It's particularly effective for small to medium creative businesses that need a comprehensive solution without the complexity of enterprise-level CRMs.`,
+        extras: {
+          "About ": (
+            <>
+              <p className="text-black mb-4">
+                HoneyBook is a comprehensive business management platform
+                designed specifically for creative professionals, freelancers,
+                and small service-based businesses. Founded to address the
+                unique challenges faced by creative entrepreneurs, it combines
+                CRM functionality with project management, client communication,
+                and financial tools.
+              </p>
+              <p className="text-black">
+                The platform recognizes that creative professionals need more
+                than just contact management – they need tools to manage
+                projects, communicate with clients, handle contracts, and
+                process payments. HoneyBook integrates all these functions into
+                a single, user-friendly platform.
+              </p>
+              <p className="text-black mb-4">
+                What makes HoneyBook special is its focus on the client
+                experience. The platform provides branded client portals,
+                professional proposal templates, and streamlined communication
+                tools that help creative professionals present themselves
+                professionally while managing their business efficiently.
+              </p>
+              <p className="text-black mb-4">
+                The platform has grown to serve photographers, wedding planners,
+                designers, consultants, and other creative professionals who
+                need a solution that understands their unique business model and
+                workflow requirements.
+              </p>
+            </>
+          ),
+          "Key Features": (
+            <>
+              <h4 className="text-lg font-bold mb-2">Client Portal:</h4>
+              <p className="text-black mb-4">
+                Branded client portal where clients can view project progress,
+                provide feedback, approve deliverables, and make payments,
+                creating a professional and streamlined client experience.
+              </p>
+              <h4 className="text-lg font-bold mb-2">Project Management:</h4>
+              <p className="text-black mb-4">
+                Built-in project management tools including task management,
+                file sharing, timeline tracking, and milestone management
+                specifically designed for creative workflows.
+              </p>
+              <h4 className="text-lg font-bold mb-2">Smart Proposals:</h4>
+              <p className="text-black mb-4">
+                Professional proposal templates with integrated pricing,
+                contracts, and payment options that can be customized for
+                different services and sent directly to clients.
+              </p>
+              <h4 className="text-lg font-bold mb-2">Contract Management:</h4>
+              <p className="text-black mb-4">
+                Digital contract creation and e-signature functionality with
+                customizable templates for different types of creative services
+                and automatic contract reminders.
+              </p>
+              <h4 className="text-lg font-bold mb-2">
+                Invoicing and Payments:
+              </h4>
+              <p className="text-black mb-4">
+                Automated invoicing system with multiple payment options
+                including credit cards, ACH transfers, and payment plans, with
+                automatic payment reminders and late fee handling.
+              </p>
+              <h4 className="text-lg font-bold mb-2">Lead Management:</h4>
+              <p className="text-black">
+                Lead capture and nurturing tools including inquiry forms,
+                automated follow-ups, and lead scoring specifically designed for
+                creative service businesses.
+              </p>
+            </>
+          ),
+          Pricing: (
+            <>
+              <p className="text-black mb-4">
+                <a href="/">Free Trial </a>Available (7 days)
+              </p>
+              <h4 className="text-lg font-bold mb-2">Starter:</h4>
+              <p className="font-bold text-black mb-4">
+                Price:{" "}
+                <span className="font-light">$16/month billed annually</span>
+              </p>
+              <h6 className="text-lg font-bold mb-2">Features:</h6>
+              <ul className="list-disc pl-5 text-black">
+                <li>Contact management</li>
+                <li>Basic project management</li>
+                <li>Proposal creation</li>
+                <li>Contract templates</li>
+                <li>Basic invoicing</li>
+                <li>Payment processing (3.5% + 30¢ per transaction)</li>
+              </ul>
+              <h4 className="text-lg font-bold mb-2">Essentials:</h4>
+              <p className="font-bold text-black mb-4">
+                Price:{" "}
+                <span className="font-light">$33/month billed annually</span>
+              </p>
+              <h6 className="text-lg font-bold mb-2">Features:</h6>
+              <ul className="list-disc pl-5 text-black">
+                <li>Everything in Starter, plus:</li>
+                <li>Client portal</li>
+                <li>Advanced project management</li>
+                <li>Automated workflows</li>
+                <li>File sharing and proofing</li>
+                <li>Calendar scheduling</li>
+                <li>Payment plans</li>
+              </ul>
+              <h4 className="text-lg font-bold mb-2">Premium:</h4>
+              <p className="font-bold text-black mb-4">
+                Price:{" "}
+                <span className="font-light">$66/month billed annually</span>
+              </p>
+              <h6 className="text-lg font-bold mb-2">Features:</h6>
+              <ul className="list-disc pl-5 text-black">
+                <li>Everything in Essentials, plus:</li>
+                <li>Advanced automation</li>
+                <li>Custom branding</li>
+                <li>Advanced reporting</li>
+                <li>Lead capture forms</li>
+                <li>Priority support</li>
+                <li>Advanced integrations</li>
+              </ul>
+              <p className="text-black mb-4">
+                <strong>Note:</strong> All plans include payment processing fees
+                of 3.5% + 30¢ per transaction. ACH payments are available at 1%
+                + 30¢ per transaction.
+              </p>
+              <p className="text-black">
+                For detailed pricing information and feature comparisons, visit
+                the HoneyBook Pricing page.
+              </p>
+            </>
+          ),
+        },
+      },
+    },
+    Pipedrive: {
+      title: "Pipedrive – Best for pipeline management and optimization",
+      logo: "/images/pipe.png",
+      button: {
+        text: "Visit Website",
+        link: "#",
+      },
+      scores: [
+        { label: "Overall Score", score: "4.2/5" },
+
+        { label: "Pricing", score: "3.5/5" },
+        { label: "General features and Interface", score: "4.3/5" },
+        { label: "Core features", score: "4.6/5" },
+        { label: "Advanced features", score: "3.5/5" },
+        { label: "Inegration and compatibility", score: "4.8/5" },
+        { label: "UX", score: "4/5" },
+      ],
+      pros: [
+        "AI-powered lead tracking",
+        "Helps teams focus their energy on more effective efforts",
+        "Approachable interface",
+      ],
+      cons: [
+        "Not as valuable for teams with existing, well-refined lead pipelines",
+      ],
+      why: {
+        intro: `Pipedrive is best for businesses that prioritize sales process optimization. Its intuitive design, combined with powerful automation and analytics, makes it an ideal tool for sales teams to streamline their workflows.
+
+Pipedrive’s visual sales pipeline breathes life into deal progression, streamlining the sales process in a digestible, visual format. Complemented by comprehensive Sales Reporting, users glean valuable insights into performance trends. With seamless Email Integration, tracking correspondence and automating follow-ups becomes effortless. Pipedrive’s Activity and Goal Tracking further keep sales efforts aligned, optimizing pipeline progress. For businesses seeking a clear view and control over their sales pipeline, Pipedrive has the right formula, making it a top recommendation in the CRM domain.`,
+        bullets: [
+          "Pipedrive’s overall score of 83.3 out of 100, with a 4.2-star rating, is a testament to its balanced performance across various criteria. It excels in core features like sales pipeline, task automation, and email integration, which are pivotal for effective CRM functionality. ",
+          "Compared to other CRMs like Salesforce or HubSpot, Pipedrive is more accessible and less complex, making it ideal for small to medium-sized businesses or teams that require a straightforward, efficient sales process without the need for extensive customization or complex integrations.",
+          "Pipedrive is designed to help teams make the most of their leads, and focus on the ones most likely to convert. It does this through a variety of non-conventional CRM capabilities, including AI analytics, intelligence software, and prescriptive data insights. ",
+          "The interface is also carefully crafted to present the most relevant information in a visual, easy-to-digest manner. Properly implemented, Pipedrive can dramatically reduce the number of leads that slip through the cracks, and the number of dead ends chased by sales staff.",
+          "Recent additions include improved AI analytics and more third-party integrations.",
+        ],
+        outro: `For more information on Pipedrive, check out Pipedrive Product Updates and Pipedrive Community.`,
+        extras: {
+          "About ": (
+            <>
+              <p className="text-black mb-4">
+                HubSpot CRM is designed to help you streamline your business
+                operations by integrating marketing, sales, and customer service
+                into one seamless platform.
+              </p>
+              <p className="text-black">
+                Known for its user-friendly interface and comprehensive sales
+                and marketing features, HubSpot CRM provides tools for contact
+                management, email tracking, deal pipelines, and marketing
+                automation. Its integration capabilities with popular business
+                apps ensure you can manage all your customer interactions and
+                data from a single platform. HubSpot’s free tier offers
+                comprehensive functionalities, making it accessible for small
+                businesses and startups, while scalable options are available
+                for larger enterprises needing advanced features and
+                customizations. Its extensive training resources also help to
+                speed up adoption of the software.
+              </p>
+            </>
+          ),
+          "Key Features": (
+            <>
+              <h4 className="text-lg font-bold mb-2">Pipeline management:</h4>
+              <p className="text-black mb-4">
+                Pipedrive offers a visual sales pipeline which allows users to
+                effectively manage deals at different stages and streamline the
+                sales process.
+              </p>
+              <h4 className="text-lg font-bold mb-2">Sales reporting:</h4>
+              <p className="text-black mb-4">
+                Pipedrive includes comprehensive sales reporting features to
+                provide insights and monitor sales performance over time.
+              </p>
+
+              <h4 className="text-lg font-bold mb-2">Email integration:</h4>
+              <p className="text-black">
+                O: Pipedrive provides seamless email integration, allowing users
+                to send and receive emails directly from the CRM, track
+                correspondence and automate follow-ups.
+              </p>
+              <h4 className="text-lg font-bold mb-2">
+                Activity and goal tracking:
+              </h4>
+              <p className="text-black">
+                Pipedrive allows users to set and monitor goals and activities,
+                keeping sales efforts aligned with business objectives.
+              </p>
+              <h4 className="text-lg font-bold mb-2">Sales automation:</h4>
+              <p className="text-black">
+                Pipedrive’s workflow automation feature enables users to
+                automate repetitive tasks, such as sending emails or updating
+                deal stages, to save time and ensure consistency in sales
+                processes
+              </p>
+              <h4 className="text-lg font-bold mb-2">Smart contact data: </h4>
+              <p className="text-black">
+                Pipedrive enriches contact profiles by pulling in data from
+                social media and other online sources, providing users with
+                comprehensive and up-to-date information about their contacts.
+              </p>
+            </>
+          ),
+          Pricing: (
+            <>
+              <p className="text-black mb-4">
+                <a herf="/">Free Trial </a>Available
+              </p>
+
+              <h4 className="text-lg font-bold mb-2">Essential:</h4>
+              <p className="font-bold  text-black mb-4">
+                Price:{" "}
+                <span classname="font-light">
+                  $24 per seat per month billed monthly or $14 per seat per
+                  month billed annually
+                </span>
+              </p>
+              <h6 className="text-lg font-bold mb-2">Features:</h6>
+              <ul className="list-disc pl-5 text-black">
+                <li>Lead and pipeline management</li>
+                <li>Data import</li>
+                <li>400+ integrations</li>
+                <li>Contact reports</li>
+                <li>Personalized onboarding</li>
+              </ul>
+              <h4 className="text-lg font-bold mb-2">Advanced:</h4>
+              <p className="font-bold  text-black mb-4">
+                Price:
+                <span classname="font-light">
+                  $49 per seat per month billed monthly or $39 per seat per
+                  month billed annually
+                </span>
+              </p>
+              <h6 className="text-lg font-bold mb-2">
+                Features:
+                <span classname="font-light">
+                  Everything from previous tier plus:
+                </span>
+              </h6>
+              <ul className="list-disc pl-5 text-black">
+                <li>Full email sync</li>
+                <li>Automations builder, including email sequences</li>
+                <li>Call and email scheduling</li>
+                <li>Live chat support</li>
+              </ul>
+              <h4 className="text-lg font-bold mb-2">Professional :</h4>
+              <p className="font-bold  text-black mb-4">
+                Price:
+                <span classname="font-light">
+                  $69 per seat per month billed monthly or $49 per seat per
+                  month billed annually
+                </span>
+              </p>
+              <h6 className="text-lg font-bold mb-2">
+                Features:
+                <span classname="font-light">
+                  Everything from previous tiers plus:
+                </span>
+              </h6>
+              <ul className="list-disc pl-5 text-black">
+                <li>AI Sales Assistant</li>
+                <li>Contract management</li>
+                <li>Lead routing</li>
+                <li>Team management</li>
+                <li>Revenue forecasts</li>
+                <li>Extra data entry and data quality settings</li>
+              </ul>
+              <h4 className="text-lg font-bold mb-2">Power:</h4>
+              <p className="font-bold  text-black mb-4">
+                Price:
+                <span classmate="font-light">
+                  {" "}
+                  $79 per seat per month billed monthly or $64 per seat per
+                  month billed annually
+                </span>
+              </p>
+              <h6 className="text-lg font-bold mb-2">
+                Features:
+                <span classmate="font-light">
+                  Everything from previous tiers plus:
+                </span>
+              </h6>
+              <ul className="list-disc pl-5 text-black">
+                <li>Project planning</li>
+                <li>More control of account permissions and visibilities</li>
+                <li>24/7 live chat support</li>
+                <li>Phone support</li>
+              </ul>
+              <h4 className="text-lg font-bold mb-2">Enterprise:</h4>
+              <p className="font-bold  text-black mb-4">
+                Price:
+                <span classmate="font-light">
+                  $129 per seat per month billed monthly or $99 per seat per
+                  month billed annually
+                </span>
+              </p>
+              <h6 className="text-lg font-bold mb-2">
+                Features:
+                <span classmate="font-light">
+                  Everything from previous tiers plus:
+                </span>
+              </h6>
+              <ul className="list-disc pl-5 text-black">
+                <li>Unlimited reports and customizations</li>
+                <li>Enhanced security preferences</li>
+                <li>
+                  Maximize the number of automations and email syncs per seatt
+                </li>
+              </ul>
+              <p className="text-black">
+                For more detailed information on pricing and features, visit the
+                Pipedrive Pricing page.
+              </p>
+            </>
+          ),
+        },
+      },
+    },
+  };
+
+  // Convert toolsContent object to array for mapping
+  const toolsArray = Object.entries(toolsContent).map(([key, value]) => ({
+    id: key,
+    ...value,
+  }));
 
   const systems = [
     {
@@ -29,7 +1066,6 @@ const BestCRMSoftware = () => {
       videoCapacity: "Office 365 integration , Zoho Marketplace",
       support: "24/7 customer support",
       link: "#",
-    
     },
     {
       name: "Creatio",
@@ -39,7 +1075,6 @@ const BestCRMSoftware = () => {
       videoCapacity: ",14-day free trial",
       support: "24/7 customer support",
       link: "#",
-     
     },
     {
       name: "Hub CRM",
@@ -49,7 +1084,6 @@ const BestCRMSoftware = () => {
       videoCapacity: "Includes 1,000 marketing contacts",
       support: "Email chat support included",
       link: "#",
-    
     },
     {
       name: "HoneyBook",
@@ -59,7 +1093,6 @@ const BestCRMSoftware = () => {
       videoCapacity: "7-day free trial",
       support: "24/7 phone and email support",
       link: "#",
-     
     },
     {
       name: "Pipedrive",
@@ -69,7 +1102,6 @@ const BestCRMSoftware = () => {
       videoCapacity: "Free 14-day trial. ",
       support: "24/7 online chat, premium for phone",
       link: "#",
-      
     },
   ];
   const crmTestimonials = [
@@ -79,7 +1111,7 @@ const BestCRMSoftware = () => {
       name: "Michael W.",
       date: "05/25/2024",
       stars: 5,
-      text: "This CRM transformed our sales process completely. The contact management and pipeline visibility have increased our conversion rates by 27% in just three months."
+      text: "This CRM transformed our sales process completely. The contact management and pipeline visibility have increased our conversion rates by 27% in just three months.",
     },
     {
       avatar: "T",
@@ -87,7 +1119,7 @@ const BestCRMSoftware = () => {
       name: "Teresa J.",
       date: "04/18/2024",
       stars: 4,
-      text: "The automation features save our team hours every week. Email sequences and follow-up reminders ensure no lead falls through the cracks."
+      text: "The automation features save our team hours every week. Email sequences and follow-up reminders ensure no lead falls through the cracks.",
     },
     {
       avatar: "R",
@@ -95,7 +1127,7 @@ const BestCRMSoftware = () => {
       name: "Robert K.",
       date: "03/30/2024",
       stars: 5,
-      text: "Integration with our phone system was seamless. Having call recordings automatically attached to contact records has improved our training and customer service."
+      text: "Integration with our phone system was seamless. Having call recordings automatically attached to contact records has improved our training and customer service.",
     },
     {
       avatar: "L",
@@ -103,7 +1135,7 @@ const BestCRMSoftware = () => {
       name: "Lisa M.",
       date: "02/12/2024",
       stars: 5,
-      text: "The reporting features give our management team real-time visibility into sales performance. Custom dashboards help us make data-driven decisions daily."
+      text: "The reporting features give our management team real-time visibility into sales performance. Custom dashboards help us make data-driven decisions daily.",
     },
     {
       avatar: "B",
@@ -111,7 +1143,7 @@ const BestCRMSoftware = () => {
       name: "Brian T.",
       date: "01/07/2024",
       stars: 4,
-      text: "Mobile app is powerful enough that our field sales team can manage their entire workflow on the go. The offline mode is particularly valuable."
+      text: "Mobile app is powerful enough that our field sales team can manage their entire workflow on the go. The offline mode is particularly valuable.",
     },
     {
       avatar: "C",
@@ -119,88 +1151,239 @@ const BestCRMSoftware = () => {
       name: "Christina R.",
       date: "04/06/2024",
       stars: 5,
-      text: "Customer support has been exceptional. Their onboarding team ensured our data migration went smoothly and trained our staff thoroughly."
-    }
+      text: "Customer support has been exceptional. Their onboarding team ensured our data migration went smoothly and trained our staff thoroughly.",
+    },
   ];
-  const crmFAQs = [
+
+  const faqData = [
     {
-      question: "How can CRM software benefit my business?",
-      answer: [
-        "Centralizes all customer interactions in one place",
-        "Automates sales pipelines and follow-ups",
-        "Provides detailed customer insights and analytics",
-        "Improves team collaboration and accountability",
-        "Enhances customer service with history tracking"
-      ]
+      question: "What is an example of a CRM program?",
+      answer:
+        "TSalesforce is a widely recognized CRM program that offers a variety of customer relationship management services.",
     },
     {
-      question: "What types of businesses need CRM software?",
-      answer: "CRM systems are valuable for businesses of all sizes and industries - from startups to enterprises. They're particularly beneficial for sales teams, marketing agencies, service providers, e-commerce businesses, and any organization that manages customer relationships."
+      question: "What is the most popular CRM software?",
+      answer:
+        "ISalesforce is often considered the most popular CRM software due to its extensive features and widespread adoption across industries. But don’t let popularity keep you from checking out their competitors like Pipedrive and HubSpot. At a fraction of the cost and with a lot less work, they can provide a robust CRM system that will serve your business well.",
     },
     {
-      question: "How does CRM software integrate with other tools?",
-      answer: "Modern CRM platforms offer integrations with email platforms, marketing automation tools, accounting software, customer support systems, and productivity apps. Many connect via APIs or pre-built connectors with popular business applications."
+      question: "What is CRM mainly used for?",
+      answer:
+        "CRM is primarily used for managing interactions with current and potential customers, streamlining processes, and improving profitability through organizing customer information and automating sales and marketing interactions.",
     },
     {
-      question: "Can a CRM help with sales forecasting?",
-      answer: [
-        "Yes, advanced CRM systems provide:",
-        "Real-time sales pipeline visualization",
-        "Deal probability scoring",
-        "Revenue forecasting based on historical data",
-        "Performance tracking by team member",
-        "Automated sales reports and KPI dashboards"
-      ]
+      question: "Is Excel a CRM tool?",
+      answer:
+        "Excel is not a dedicated CRM tool; it is a spreadsheet application that can be used for basic data management but lacks the automation, integration, and analytics capabilities of specialized CRM software.",
     },
     {
-      question: "Is CRM software difficult to learn and implement?",
-      answer: "Most modern CRM systems are designed for ease of use with intuitive interfaces. Implementation time varies from a few days to several weeks depending on complexity. Many providers offer onboarding assistance, training resources, and templates to accelerate adoption."
+      question: "What is the point of having a CRM?",
+      answer: `A CRM system helps businesses manage customer data, track interactions, and automate various marketing, sales, and customer service processes, leading to improved customer relationships and increased efficiency.`,
     },
-    {
-      question: "What's the difference between cloud-based and on-premise CRM?",
-      answer: "Cloud-based CRM (SaaS) requires no hardware, offers automatic updates, and is accessible from anywhere. On-premise solutions are installed locally, offer more customization, but require IT infrastructure and maintenance. Most businesses today prefer cloud solutions for scalability and ease of use."
-    },
-    {
-      question: "Can CRM software automate marketing campaigns?",
-      answer: [
-        "Yes, marketing automation features may include:",
-        "Email campaign management",
-        "Lead scoring and segmentation",
-        "Customer journey mapping",
-        "Behavior-triggered communications",
-        "ROI tracking for marketing efforts",
-        "Social media integration"
-      ]
-    },
-    {
-      question: "How do I choose the right CRM for my company?",
-      answer: "Consider your team size, budget, required features, and scalability needs. Look for industry-specific solutions if applicable. We recommend starting with our comparison tool at Compare-bazaar to evaluate options based on your specific business requirements."
-    },
-    {
-      question: "What mobile capabilities do CRM systems offer?",
-      answer: "Most modern CRMs provide full-featured mobile apps allowing access to customer data, logging interactions, updating deals, and receiving notifications while on-the-go. Some offer offline functionality that syncs when connection is restored."
-    },
-    {
-      question: "How secure is customer data in CRM systems?",
-      answer: "Reputable CRM providers implement enterprise-grade security including encryption, regular backups, role-based access controls, and compliance with standards like GDPR. Cloud-based systems often offer better security than most businesses can maintain in-house."
-    }
   ];
 
   const contents = [
-    { id: 1, title: "Introduction to CRM", slug: "intro-crm" },
-    { id: 2, title: "What Is CRM Software?", slug: "what-is-crm" },
-    { id: 3, title: "Benefits of Implementing a CRM", slug: "crm-benefits" },
-    { id: 4, title: "Types of CRM Solutions", slug: "crm-types" },
-    { id: 5, title: "Pricing Models for CRM Software", slug: "crm-pricing" },
-    { id: 6, title: "Key Features to Look For", slug: "key-features" },
-    { id: 7, title: "Integration Capabilities", slug: "integration" },
-    { id: 8, title: "Implementation Process", slug: "implementation" },
-    { id: 9, title: "Comparing Top CRM Providers", slug: "comparison" },
-    { id: 10, title: "What Are Features to Look for in a CRM?", slug: "features" },
-    { id: 12, title: "How Much Would CRM Software Cost?", slug: "cost" },
-    { id: 13, title: "How to Choose CRM Software", slug: "Choose CRM" },
-    { id: 14, title: "Methodology", slug: "methrlodgy" } 
+    {
+      id: "CRM-recommendations",
+      title: "Our top 11 CRM recommendations",
+      active: false,
+    },
+    {
+      id: "new-CRM-software",
+      title: "Find your new CRM software",
+      active: false,
+    },
+    {
+      id: "key-features",
+      title: "Key CRM features to consider for your use case",
+      active: false,
+    },
+    {
+      id: "how-to-choose",
+      title: "Choosing the right CRM and sales software",
+      active: false,
+    },
+    {
+      id: "crm-faqs",
+      title: "Frequently Asked Questions (FAQ)",
+      active: false,
+    },
   ];
+  const crmData = [
+    {
+      id: 1,
+      name: "HubSpot Sales Hub",
+      image: "/images/hub.png",
+      alt: "HubSpot Sales Hub",
+      expertScore: 4.5,
+      bestFor: "Best for integrations",
+      visitUrl: "hubspot",
+      keyFeatures: [
+        "AI-driven lead scoring",
+        "Bidirectional scoring",
+        "Pipeline management",
+      ],
+      freeTrial: true,
+      freeVersion: true,
+    },
+    {
+      id: 2,
+      name: "Zoho CRM",
+      image: "/images/zoho.png",
+      alt: "Zoho CRM",
+      expertScore: 4.5,
+      bestFor: "Best for decentralized teams",
+      visitUrl: "zoho",
+      keyFeatures: [
+        "SalesSignals",
+        "Blueprint",
+        "AI-powered sales assistant Zia",
+      ],
+      freeTrial: true,
+      freeVersion: true,
+    },
+
+    {
+      id: 3,
+      name: "Pipedrive",
+      image: "/images/pipe.png",
+      alt: "Pipedrive",
+      expertScore: 4.2,
+      bestFor: "Best for pipeline management and optimization",
+      visitUrl: "shape",
+      keyFeatures: [
+        "Streamlined lead routing",
+        "Revenue Forecasting",
+        "Smart contact management",
+      ],
+      freeTrial: true,
+      freeVersion: false,
+    },
+    {
+      id: 4,
+      name: "Creatio",
+      image: "/images/creatio.png",
+      alt: "Creatio",
+      expertScore: 4.3,
+      bestFor: "Best for no-code platform",
+      visitUrl: "creatio",
+      keyFeatures: [
+        "No-code platform",
+        "Process automation",
+        "AI-powered insights",
+      ],
+      freeTrial: true,
+      freeVersion: false,
+    },
+
+    {
+      id: 5,
+      name: "HoneyBook",
+      image: "/images/honey.png",
+      alt: "HoneyBook",
+      expertScore: 4.1,
+      bestFor: "Best for creative businesses",
+      visitUrl: "honeybook",
+      keyFeatures: [
+        "Client management for creatives",
+        "Automated workflows",
+        "Invoice and contract management",
+      ],
+      freeTrial: true,
+      freeVersion: false,
+    },
+    {
+      id: 6,
+      name: "Shape CRM",
+      image: "/images/shapecrm.png",
+      alt: "Shape CRM",
+      expertScore: 4.4,
+      bestFor: "Best for flexibility",
+      visitUrl: "shape",
+      keyFeatures: [
+        "Industry-specific modules",
+        "Dynamic data modeling",
+        "Custom workflow automation",
+      ],
+      freeTrial: true,
+      freeVersion: false,
+    },
+    {
+      id: 7,
+      name: "Salesforce Sales Cloud",
+      image: "/images/salesforce.png",
+      alt: "Salesforce Sales Cloud",
+      expertScore: 4.0,
+      bestFor: "Best CRM for enterprises",
+      visitUrl: "shape",
+      keyFeatures: [
+        "360-degree customer view",
+        "Einstein AI analytics",
+        "Broad scalability",
+      ],
+      freeTrial: true,
+      freeVersion: false,
+    },
+
+    {
+      id: 8,
+      name: "Oracle Netsuite CRM",
+      image: "/images/oracle.png",
+      alt: "Oracle Netsuite CRM",
+      expertScore: 4.0,
+      bestFor: "Best all-in-one solutions",
+      visitUrl: "shape",
+      keyFeatures: [
+        "Marketing automation",
+        "Customer service management",
+        "Advanced order management",
+      ],
+      freeTrial: true,
+      freeVersion: false,
+    },
+  ];
+
+  const renderStars = (score) => {
+    const stars = [];
+    const fullStars = Math.floor(score);
+    const hasHalfStar = score % 1 !== 0;
+
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(
+        <svg
+          key={i}
+          className="w-5 h-5 text-yellow-400 fill-current"
+          viewBox="0 0 24 24"
+        >
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+      );
+    }
+
+    if (hasHalfStar) {
+      stars.push(
+        <svg
+          key="half"
+          className="w-5 h-5 text-yellow-400 fill-current"
+          viewBox="0 0 24 24"
+        >
+          <defs>
+            <linearGradient id="half">
+              <stop offset="50%" stopColor="currentColor" />
+              <stop offset="50%" stopColor="transparent" />
+            </linearGradient>
+          </defs>
+          <path
+            fill="url(#half)"
+            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+          />
+        </svg>
+      );
+    }
+
+    return stars;
+  };
+
   const articles = [
     {
       id: 1,
@@ -239,7 +1422,7 @@ const BestCRMSoftware = () => {
     const ripple = document.createElement("span");
     const rect = button.getBoundingClientRect();
     const size = Math.max(rect.width, rect.height);
-    ripple.style.width = ripple.style.height =`${size}px`;
+    ripple.style.width = ripple.style.height = `${size}px`;
     ripple.style.left = `${event.clientX - rect.left - size / 2}px`;
     ripple.style.top = `${event.clientY - rect.top - size / 2}px`;
     ripple.classNameList.add("ripple");
@@ -247,44 +1430,96 @@ const BestCRMSoftware = () => {
     setTimeout(() => ripple.remove(), 600);
   };
 
-
-  const additionalText = "Business communication has come a long way, with VoIP (Voice over Internet Protocol) systems now replacing traditional PBX setups in many organizations. Today's business phone systems come with cutting-edge features like AI-powered voicemail transcription, smart call routing, CRM integration, and detailed analytics dashboards. These tools enable businesses to track key performance metrics, enhance customer satisfaction, and optimize communication workflows. When choosing a provider, it's crucial to consider factors such as scalability, reliability, security, and the total cost of ownership. Many modern systems now offer unified communications, merging voice, video, messaging, and collaboration tools into one seamless platform.";
+  const additionalText =
+    "Business communication has come a long way, with VoIP (Voice over Internet Protocol) systems now replacing traditional PBX setups in many organizations. Today's business phone systems come with cutting-edge features like AI-powered voicemail transcription, smart call routing, CRM integration, and detailed analytics dashboards. These tools enable businesses to track key performance metrics, enhance customer satisfaction, and optimize communication workflows. When choosing a provider, it's crucial to consider factors such as scalability, reliability, security, and the total cost of ownership. Many modern systems now offer unified communications, merging voice, video, messaging, and collaboration tools into one seamless platform.";
 
   return (
     <>
-                <Head>
-                   <title>Best CRM Software Compared Side-by-Side | Free Quotes on Compare-Bazaar</title>
-                   <meta name="description" content="Easily compare the best CRM software side-by-side. Get free, no-obligation quotes and find the right CRM for your business—fast, simple, and 100% unbiased." />
-                   <link rel="canonical" href="https://www.compare-bazaar.com/BestCRMSoftware" />
-                 </Head>
-    
-      <div className="max-w-6xl mx-auto p-4 py-12">
+      <Head>
+        <title>
+          Best CRM Software Compared Side-by-Side | Free Quotes on
+          Compare-Bazaar
+        </title>
+        <meta
+          name="description"
+          content="Easily compare the best CRM software side-by-side. Get free, no-obligation quotes and find the right CRM for your business—fast, simple, and 100% unbiased."
+        />
+        <link
+          rel="canonical"
+          href="https://www.compare-bazaar.com/BestCRMSoftware"
+        />
+      </Head>
+
+      <div className="max-w-6xl mx-auto bg-white p-4 py-12">
         <header className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-2">The Best CRM Software of 2025</h1>
+          <h1 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-2">
+            The Best CRM Software of 2025
+          </h1>
 
-
-   <p className="text-gray-800 text-base md:text-base mb-4">
-  At <span className="text-orange-500 font-semibold">Compare-bazaar</span>, we know how important it is to find the right tools to support your business. That’s why we suggest using the <span className="text-orange-500 font-semibold">best CRM software</span>—designed to work effortlessly with today’s VoIP systems. With features like AI-powered insights, smart automation, and real-time analytics, the <span className="text-orange-500 font-semibold">best CRM software</span> helps you build stronger customer relationships and streamline your workflow. Whether you're running a startup or managing a large company, the right CRM can make all the difference in how your team connects, collaborates, and grows.
-</p>
-
+          <p className="text-gray-800 text-base md:text-base mb-4">
+            At{" "}
+            <span className="text-orange-500 font-semibold">
+              Compare-bazaar
+            </span>
+            , we know how important it is to find the right tools to support
+            your business. That’s why we suggest using the{" "}
+            <span className="text-orange-500 font-semibold">
+              best CRM software
+            </span>
+            —designed to work effortlessly with today’s VoIP systems. With
+            features like AI-powered insights, smart automation, and real-time
+            analytics, the{" "}
+            <span className="text-orange-500 font-semibold">
+              best CRM software
+            </span>{" "}
+            helps you build stronger customer relationships and streamline your
+            workflow. Whether you're running a startup or managing a large
+            company, the right CRM can make all the difference in how your team
+            connects, collaborates, and grows.
+          </p>
         </header>
 
         <section className="mb-6">
-        <p className="text-gray-800 text-base md:text-base">
-  As your business grows, having the right communication tools becomes essential. While startups may start with a simple phone system, it’s important to upgrade as your needs evolve. A more advanced setup helps you stay efficient and connected. Integrating the <span className="text-orange-500 font-semibold">best CRM software</span> into your workflow can greatly improve how you manage customer relationships, automate tasks, and support business growth. At <span className="text-orange-500 font-semibold">Compare-bazaar</span>, we help you find the CRM that fits your goals, with features like AI analytics, automation, and smooth integration with your tools.
-  {showMore && (
-    <span className="block mt-3">
-  {additionalText} Additionally, the <span className="text-orange-500 font-semibold">best CRM software</span> comes with advanced features like AI-powered insights, real-time analytics, and powerful automation to enhance your team's efficiency. With <span className="text-orange-500 font-semibold">Compare-bazaar</span>, you can compare leading CRM platforms, assess their strengths, and choose the best fit for your growing business. We're here to help you elevate your communication and customer management strategies.
-</span>
-
-  )}
-</p>
+          <p className="text-gray-800 text-base md:text-base">
+            As your business grows, having the right communication tools becomes
+            essential. While startups may start with a simple phone system, it’s
+            important to upgrade as your needs evolve. A more advanced setup
+            helps you stay efficient and connected. Integrating the{" "}
+            <span className="text-orange-500 font-semibold">
+              best CRM software
+            </span>{" "}
+            into your workflow can greatly improve how you manage customer
+            relationships, automate tasks, and support business growth. At{" "}
+            <span className="text-orange-500 font-semibold">
+              Compare-bazaar
+            </span>
+            , we help you find the CRM that fits your goals, with features like
+            AI analytics, automation, and smooth integration with your tools.
+            {showMore && (
+              <span className="block mt-3">
+                {additionalText} Additionally, the{" "}
+                <span className="text-orange-500 font-semibold">
+                  best CRM software
+                </span>{" "}
+                comes with advanced features like AI-powered insights, real-time
+                analytics, and powerful automation to enhance your team's
+                efficiency. With{" "}
+                <span className="text-orange-500 font-semibold">
+                  Compare-bazaar
+                </span>
+                , you can compare leading CRM platforms, assess their strengths,
+                and choose the best fit for your growing business. We're here to
+                help you elevate your communication and customer management
+                strategies.
+              </span>
+            )}
+          </p>
 
           <button
             className="mt-2 text-[#000e54] font-semibold flex items-center"
             onClick={() => setShowMore(!showMore)}
           >
-            {showMore ? 'LESS -' : 'MORE +'}
+            {showMore ? "LESS -" : "MORE +"}
           </button>
         </section>
 
@@ -301,2132 +1536,2086 @@ const BestCRMSoftware = () => {
         </div>
       </div>
 
-    
-      <TableOfContents contents={contents} />
-
-
-
-      {/* Big Divs for Each Section */}
-      
-      <div className="max-w-6xl mx-auto p-4 space-y-12">
-  {/* Introduction to CRM */}
-  <div id="intro-crm" className=" bg-white rounded-xl ">
-    <div className=" mx-auto  ">
-    <h2 className="text-4xl font-semibold text-gray-900 mb-6 text-left">
-        Introduction to CRM for B2B Marketing
-</h2>
-<p className="text-gray-800 text-base mb-8 text-left">
-  Customer Relationship Management, or CRM, isn’t just a piece of software—it’s a smart way for businesses to stay connected with their leads and customers. For B2B companies like Compare Bazaar, having a strong CRM system can make a big difference. It helps you find new leads, keep your email marketing on point, and manage your sales pipeline without the usual hassle.
-
-  With everything in one place, a good CRM lets you track every interaction, follow up with potential customers, and build stronger relationships over time. It also works hand-in-hand with marketing tools so you can send more personal emails, set up automated follow-ups, and get valuable insights to tweak your strategies as needed.
-
-  On top of that, it helps your sales team focus on the right leads, cuts down on repetitive tasks, and gives you real-time reports to make smarter decisions. In short, using the right CRM can help Compare Bazaar work more efficiently, close more deals, and create lasting connections with customers.
-</p>
-
-
-
-      <h3 className="text-4xl font-semibold text-gray-900 mb-5 ">
-        Why CRM is Essential for B2B Businesses?
-      </h3>
-      <p className="text-gray-800 text-base mb-6">
-  B2B deals can be pretty complex, with lots of moving parts and ongoing conversations. That’s where a CRM really shines—it brings everything together in one place so your team can easily manage the entire sales process. With better organization and clear insights, it’s easier to work efficiently and make smarter, data-backed decisions.
-</p>
-
-
-<ul className="text-gray-800 text-base list-disc pl-6 space-y-4 mb-8">
-  <li>
-    <span className="font-semibold">Longer Sales Cycles:</span> B2B deals often take months to close. A CRM helps track each step, ensuring consistent follow-ups and stronger lead nurturing throughout the entire process.
-  </li>
-  <li>
-    <span className="font-semibold">Account-Based Marketing (ABM):</span> CRM systems let you tailor messaging and campaigns for key accounts, making your outreach more personal and improving your chances of converting high-value clients.
-  </li>
-  <li>
-    <span className="font-semibold">Multiple Decision Makers:</span> B2B sales usually involve several stakeholders. A CRM keeps conversations organized and accessible, so you can align communication with everyone involved in the decision.
-  </li>
-  <li>
-    <span className="font-semibold">Data-Driven Lead Generation:</span> Built-in CRM analytics help identify the most promising leads. This lets your team focus on prospects with the highest conversion potential, saving time and effort.
-  </li>
-  <li>
-    <span className="font-semibold">Automation & Workflow Optimization:</span> CRM tools handle routine tasks like emails and follow-ups automatically. This streamlines your workflow and allows your team to spend more time closing deals.
-  </li>
-  <li>
-    <span className="font-semibold">Customer Retention & Relationship Management:</span> CRM helps you stay engaged with clients after the sale. Regular touchpoints and insights help maintain strong relationships and increase chances of repeat business.
-  </li>
-</ul>
-
-
-
-      <div className=" flex justify-center ">
-        <img 
-          src="https://www.sunzinet.com/hs-fs/hubfs/CRM-implementation%20process.png?width=1992&height=2000&name=CRM-implementation%20process.png" 
-          alt="CRM Process Diagram" 
-          className=" max-w-lg rounded-lg p-12" 
-        />
-      </div>
-
-      <h3 className="text-4xl font-semibold text-gray-900 mb-5 ">
-        Key Features of an Effective B2B CRM
-      </h3>
-      <p className="text-gray-800  mb-6 text-base">
-        The right CRM should offer a range of features tailored to the needs of B2B businesses:
-      </p>
-      <ul className="text-gray-700 text-base list-disc pl-6 space-y-4">
-        <li><span className="font-semibold">Lead & Contact Management:</span> Track customer interactions and maintain detailed records.</li>
-        <li><span className="font-semibold">Sales Pipeline Visibility:</span> Monitor deal progress and forecast revenue.</li>
-        <li><span className="font-semibold">Marketing Automation:</span> Automate email campaigns, follow-ups, and lead nurturing.</li>
-        <li><span className="font-semibold">Integration with Other Tools:</span> Connect with email, calendar, and analytics platforms.</li>
-        <li><span className="font-semibold">Reporting & Analytics:</span> Gain insights into sales performance and customer behavior.</li>
-        <li><span className="font-semibold">Mobile Accessibility:</span> Access CRM data on the go for improved productivity.</li>
-      </ul>
-    </div>
-  </div>
-
-  {/* What is CRM */}
-  <div id="what-is-crm" className=" rounded-xl ">
-    <div className=" mx-auto ">
-      <h2 className="text-4xl font-semibold text-gray-900 mb-4 text-left">What Is CRM Software?</h2>
-      <p className="text-gray-800 text-base mb-4">
-  CRM (Customer Relationship Management) software helps businesses manage interactions with both current and potential customers. It’s more than just a contact list—it’s a tool that supports every stage of the customer journey, from the first lead to long-term loyalty. With a CRM system, you can track leads, manage your sales pipeline, run marketing campaigns, store customer data, analyze performance, and even automate routine tasks—all from one place.
-</p>
-
-<p className="text-gray-800 text-base mb-8">
-  Almost any business involved in sales can benefit from using a CRM. For instance, a clothing store might use one to track customer preferences and reward loyal shoppers. A timeshare company could rely on a CRM to manage leads and stay connected with ideal prospects. Even larger businesses can use it to better align their sales and marketing efforts. That said, CRMs aren’t a fit for every business. A fast-food restaurant or a doctor’s office, for example, probably wouldn’t need full CRM features—but they might still use tools like POS systems or medical software that include similar functions.
-</p>
-
-
-      <h3 className="text-4xl font-semibold text-gray-900 mb-5">Key Functionalities for B2B CRM:</h3>
-      <ul className="list-disc pl-6 text-gray-800 text-base mb-8 space-y-3">
-  <li>
-    <span className="font-semibold">Lead Tracking & Management:</span> Easily capture leads from sources like websites, emails, or ads. A CRM keeps track of every interaction and helps your team follow up without missing a beat.
-  </li>
-  <li>
-    <span className="font-semibold">Sales Pipeline Visualization:</span> See where each deal stands at a glance. Visual tools help forecast revenue, assign tasks efficiently, and keep your sales team focused on what matters most.
-  </li>
-  <li>
-    <span className="font-semibold">Automated Email & Follow-ups:</span> Let your CRM handle routine follow-ups and emails. This keeps communication timely and personalized, while freeing up your team to close more deals.
-  </li>
-  <li>
-    <span className="font-semibold">Customer Data Analytics:</span> Get clear insights into what your customers want and how they behave. Use this data to refine your marketing, improve targeting, and boost overall performance.
-  </li>
-  <li>
-    <span className="font-semibold">Integration with Marketing Tools:</span> Connect your CRM with tools like email platforms, social media, or ad services. This gives you a complete view of your customer journey across all channels.
-  </li>
-</ul>
-
-
-      <h3 className="text-4xl font-semibold text-gray-900 mb-5">Benefits of CRM for Businesses:</h3>
-      <ul className="list-disc pl-6 text-gray-800 text-base mb-8 space-y-3">
-  <li>
-    <span className="font-semibold">Improved Customer Experience:</span> CRM tools help you deliver faster, more personalized service—making customers feel heard and appreciated, which builds loyalty over time.
-  </li>
-  <li>
-    <span className="font-semibold">Increased Efficiency:</span> By automating tasks like follow-ups, data entry, and reports, your team saves time and can focus on what really drives growth and results.
-  </li>
-  <li>
-    <span className="font-semibold">Better Collaboration:</span> With shared access to real-time customer info, your sales, marketing, and support teams can work together more smoothly and stay aligned.
-  </li>
-  <li>
-    <span className="font-semibold">Stronger Customer Relationships:</span> A CRM helps you remember key details about each customer, so every interaction feels personal, thoughtful, and more meaningful.
-  </li>
-  <li>
-    <span className="font-semibold">Increased Revenue:</span> When your processes are streamlined and your team is working smarter, it naturally leads to better conversions, more sales, and happier customers.
-  </li>
-</ul>
-
-
-      <div className="my-12 bg-white  ">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" className="w-full md:h-[500px]">
-          <defs>
-            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" style={{stopColor: '#4F46E5', stopOpacity: 1}} />
-              <stop offset="100%" style={{stopColor: '#7C3AED', stopOpacity: 1}} />
-            </linearGradient>
-          </defs>
-          
-         
-          <rect width="100%" height="100%" fill="white" rx="12" ry="12"/>
-          
-          
-          <rect x="50" y="100" width="700" height="300" rx="10" ry="10" fill="white" stroke="#e5e7eb" strokeWidth="2"/>
-          
-        
-          <circle cx="150" cy="250" r="40" fill="url(#grad1)"/>
-          <text x="150" y="250" fontFamily="Arial" fontSize="16" fill="white" textAnchor="middle" dominantBaseline="middle">Leads</text>
-          
-          <path d="M190 250 L230 250" stroke="#4F46E5" strokeWidth="3" strokeDasharray="5,5"/>
-          
-          <circle cx="270" cy="250" r="40" fill="url(#grad1)"/>
-          <text x="270" y="250" fontFamily="Arial" fontSize="16" fill="white" textAnchor="middle" dominantBaseline="middle">Engage</text>
-          
-          <path d="M310 250 L350 250" stroke="#4F46E5" strokeWidth="3" strokeDasharray="5,5"/>
-          
-          <circle cx="390" cy="250" r="40" fill="url(#grad1)"/>
-          <text x="390" y="250" fontFamily="Arial" fontSize="16" fill="white" textAnchor="middle" dominantBaseline="middle">Nurture</text>
-          
-          <path d="M430 250 L470 250" stroke="#4F46E5" strokeWidth="3" strokeDasharray="5,5"/>
-          
-          <circle cx="510" cy="250" r="40" fill="url(#grad1)"/>
-          <text x="510" y="250" fontFamily="Arial" fontSize="16" fill="white" textAnchor="middle" dominantBaseline="middle">Convert</text>
-          
-          <path d="M550 250 L590 250" stroke="#4F46E5" strokeWidth="3" strokeDasharray="5,5"/>
-          
-          <circle cx="630" cy="250" r="40" fill="url(#grad1)"/>
-          <text x="630" y="250" fontFamily="Arial" fontSize="16" fill="white" textAnchor="middle" dominantBaseline="middle">Retain</text>
-     
-          <g transform="translate(100, 350)">
-            <rect x="0" y="0" width="600" height="100" fill="white" rx="8" ry="8" stroke="#e5e7eb" strokeWidth="1"/>
-            
-       
-            <circle cx="60" cy="50" r="20" fill="#10B981"/>
-            <path d="M55 60 L65 70 L80 45" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round"/>
-            <text x="60" y="90" fontFamily="Arial" fontSize="12" fill="#6B7280" textAnchor="middle">Efficiency</text>
-            
-            
-            <circle cx="180" cy="50" r="20" fill="#3B82F6"/>
-            <path d="M165 50 L175 50 L175 70 L165 70" fill="none" stroke="white" strokeWidth="3"/>
-            <path d="M185 50 L195 50 L195 70 L185 70" fill="none" stroke="white" strokeWidth="3"/>
-            <text x="180" y="90" fontFamily="Arial" fontSize="12" fill="#6B7280" textAnchor="middle">Collaboration</text>
-            
-            
-            <circle cx="300" cy="50" r="20" fill="#F59E0B"/>
-            <path d="M290 60 L300 45 L310 60" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round"/>
-            <text x="300" y="90" fontFamily="Arial" fontSize="12" fill="#6B7280" textAnchor="middle">Growth</text>
-            
-           
-            <circle cx="420" cy="50" r="20" fill="#EC4899"/>
-            <path d="M410 50 L430 50" fill="none" stroke="white" strokeWidth="3"/>
-            <path d="M420 40 L420 60" fill="none" stroke="white" strokeWidth="3"/>
-            <text x="420" y="90" fontFamily="Arial" fontSize="12" fill="#6B7280" textAnchor="middle">Insights</text>
-            
-            
-            <circle cx="540" cy="50" r="20" fill="#8B5CF6"/>
-            <path d="M530 50 L550 50" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round"/>
-            <path d="M540 40 L540 60" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round"/>
-            <text x="540" y="90" fontFamily="Arial" fontSize="12" fill="#6B7280" textAnchor="middle">Revenue</text>
-          </g>
-          
-          
-          <text x="400" y="60" fontFamily="Arial" fontSize="24" fontWeight="bold" fill="#1F2937" textAnchor="middle ">CRM Workflow Process</text>
-          <text x="400" y="90" fontFamily="Arial" fontSize="16" fill="#6B7280" textAnchor="middle">From lead generation to customer retention</text>
-        </svg>
-      </div>
-
-     
-    </div>
-  </div>
-
-
-        {/* Types of CRM Solutions */}
-        <div id="crm-types" className="">
-  <h2 className="text-4xl font-semibold text-gray-900 mb-4 ">Types of CRM Solutions for B2B Businesses</h2>
-  <p className="text-gray-800 text-base mb-6 text-base">
-    There are several types of CRM solutions, each designed to address different business needs and challenges.
-  </p>
-  <div className="overflow-x-auto">
-    <table className="min-w-full bg-white border border-gary-500 text-base">
-      <thead>
-        <tr className="bg-gray-100">
-          <th className="py-2 px-4 border border-gray-500">CRM Type</th>
-          <th className="py-2 px-4 border border-gray-500">Features</th>
-          <th className="py-2 px-4 border border-gary-500">Best For</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td className="py-2 px-4 border border-gary-500">Operational CRM</td>
-          <td className="py-2 px-4 border border-gary-500">Lead tracking, sales automation, email workflows</td>
-          <td className="py-2 px-4 border border-gary-500">Companies needing streamlined processes</td>
-        </tr>
-        <tr className="bg-gray-50">
-          <td className="py-2 px-4 border border-gary-500">Analytical CRM</td>
-          <td className="py-2 px-4 border border-gary-500">Customer behavior insights, predictive analytics</td>
-          <td className="py-2 px-4 border border-gary-500">Data-driven businesses optimizing sales strategy</td>
-        </tr>
-        <tr>
-          <td className="py-2 px-4 border border-gary-500">Collaborative CRM</td>
-          <td className="py-2 px-4 border border-gary-500">Shared databases, multi-team collaboration</td>
-          <td className="py-2 px-4 border border-gary-500">Businesses needing strong internal communication</td>
-        </tr>
-        <tr className="bg-gray-50">
-          <td className="py-2 px-4 border border-gary-500">Strategic CRM</td>
-          <td className="py-2 px-4 border border-gary-500">Long-term customer engagement focus</td>
-          <td className="py-2 px-4 border border-gary-500">Businesses focusing on account-based marketing</td>
-        </tr>
-        <tr>
-          <td className="py-2 px-4 border border-gary-500">AI-Powered CRM</td>
-          <td className="py-2 px-4 border border-gary-500">Machine learning insights, automated recommendations</td>
-          <td className="py-2 px-4 border border-gary-500">Businesses leveraging AI for personalization</td>
-        </tr>
-        <tr className="bg-gray-50">
-          <td className="py-2 px-4 border border-gary-500">Social CRM</td>
-          <td className="py-2 px-4 border border-gary-500">Social media integration, sentiment analysis</td>
-          <td className="py-2 px-4 border border-gary-500">Companies focusing on brand engagement</td>
-        </tr>
-        <tr>
-          <td className="py-2 px-4 border border-gary-500">Mobile CRM</td>
-          <td className="py-2 px-4 border border-gary-500">Access CRM features on mobile devices</td>
-          <td className="py-2 px-4 border border-gary-500">Remote teams and field sales representatives</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div className="mt-6">
-    <h3 className="text-xl font-semibold text-gray-900 mb-2 text-base">Example Use Cases:</h3>
-    <ul className="list-disc list-inside text-gray-800 text-base">
-      <li>A SaaS Company using CRM for subscription management & renewals.</li>
-      <li>A B2B Service Provider automating lead nurturing and email marketing.</li>
-      <li>An E-commerce business integrating AI-driven customer insights.</li>
-      <li>A retail company using social CRM for brand engagement.</li>
-      <li>A sales team utilizing mobile CRM for on-the-go client interactions.</li>
-    </ul>
-  </div>
-  
-</div>
-<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" className='py-10'>
-  <defs>
-    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stopColor="#f1f5f9" />
-      <stop offset="100%" stopColor="#e2e8f0" />
-    </linearGradient>
-    <filter id="drop-shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="2" dy="4" stdDeviation="4" floodOpacity="0.2" />
-    </filter>
-    <radialGradient id="center-glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-      <stop offset="0%" stopColor="#1e40af" />
-      <stop offset="100%" stopColor="#000e54" />
-    </radialGradient>
-  </defs>
-  
- 
-  
-  <text x="400" y="30" fontFamily="Arial, sans-serif" fontSize="32" fontWeight="bold" textAnchor="middle" fill="#000e54">7 Types of CRM Software</text>
-  <line x1="275" y1="75" x2="525" y2="75" stroke="#000e54" strokeWidth="3" strokeLinecap="round" />
-  
-  <circle cx="400" cy="300" r="85" fill="url(#center-glow)" filter="url(#drop-shadow)" />
-  <text x="400" y="290" fontFamily="Arial, sans-serif" fontSize="28" fontWeight="bold" textAnchor="middle" fill="white">CRM</text>
-  <text x="400" y="315" fontFamily="Arial, sans-serif" fontSize="12" textAnchor="middle" fill="white">Customer Relationship</text>
-  <text x="400" y="330" fontFamily="Arial, sans-serif" fontSize="12" textAnchor="middle" fill="white">Management</text>
-  
-  <circle cx="200" cy="260" r="70" fill="#0284c7" filter="url(#drop-shadow)" />
-  <text x="200" y="230" fontFamily="Arial, sans-serif" fontSize="18" fontWeight="bold" textAnchor="middle" fill="white">Operational</text>
-  <text x="200" y="260" fontFamily="Arial, sans-serif" fontSize="12" textAnchor="middle" fill="white">Sales Automation</text>
-  <text x="200" y="275" fontFamily="Arial, sans-serif" fontSize="12" textAnchor="middle" fill="white">Marketing</text>
-  <text x="200" y="290" fontFamily="Arial, sans-serif" fontSize="12" textAnchor="middle" fill="white">Service</text>
-  
- 
-<path d="M200,200 a12,12 0 1,0 0.1,0 M188,200 L184,200 M212,200 L216,200 M192,192 L189,189 M208,192 L211,189 M192,208 L189,211 M208,208 L211,211"
-  stroke="white" strokeWidth="2" fill="none" />
-<circle cx="200" cy="200" r="6" fill="white" />
-  
-  <line x1="280" y1="210" x2="330" y2="230" stroke="#0284c7" strokeWidth="3" strokeLinecap="round" />
-  
-  <circle cx="600" cy="250" r="70" fill="#7e22ce" filter="url(#drop-shadow)" />
-  <text x="600" y="240" fontFamily="Arial, sans-serif" fontSize="18" fontWeight="bold" textAnchor="middle" fill="white">Analytical</text>
-  <text x="600" y="260" fontFamily="Arial, sans-serif" fontSize="12" textAnchor="middle" fill="white">Data Mining</text>
-  <text x="600" y="275" fontFamily="Arial, sans-serif" fontSize="12" textAnchor="middle" fill="white">Reporting</text>
-  <text x="600" y="290" fontFamily="Arial, sans-serif" fontSize="12" textAnchor="middle" fill="white">Forecasting</text>
-  
-  <g transform="translate(600, 205) scale(0.8)">
-    <rect x="-30" y="0" width="10" height="25" fill="white" />
-    <rect x="-15" y="-10" width="10" height="35" fill="white" />
-    <rect x="0" y="-5" width="10" height="30" fill="white" />
-    <rect x="15" y="-15" width="10" height="40" fill="white" />
-    
-    <polyline points="-25,10 -10,-5 5,5 20,-10" 
-      stroke="white" strokeWidth="2.5" fill="none" />
-    <circle cx="-25" cy="10" r="3" fill="white" />
-    <circle cx="-10" cy="-5" r="3" fill="white" />
-    <circle cx="5" cy="5" r="3" fill="white" />
-    <circle cx="20" cy="-10" r="3" fill="white" />
-  </g>
-  
-  <line x1="520" y1="220" x2="470" y2="230" stroke="#7e22ce" strokeWidth="3" strokeLinecap="round" />
-  
-  <circle cx="600" cy="450" r="70" fill="#0891b2" filter="url(#drop-shadow)" />
-  <text x="600" y="430" fontFamily="Arial, sans-serif" fontSize="18" fontWeight="bold" textAnchor="middle" fill="white">Collaborative</text>
-  <text x="600" y="460" fontFamily="Arial, sans-serif" fontSize="12" textAnchor="middle" fill="white">Shared Data</text>
-  <text x="600" y="475" fontFamily="Arial, sans-serif" fontSize="12" textAnchor="middle" fill="white">Team Access</text>
-  <text x="600" y="490" fontFamily="Arial, sans-serif" fontSize="12" textAnchor="middle" fill="white">Interaction</text>
-  
-  <circle cx="590" cy="400" r="5" fill="white" />
-  <circle cx="610" cy="400" r="5" fill="white" />
-  <path d="M585,410 Q590,415 595,410 M605,410 Q610,415 615,410" stroke="white" strokeWidth="1.5" fill="none" />
-  <path d="M590,405 L590,412 Q600,417 610,412 L610,405" stroke="white" strokeWidth="1.5" fill="none" />
-  
-  <line x1="520" y1="420" x2="470" y2="370" stroke="#0891b2" strokeWidth="3" strokeLinecap="round" />
-  
-  <circle cx="200" cy="450" r="70" fill="#10b981" filter="url(#drop-shadow)" />
-  <text x="200" y="430" fontFamily="Arial, sans-serif" fontSize="18" fontWeight="bold" textAnchor="middle" fill="white">Strategic</text>
-  <text x="200" y="460" fontFamily="Arial, sans-serif" fontSize="12" textAnchor="middle" fill="white">Customer</text>
-  <text x="200" y="475" fontFamily="Arial, sans-serif" fontSize="12" textAnchor="middle" fill="white">Retention</text>
-  <text x="200" y="490" fontFamily="Arial, sans-serif" fontSize="12" textAnchor="middle" fill="white">Loyalty</text>
-  
-  <circle cx="200" cy="400" r="10" stroke="white" strokeWidth="2" fill="none" />
-  <circle cx="200" cy="400" r="5" stroke="white" strokeWidth="2" fill="none" />
-  <circle cx="200" cy="400" r="1" fill="white" />
-  <line x1="185" y1="400" x2="195" y2="400" stroke="white" strokeWidth="1" />
-  <line x1="205" y1="400" x2="215" y2="400" stroke="white" strokeWidth="1" />
-  <line x1="200" y1="385" x2="200" y2="395" stroke="white" strokeWidth="1" />
-  <line x1="200" y1="405" x2="200" y2="415" stroke="white" strokeWidth="1" />
-  
-  <line x1="280" y1="420" x2="330" y2="370" stroke="#10b981" strokeWidth="3" strokeLinecap="round" />
-  
-  <circle cx="300" cy="100" r="60" fill="#3b82f6" filter="url(#drop-shadow)" />
-  <text x="300" y="90" fontFamily="Arial, sans-serif" fontSize="16" fontWeight="bold" textAnchor="middle" fill="white">Cloud-Based</text>
-  <text x="300" y="110" fontFamily="Arial, sans-serif" fontSize="12" textAnchor="middle" fill="white">SaaS</text>
-  <text x="300" y="125" fontFamily="Arial, sans-serif" fontSize="12" textAnchor="middle" fill="white">Subscription</text>
-  
-  <path d="M285,70 Q275,75 280,85 Q270,85 270,95 Q280,100 290,95 Q295,105 305,100 Q315,105 315,95 Q325,95 325,85 Q320,75 310,80 Q305,65 285,70" 
-    stroke="white" strokeWidth="1.5" fill="white" fillOpacity="0.3" />
-  
-  <line x1="340" y1="140" x2="380" y2="180" stroke="#3b82f6" strokeWidth="2" strokeLinecap="round" />
-  
-  <circle cx="500" cy="100" r="60" fill="#8b5cf6" filter="url(#drop-shadow)" />
-  <text x="500" y="90" fontFamily="Arial, sans-serif" fontSize="16" fontWeight="bold" textAnchor="middle" fill="white">AI-Powered</text>
-  <text x="500" y="110" fontFamily="Arial, sans-serif" fontSize="12" textAnchor="middle" fill="white">Automation</text>
-  <text x="500" y="125" fontFamily="Arial, sans-serif" fontSize="12" textAnchor="middle" fill="white">Intelligence</text>
-  
-  <path d="M500,60 Q490,55 485,65 Q475,65 475,75 Q480,80 485,75 Q490,85 500,80 Q510,85 515,75 Q520,80 525,75 Q525,65 515,65 Q510,55 500,60" 
-    stroke="white" strokeWidth="1.5" fill="white" fillOpacity="0.3" />
-  <path d="M495,70 L495,75 M500,70 L500,77 M505,70 L505,75" stroke="white" strokeWidth="1" />
-  
-  <line x1="460" y1="140" x2="420" y2="180" stroke="#8b5cf6" strokeWidth="2" strokeLinecap="round" />
-  
-  <circle cx="400" cy="500" r="60" fill="#f59e0b" filter="url(#drop-shadow)" />
-  <text x="400" y="490" fontFamily="Arial, sans-serif" fontSize="16" fontWeight="bold" textAnchor="middle" fill="white">Industry</text>
-  <text x="400" y="510" fontFamily="Arial, sans-serif" fontSize="12" textAnchor="middle" fill="white">Specific</text>
-  <text x="400" y="525" fontFamily="Arial, sans-serif" fontSize="12" textAnchor="middle" fill="white">Specialized</text>
-  
-  <path d="M385,465 L385,480 L415,480 L415,465 Z" stroke="white" strokeWidth="1.5" fill="white" fillOpacity="0.3" />
-  <path d="M390,465 L390,455 L410,455 L410,465" stroke="white" strokeWidth="1.5" fill="none" />
-  <path d="M395,480 L395,470 L400,470 L400,480 M405,480 L405,470 L410,470 L410,480" stroke="white" strokeWidth="1" />
-  
-  <line x1="400" y1="440" x2="400" y2="380" stroke="#f59e0b" strokeWidth="2" strokeLinecap="round" />
-  
-  <circle cx="400" cy="300" r="90" fill="none" stroke="#1e3a8a" strokeWidth="2" opacity="0.5">
-    <animate attributeName="r" from="85" to="95" dur="2s" repeatCount="indefinite" />
-    <animate attributeName="opacity" from="0.5" to="0" dur="2s" repeatCount="indefinite" />
-  </circle>
-  
-  <g stroke="#64748b" strokeWidth="1" strokeDasharray="3,3" opacity="0.3">
-    <line x1="200" y1="150" x2="600" y2="150" />
-    <line x1="200" y1="450" x2="600" y2="450" />
-    <line x1="300" y1="100" x2="500" y2="100" />
-    <line x1="200" y1="150" x2="300" y2="100" />
-    <line x1="600" y1="150" x2="500" y2="100" />
-    <line x1="200" y1="450" x2="400" y2="500" />
-    <line x1="600" y1="450" x2="400" y2="500" />
-  </g>
-</svg>
-
-
-
-        {/* Pricing Models for CRM Software */}
-  <div id="crm-pricing" className="">
-   
-    <div className="4xl mx-auto px-4 py-12 ">
-  <h2 className="text-4xl font-semibold text-center text-gray-800 mb-2">Pricing Models</h2>
-  <p className="text-center text-gray-800 mb-12 max-w-2xl mx-auto text-base">Select the perfect CRM solution for your business needs</p>
-  
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-    {/* Subscription-Based Card */}
-    <div className=" rounded-xl border border-gray-100 shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-      <div className="bg-gradient-to-r from-blue-700 to-blue-500 p-6">
-        <h3 className="text-2xl font-semibold text-white text-center">Subscription-Based</h3>
-        <div className="flex justify-center mt-4">
-          <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-lg">
-            <span className="text-[#000e54] text-2xl font-semibold">$</span>
-          </div>
-        </div>
-      </div>
-      <div className="p-8">
-        <div className="text-center mb-4">
-          <span className="text-3xl font-semibold text-gray-800">$29</span>
-          <span className="text-gray-800">/month</span>
-        </div>
-        <ul className="space-y-4 text-gray-700">
-          <li className="flex items-start">
-            <svg className="w-5 h-5 text-blue-500 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-            </svg>
-            <span>Monthly/annual fees per user</span>
-          </li>
-          <li className="flex items-start">
-            <svg className="w-5 h-5 text-blue-500 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-            </svg>
-            <span>Best for small-to-medium businesses</span>
-          </li>
-          <li className="flex items-start">
-            <svg className="w-5 h-5 text-blue-500 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-            </svg>
-            <span>Examples: HubSpot, Zoho CRM</span>
-          </li>
-        </ul>
-        <div className="mt-8">
-          <button className="w-full py-3 bg-[#000e54] text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">Choose Plan</button>
-        </div>
-      </div>
-    </div>
-
-    {/* Feature-Based Card - Highlighted as recommended */}
-    <div className="bg-white rounded-xl border border-orange-200 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 relative">
-      <div className="absolute -top-4 inset-x-0 flex justify-center">
-        <div className="bg-green-500 text-white py-1 px-4 rounded-full font-semibold shadow-md">
-          
-        </div>
-      </div>
-      <div className="bg-gradient-to-r from-orange-500 to-orange-400 p-6 pt-8">
-        <h3 className="text-2xl font-semibold text-white text-center">Feature-Based</h3>
-        <div className="flex justify-center mt-4 space-x-2">
-          <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow">
-            <span className="text-orange-500 text-sm font-semibold">Basic</span>
-          </div>
-          <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow">
-            <span className="text-orange-500 text-sm font-semibold">Pro</span>
-          </div>
-          <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow opacity-50">
-            <span className="text-orange-500 text-sm font-semibold">Ultra</span>
-          </div>
-        </div>
-      </div>
-      <div className="p-8">
-        <div className="text-center mb-4">
-          <span className="text-3xl font-semibold text-gray-800">$49</span>
-          <span className="text-gray-500">/month</span>
-        </div>
-        <ul className="space-y-4 text-gray-700">
-          <li className="flex items-start">
-            <svg className="w-5 h-5 text-orange-500 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-            </svg>
-            <span>Pay for only needed features</span>
-          </li>
-          <li className="flex items-start">
-            <svg className="w-5 h-5 text-orange-500 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-            </svg>
-            <span>Ideal for startups with limited budgets</span>
-          </li>
-          <li className="flex items-start">
-            <svg className="w-5 h-5 text-orange-500 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-            </svg>
-            <span>Customizable feature packages</span>
-          </li>
-        </ul>
-        <div className="mt-8">
-          <button className="w-full py-3 bg-orange-500 text-white font-semibold rounded-lg hover:bg-orange-600 transition-colors">Choose Plan</button>
-        </div>
-      </div>
-    </div>
-
-    {/* Enterprise Custom Card */}
-    <div className="bg-white rounded-xl border border-gray-100 shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-      <div className="bg-gradient-to-r from-indigo-700 to-indigo-500 p-6">
-        <h3 className="text-2xl font-semibold text-white text-center">Enterprise Custom</h3>
-        <div className="flex justify-center mt-4">
-          <div className="flex space-x-1">
-            <div className="w-3 h-10 bg-white rounded-md"></div>
-            <div className="w-3 h-6 bg-white rounded-md"></div>
-            <div className="w-3 h-8 bg-white rounded-md"></div>
-            <div className="w-3 h-5 bg-white rounded-md"></div>
-            <div className="w-3 h-7 bg-white rounded-md"></div>
-            <div className="w-3 h-9 bg-white rounded-md"></div>
-          </div>
-        </div>
-      </div>
-      <div className="p-8">
-        <div className="text-center mb-4">
-          <span className="text-gray-800 font-semibold">Custom Pricing</span>
-        </div>
-        <ul className="space-y-4 text-gray-700">
-          <li className="flex items-start">
-            <svg className="w-5 h-5 text-indigo-500 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-            </svg>
-            <span>Fully customized solutions</span>
-          </li>
-          <li className="flex items-start">
-            <svg className="w-5 h-5 text-indigo-500 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-            </svg>
-            <span>Best for large organizations</span>
-          </li>
-          <li className="flex items-start">
-            <svg className="w-5 h-5 text-indigo-500 mr-2 mt-1" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-            </svg>
-            <span>Advanced needs and integrations</span>
-          </li>
-        </ul>
-        <div className="mt-8">
-          <button className="w-full py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 transition-colors">Contact Sales</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
- 
-</div>
-  </div>
- 
-
-  {/* Key Features to Look for in a B2B CRM */}
-  
-  <div id="key-features" className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8">
-  <div className="text-center mb-16">
-    <h2 className="text-4xl font-semibold text-gray-900 mb-4">Essential CRM Features for Business Growth</h2>
-    <p className="text-base text-gray-600 max-w-3xl mx-auto">
-      Discover the must-have capabilities that transform your customer relationships and drive revenue
-    </p>
-  </div>
-
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    {/* Lead Management */}
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-      <div className="h-2 bg-[#000e54]"></div>
-      <div className="p-8">
-        <div className="flex items-center mb-6">
-          <div className="bg-blue-100 p-3 rounded-lg mr-4">
-            <svg className="w-8 h-8 text-[#000e54]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-            </svg>
-          </div>
-          <h3 className="text-2xl font-semibold text-gray-800">Lead Management</h3>
-        </div>
-        <ul className="space-y-4 text-gray-700">
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-[#000e54] rounded-full"></div>
+      <div className="min-h-screen bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex flex-col lg:flex-row gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8">
+              {/* Table of Contents - Left Sidebar */}
+              <TableOfContents contents={contents} />
             </div>
-            <p className="ml-3 text-base">Automated lead capture from multiple sources</p>
-          </li>
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-[#000e54] rounded-full"></div>
+            {/* main content */}
+            <div className="flex-1 max-w-4xl">
+              <section id="what-is-pm-software">
+                <div className="bg-white rounded-2xl sm:rounded-3xl border border-gray-200 shadow-sm hover:shadow-lg mt-4 transition-shadow duration-300 overflow-hidden p-6 sm:p-8">
+                  {/* Header */}
+                  <header className="mb-8">
+                    <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                      CRM Software
+                    </h1>
+                  </header>
+
+                  {/* Main Content */}
+                  <div className="prose prose-lg max-w-none">
+                    <p className="text-gray-700 leading-relaxed mb-6">
+                      CRM software manages and analyzes business contact and
+                      customer information by storing and organizing it
+                      effectively. Sales, marketing, and customer service teams
+                      use the CRM platform to automate the gathering and
+                      structuring of data related to customers, leads, partners,
+                      and crucial business relationships.
+                    </p>
+
+                    <p className="text-gray-700 leading-relaxed mb-8">
+                      The processes and systems that help improve a business’s
+                      relationships with their contacts may also be called
+                      customer relationship management..
+                    </p>
+
+                    <p className="text-gray-700 leading-relaxed mb-6">
+                      Below, we have scored and ranked some of the top CRM
+                      solutions in the market. Each has its own unique features
+                      and functions that make them best suited to various use
+                      cases.
+                    </p>
+
+                    {/* Recommendations List */}
+                    <div className="space-y-3 mb-8">
+                      {/* HubSpot */}
+                      <div className="flex items-start space-x-3">
+                        <div className="w-5 h-5 rounded-full bg-orange-100 flex items-center justify-center mt-0.5">
+                          <svg
+                            className="w-3 h-3 text-orange-600"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                        <p className="text-gray-700">
+                          <a
+                            href="#"
+                            className="text-orange-600 hover:text-orange-700 font-medium underline"
+                          >
+                            HubSpot Sales Hub:
+                          </a>{" "}
+                          Best for integrations
+                        </p>
+                      </div>
+
+                      {/* Pipedrive */}
+                      <div className="flex items-start space-x-3">
+                        <div className="w-5 h-5 rounded-full bg-orange-100 flex items-center justify-center mt-0.5">
+                          <svg
+                            className="w-3 h-3 text-orange-600"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                        <p className="text-gray-700">
+                          <a
+                            href="#"
+                            className="text-orange-600 hover:text-orange-700 font-medium underline"
+                          >
+                            Pipedrive:
+                          </a>{" "}
+                          Best for pipeline management and optimization
+                        </p>
+                      </div>
+
+                      {/* Zoho CRM */}
+                      <div className="flex items-start space-x-3">
+                        <div className="w-5 h-5 rounded-full bg-orange-100 flex items-center justify-center mt-0.5">
+                          <svg
+                            className="w-3 h-3 text-orange-600"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                        <p className="text-gray-700">
+                          <a
+                            href="#"
+                            className="text-orange-600 hover:text-orange-700 font-medium underline"
+                          >
+                            Zoho CRM:
+                          </a>{" "}
+                          Best for decentralized teams
+                        </p>
+                      </div>
+
+                      {/* Creatio */}
+                      <div className="flex items-start space-x-3">
+                        <div className="w-5 h-5 rounded-full bg-orange-100 flex items-center justify-center mt-0.5">
+                          <svg
+                            className="w-3 h-3 text-orange-600"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                        <p className="text-gray-700">
+                          <a
+                            href="#"
+                            className="text-orange-600 hover:text-orange-700 font-medium underline"
+                          >
+                            Creatio:
+                          </a>{" "}
+                          Best for low-code CRM and business process automation
+                        </p>
+                      </div>
+
+                      {/* HoneyBook */}
+                      <div className="flex items-start space-x-3">
+                        <div className="w-5 h-5 rounded-full bg-orange-100 flex items-center justify-center mt-0.5">
+                          <svg
+                            className="w-3 h-3 text-orange-600"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                        <p className="text-gray-700">
+                          <a
+                            href="#"
+                            className="text-orange-600 hover:text-orange-700 font-medium underline"
+                          >
+                            HoneyBook:
+                          </a>{" "}
+                          Best for freelancers and service-based businesses
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              {/* Featured Partners Section */}
+              <div className="bg-white rounded-2xl sm:rounded-3xl border border-gray-200 shadow-sm hover:shadow-lg mt-4 transition-shadow duration-300 overflow-hidden p-6 sm:p-8">
+                <div className="flex items-center justify-between mb-6">
+                  <h2 className="text-2xl font-bold text-gray-900">
+                    Featured partners
+                  </h2>
+                  <div className="flex items-center space-x-2 text-sm text-gray-500">
+                    <span>Advertisement</span>
+                    <div className="w-4 h-4 rounded-full bg-gray-400 flex items-center justify-center">
+                      <span className="text-white font-bold">i</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Zoho CRM */}
+                <div className="bg-gray-50 rounded-lg p-6 mb-6">
+                  <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-16 h-16 flex-shrink-0">
+                        <Image
+                          src="/images/zoho.png"
+                          alt="Zoho CRM Logo"
+                          width={64}
+                          height={64}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                      <div className="text-xl font-bold text-gray-900">
+                        Zoho
+                        <br />
+                        <span className="text-lg">CRM</span>
+                      </div>
+                    </div>
+                    <div className="w-full sm:w-auto">
+                      <button className="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-8 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2">
+                        <span>Visit Website</span>
+                        <ExternalLink className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                  <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <div className="text-gray-600 mb-1">Good For</div>
+                      <div className="font-medium text-gray-900">
+                        Any Company Size
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-gray-600 mb-1">Core Features</div>
+                      <div className="font-medium text-gray-900">
+                        Lead Management, Automation, AI Assistant, and 10 more
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-gray-600 mb-1">Integrations</div>
+                      <div className="font-medium text-gray-900">
+                        Google Workspace, Microsoft 365, Zapier, and more
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* HubSpot */}
+                <div className="bg-gray-50 rounded-lg p-6 mb-6">
+                  <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-16 h-16 flex-shrink-0">
+                        <Image
+                          src="/images/hub.png"
+                          alt="HubSpot Logo"
+                          width={64}
+                          height={64}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                      <div className="text-xl font-bold text-gray-900">
+                        HubSpot
+                        <br />
+                        <span className="text-lg">CRM Platform</span>
+                      </div>
+                    </div>
+                    <div className="w-full sm:w-auto">
+                      <button className="w-full sm:w-auto bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 px-8 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2">
+                        <span>Visit Website</span>
+                        <ExternalLink className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                  <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <div className="text-gray-600 mb-1">Good For</div>
+                      <div className="font-medium text-gray-900">
+                        SMBs to Enterprises
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-gray-600 mb-1">Core Features</div>
+                      <div className="font-medium text-gray-900">
+                        Marketing Automation, Email Tracking, Sales Pipeline
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-gray-600 mb-1">Integrations</div>
+                      <div className="font-medium text-gray-900">
+                        Zapier, Gmail, Outlook, and 50+ more
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Creatio */}
+                <div className="bg-gray-50 rounded-lg p-6 mb-6">
+                  <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-16 h-16 flex-shrink-0">
+                        <Image
+                          src="/images/creatio.png"
+                          alt="Creatio Logo"
+                          width={64}
+                          height={64}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                      <div className="text-xl font-bold text-gray-900">
+                        Creatio
+                        <br />
+                        <span className="text-lg">Low-Code CRM</span>
+                      </div>
+                    </div>
+                    <div className="w-full sm:w-auto">
+                      <button className="w-full sm:w-auto bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 px-8 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2">
+                        <span>Visit Website</span>
+                        <ExternalLink className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                  <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <div className="text-gray-600 mb-1">Good For</div>
+                      <div className="font-medium text-gray-900">
+                        Mid to Large Enterprises
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-gray-600 mb-1">Core Features</div>
+                      <div className="font-medium text-gray-900">
+                        BPM, Low-Code Automation, Sales & Service
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-gray-600 mb-1">Integrations</div>
+                      <div className="font-medium text-gray-900">
+                        Microsoft Teams, Google Workspace, and 10 more
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* HoneyBook */}
+                <div className="bg-gray-50 rounded-lg p-6 mb-6">
+                  <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-16 h-16 flex-shrink-0">
+                        <Image
+                          src="/images/honey.png"
+                          alt="HoneyBook Logo"
+                          width={64}
+                          height={64}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                      <div className="text-xl font-bold text-gray-900">
+                        HoneyBook
+                        <br />
+                        <span className="text-lg">Client Management</span>
+                      </div>
+                    </div>
+                    <div className="w-full sm:w-auto">
+                      <button className="w-full sm:w-auto bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 px-8 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2">
+                        <span>Visit Website</span>
+                        <ExternalLink className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                  <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <div className="text-gray-600 mb-1">Good For</div>
+                      <div className="font-medium text-gray-900">
+                        Freelancers & Creatives
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-gray-600 mb-1">Core Features</div>
+                      <div className="font-medium text-gray-900">
+                        Proposals, Invoicing, Scheduling
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-gray-600 mb-1">Integrations</div>
+                      <div className="font-medium text-gray-900">
+                        QuickBooks, Calendly, Zapier, and more
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Pipedrive */}
+                <div className="bg-gray-50 rounded-lg p-6">
+                  <div className="flex flex-col sm:flex-row items-center justify-between space-y-4 sm:space-y-0">
+                    <div className="flex items-center space-x-4">
+                      <div className="w-16 h-16 flex-shrink-0">
+                        <Image
+                          src="/images/pipe.png"
+                          alt="Pipedrive Logo"
+                          width={64}
+                          height={64}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                      <div className="text-xl font-bold text-gray-900">
+                        Pipedrive
+                        <br />
+                        <span className="text-lg">Sales CRM</span>
+                      </div>
+                    </div>
+                    <div className="w-full sm:w-auto">
+                      <button className="w-full sm:w-auto bg-orange-600 hover:bg-orange-700 text-white font-medium py-3 px-8 rounded-lg transition-colors duration-200 flex items-center justify-center space-x-2">
+                        <span>Visit Website</span>
+                        <ExternalLink className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                  <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                    <div>
+                      <div className="text-gray-600 mb-1">Good For</div>
+                      <div className="font-medium text-gray-900">
+                        Sales Teams
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-gray-600 mb-1">Core Features</div>
+                      <div className="font-medium text-gray-900">
+                        Pipeline Management, AI Sales Assistant
+                      </div>
+                    </div>
+                    <div>
+                      <div className="text-gray-600 mb-1">Integrations</div>
+                      <div className="font-medium text-gray-900">
+                        Slack, Asana, Trello, and 30 more
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <section id="CRM-recommendations" className="mt-8">
+                <div className="mx-auto">
+                  <div className="text-center mb-8 sm:mb-12">
+                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
+                      Our top 11 CRM recommendations
+                    </h1>
+                    <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
+                  </div>
+
+                  {/* Unified Table Layout for All Screen Sizes */}
+                  <div className="bg-white rounded-2xl  border border-gray-200 overflow-hidden">
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-full">
+                        <thead>
+                          <tr className="border-b border-gray-200 bg-gray-50">
+                            <th className="text-left py-3 sm:py-6 px-2 sm:px-8 font-semibold text-gray-700 text-sm sm:text-lg">
+                              CRM Platform
+                            </th>
+                            <th className="text-center py-3 sm:py-6 px-2 sm:px-6 font-semibold text-gray-700 text-sm sm:text-lg">
+                              Expert Score
+                            </th>
+                            <th className="text-center py-3 sm:py-6 px-2 sm:px-6 font-semibold text-gray-700 text-sm sm:text-lg">
+                              Best for
+                            </th>
+                            <th className="text-center py-3 sm:py-6 px-2 sm:px-6 font-semibold text-gray-700 text-sm sm:text-lg">
+                              Key Features
+                            </th>
+                            <th className="text-center py-3 sm:py-6 px-2 sm:px-6 font-semibold text-gray-700 text-sm sm:text-lg">
+                              Free Trial
+                            </th>
+                            <th className="text-center py-3 sm:py-6 px-2 sm:px-6 font-semibold text-gray-700 text-sm sm:text-lg">
+                              Free Version
+                            </th>
+                            <th className="text-center py-3 sm:py-6 px-2 sm:px-8 font-semibold text-gray-700 text-sm sm:text-lg">
+                              Action
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {crmData.map((crm, index) => (
+                            <tr
+                              key={crm.id}
+                              className={`border-b border-gray-100 hover:bg-gray-50 transition-colors duration-200 ${
+                                index % 2 === 0 ? "bg-white" : "bg-gray-50/50"
+                              }`}
+                            >
+                              <td className="py-4 sm:py-8 px-2 sm:px-8">
+                                <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-3">
+                                  <div className="flex items-center justify-center flex-shrink-0">
+                                    <img
+                                      src={crm.image}
+                                      alt={crm.alt}
+                                      className="max-w-16 max-h-8 sm:max-w-32 sm:max-h-12 object-contain"
+                                    />
+                                  </div>
+                                  <div className="text-center sm:text-left">
+                                    <span className="font-medium text-gray-800 text-xs sm:text-base">
+                                      {crm.name}
+                                    </span>
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="py-4 sm:py-8 px-2 sm:px-6 text-center">
+                                <div className="flex flex-col items-center space-y-1 sm:space-y-2">
+                                  <span className="text-lg sm:text-2xl font-bold text-gray-800">
+                                    {crm.expertScore}
+                                  </span>
+                                  <div className="flex space-x-1 scale-75 sm:scale-100">
+                                    {renderStars(crm.expertScore)}
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="py-4 sm:py-8 px-2 sm:px-6 text-center">
+                                <span className="inline-block bg-blue-100 text-blue-800 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
+                                  {crm.bestFor}
+                                </span>
+                              </td>
+                              <td className="py-4 sm:py-8 px-2 sm:px-6">
+                                <ul className="space-y-1 sm:space-y-2">
+                                  {crm.keyFeatures.map((feature, idx) => (
+                                    <li
+                                      key={idx}
+                                      className="text-xs sm:text-sm text-gray-600 flex items-start sm:items-center"
+                                    >
+                                      <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-500 rounded-full mr-2 sm:mr-3 flex-shrink-0 mt-1.5 sm:mt-0"></div>
+                                      <span className="leading-tight sm:leading-normal">
+                                        {feature}
+                                      </span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </td>
+                              <td className="py-4 sm:py-8 px-2 sm:px-6 text-center">
+                                <div className="flex justify-center">
+                                  {crm.freeTrial ? (
+                                    <div className="w-6 h-6 sm:w-8 sm:h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                                      <Check className="w-3 h-3 sm:w-5 sm:h-5 text-orange-600" />
+                                    </div>
+                                  ) : (
+                                    <div className="w-6 h-6 sm:w-8 sm:h-8 bg-red-100 rounded-full flex items-center justify-center">
+                                      <X className="w-3 h-3 sm:w-5 sm:h-5 text-red-600" />
+                                    </div>
+                                  )}
+                                </div>
+                              </td>
+                              <td className="py-4 sm:py-8 px-2 sm:px-6 text-center">
+                                <div className="flex justify-center">
+                                  {crm.freeVersion ? (
+                                    <div className="w-6 h-6 sm:w-8 sm:h-8 bg-orange-100 rounded-full flex items-center justify-center">
+                                      <Check className="w-3 h-3 sm:w-5 sm:h-5 text-orange-600" />
+                                    </div>
+                                  ) : (
+                                    <div className="w-6 h-6 sm:w-8 sm:h-8 bg-red-100 rounded-full flex items-center justify-center">
+                                      <X className="w-3 h-3 sm:w-5 sm:h-5 text-red-600" />
+                                    </div>
+                                  )}
+                                </div>
+                              </td>
+                              <td className="py-4 sm:py-8 px-2 sm:px-8">
+                                <button className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-medium py-2 px-3 sm:py-3 sm:px-6 rounded-lg transition-all duration-200 flex items-center space-x-1 sm:space-x-2 mx-auto text-xs sm:text-sm">
+                                  <span>Visit Website</span>
+                                  <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <div className="text-center mt-12">
+                    <p className="text-gray-600 text-sm">
+                      * Scores and recommendations are based on expert analysis
+                      and user reviews
+                    </p>
+                  </div>
+                </div>
+              </section>
+
+              {toolsArray.map((tool) => (
+                <div
+                  key={tool.id}
+                  className="bg-white rounded-2xl sm:rounded-3xl border mt-4  border-gray-200  p-6 mb-8"
+                >
+                  {/* Tool Header */}
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                        <Image
+                          src={tool.logo}
+                          alt={`${tool.title} logo`}
+                          width={48}
+                          height={48}
+                          className="object-contain"
+                        />
+                      </div>
+                      <h2 className="text-2xl font-bold text-black">
+                        {tool.title}
+                      </h2>
+                    </div>
+                    <a
+                      href={tool.button.link}
+                      className="bg-orange-600 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-700"
+                    >
+                      {tool.button.text}
+                    </a>
+                  </div>
+
+                  {/* Scores */}
+                  <div className="space-y-4 text-black mb-6">
+                    {tool.scores.map((score, index) => (
+                      <div key={index}>
+                        <div className="flex justify-between text-sm font-medium mb-1">
+                          <span>{score.label}</span>
+                          <span>{score.score}</span>
+                        </div>
+                        <div className="w-full bg-gray-100 rounded-full h-2">
+                          <div
+                            className="bg-orange-600 h-2 rounded-full"
+                            style={{
+                              width: `${(parseFloat(score.score) / 5) * 100}%`,
+                            }}
+                          ></div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Pros and Cons */}
+                  <div className="grid md:grid-cols-2 text-black gap-6 mb-6">
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2">Pros</h3>
+                      <ul className="list-disc pl-5 space-y-1">
+                        {tool.pros.map((pro, index) => (
+                          <li key={index}>{pro}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2">Cons</h3>
+                      <ul className="list-disc pl-5 space-y-1">
+                        {tool.cons.map((con, index) => (
+                          <li key={index}>{con}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+
+                  {/* Why I Chose Section */}
+                  <div className="mb-6 text-black">
+                    <h3 className="text-lg font-semibold mb-2">
+                      Why I chose {tool.title.split(":")[0]}
+                    </h3>
+                    <p className="mb-4">{tool.why.intro}</p>
+                    {tool.why.bullets && (
+                      <ul className="list-disc pl-5 space-y-1 mb-4">
+                        {tool.why.bullets.map((bullet, index) => (
+                          <li key={index}>{bullet}</li>
+                        ))}
+                      </ul>
+                    )}
+                    <p>{tool.why.outro}</p>
+                  </div>
+
+                  {/* Expandable Sections */}
+                  {tool.why.extras &&
+                    Object.entries(tool.why.extras).map(([label, content]) => {
+                      const sectionKey = `${tool.id}-${label}`;
+                      return (
+                        <div
+                          key={sectionKey}
+                          className="border-t text-black pt-4 mb-4"
+                        >
+                          <button
+                            onClick={() => toggleSection(sectionKey)}
+                            className="w-full flex justify-between items-center font-medium"
+                          >
+                            <span>{label}</span>
+                            <span className="text-orange-600">
+                              {openSections[sectionKey] ? (
+                                <Minus className="w-5 h-5" />
+                              ) : (
+                                <Plus className="w-5 h-5" />
+                              )}
+                            </span>
+                          </button>
+                          {openSections[sectionKey] && (
+                            <div className="mt-2 text-gray-700">
+                              {typeof content === "string" ? (
+                                <p>{content}</p>
+                              ) : (
+                                content
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                </div>
+              ))}
+
+              {/* find your prodoct management software */}
+              <div className="bg-white rounded-2xl sm:rounded-3xl border border-gray-200 shadow-sm hover:shadow-lg mt-4 p-6 sm:p-8 transition-shadow duration-300 overflow-hidden">
+                {/* Header */}
+                <div className="text-center mb-10">
+                  <div className="inline-flex items-center justify-center w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mb-6 shadow-lg">
+                    <Search className="w-8 h-8 text-white" />
+                  </div>
+                  <h2 className="text-4xl font-bold bg-gradient-to-r from-gray-900 via-blue-800 to-purple-800 bg-clip-text text-transparent mb-4">
+                    Find your new project management software
+                  </h2>
+                  <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Discover the perfect tool to streamline your workflow and
+                    boost productivity
+                  </p>
+                </div>
+
+                {/* Filter Products & Search Section */}
+                <div className="bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl p-6 mb-8 border border-gray-100">
+                  <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                    {/* Filter Products */}
+                    <div className="lg:col-span-1">
+                      <div className="flex items-center gap-2 mb-3">
+                        <Filter className="w-4 h-4 text-blue-600" />
+                        <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider">
+                          Filter Products
+                        </h3>
+                      </div>
+                      <div className="relative group">
+                        <input
+                          type="text"
+                          placeholder="Search"
+                          value={searchTerm}
+                          onChange={(e) => setSearchTerm(e.target.value)}
+                          className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all duration-300 bg-white/70 hover:bg-white group-hover:shadow-md"
+                        />
+                        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                          <Search className="h-5 w-5 text-gray-400 group-hover:text-blue-500 transition-colors" />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Products Search */}
+                    <div className="lg:col-span-3">
+                      <div className="flex items-center gap-2 mb-3">
+                        <Search className="w-4 h-4 text-orange-600" />
+                        <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider">
+                          Search Products
+                        </h3>
+                      </div>
+                      <div className="relative group">
+                        <input
+                          type="text"
+                          placeholder="Search product name"
+                          value={productSearch}
+                          onChange={(e) => setProductSearch(e.target.value)}
+                          className="w-full px-6 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-orange-500 focus:ring-4 focus:ring-orange-100 transition-all duration-300 bg-white/70 hover:bg-white group-hover:shadow-md text-lg"
+                        />
+                        <div className="absolute inset-y-0 right-0 pr-4 flex items-center">
+                          <div className="bg-gradient-to-r from-orange-500 to-blue-500 p-2 rounded-lg cursor-pointer hover:shadow-lg transition-all duration-300 hover:scale-105">
+                            <Search className="h-5 w-5 text-white" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Filter Controls */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                  {/* Filter by */}
+                  <div className="group">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Star className="w-4 h-4 text-yellow-500" />
+                      <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider">
+                        Filter by
+                      </h3>
+                    </div>
+                    <div className="relative">
+                      <select
+                        value={filterBy}
+                        onChange={(e) => setFilterBy(e.target.value)}
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-yellow-500 focus:ring-4 focus:ring-yellow-100 transition-all duration-300 bg-white/70 hover:bg-white appearance-none cursor-pointer group-hover:shadow-md"
+                      >
+                        <option>Reviews</option>
+                        <option>Pricing</option>
+                        <option>Company Size</option>
+                        <option>Features</option>
+                        <option>Industry</option>
+                      </select>
+                      <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
+                    </div>
+                  </div>
+
+                  {/* Sort by */}
+                  <div className="group">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Clock className="w-4 h-4 text-purple-500" />
+                      <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider">
+                        Sort by
+                      </h3>
+                    </div>
+                    <div className="relative">
+                      <select
+                        value={sortBy}
+                        onChange={(e) => setSortBy(e.target.value)}
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition-all duration-300 bg-white/70 hover:bg-white appearance-none cursor-pointer group-hover:shadow-md"
+                      >
+                        <option>Featured</option>
+                        <option>Most Reviews</option>
+                        <option>Highest Rated</option>
+                        <option>Lowest Price</option>
+                        <option>Most Popular</option>
+                      </select>
+                      <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
+                    </div>
+                  </div>
+
+                  {/* Items per page */}
+                  <div className="group">
+                    <div className="flex items-center gap-2 mb-3">
+                      <Users className="w-4 h-4 text-indigo-500" />
+                      <h3 className="text-sm font-bold text-gray-700 uppercase tracking-wider">
+                        Items per page
+                      </h3>
+                    </div>
+                    <div className="relative">
+                      <select
+                        value={itemsPerPage}
+                        onChange={(e) => setItemsPerPage(e.target.value)}
+                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100 transition-all duration-300 bg-white/70 hover:bg-white appearance-none cursor-pointer group-hover:shadow-md"
+                      >
+                        <option>10 per page</option>
+                        <option>25 per page</option>
+                        <option>50 per page</option>
+                        <option>100 per page</option>
+                      </select>
+                      <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 pointer-events-none" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* 1CRM products details */}
+              <section id="new-CRM-software" className="mt-8">
+                <div className="bg-white rounded-2xl sm:rounded-3xl border border-gray-200 shadow-sm hover:shadow-lg mt-4 sm:p-8 transition-shadow duration-300 overflow-hidden">
+                  <div className="p-6  md:p-8 lg:p-10">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
+                      <div className="flex items-center gap-3 sm:gap-4">
+                        {/* Logo */}
+                        <div className="flex-shrink-0">
+                          <Image
+                            src="/images/1CRM.png" // Replace with your actual logo path
+                            alt="1CRM Logo"
+                            width={80}
+                            height={80}
+                            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
+                            priority
+                          />
+                        </div>
+
+                        {/* Title and Review Link */}
+                        <div className="min-w-0 flex-1">
+                          <h1 className="text-xl sm:text-xl md:text-2xl lg:text-4xl font-bold text-gray-900 mb-1 sm:mb-2">
+                            1CRM
+                          </h1>
+                          <Link
+                            href="/reviews/zoho-projects"
+                            className="text-sm sm:text-base md:text-lg text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200 font-medium"
+                          >
+                            Leave a Review
+                          </Link>
+                        </div>
+                      </div>
+
+                      {/* Compare Button */}
+                      <div className="flex-shrink-0">
+                        <button className="flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 text-sm sm:text-base md:text-lg font-semibold text-blue-600 hover:text-blue-800 border border-blue-600 hover:border-blue-800 rounded-lg hover:bg-blue-50 transition-all duration-200 group">
+                          <Plus className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-90 transition-transform duration-200" />
+                          Compare
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Good For Section */}
+                    <div className="mb-6 sm:mb-8">
+                      <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-sm sm:text-base md:text-lg">
+                        <span className="font-semibold text-gray-700">
+                          Good for:
+                        </span>
+                        <div className="flex flex-wrap items-center gap-1">
+                          <span className="text-gray-600">
+                            Medium (250-999 Employees),
+                          </span>
+                          <span className="text-gray-600">
+                            Enterprise (5,000+ Employees),
+                          </span>
+                          <span className="text-gray-600">
+                            Large (1,000-4,999 Employees),
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Description Section */}
+                    <div className="mb-6 sm:mb-8">
+                      <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6">
+                        Founded in 1997 and headquartered in Victoria, Canada,
+                        1CRM develops an eponymous customer relationship
+                        management (CRM) tool. The 1CRM system helps its clients
+                        provide better online information to their customers
+                        while streamlining internal business processes and
+                        improving their cost model. 1CRM offers both an
+                        on-premise solution and a cloud-based service
+                      </p>
+
+                      <Link
+                        href="/learn-more/zoho-projects"
+                        className="text-sm sm:text-base md:text-lg text-orange-600 hover:text-orange-800 hover:underline transition-colors duration-200 font-semibold"
+                      >
+                        Learn More About 1CRM
+                      </Link>
+                    </div>
+
+                    {/* Visit Website Button */}
+                    <div className="flex justify-end">
+                      <Link
+                        href="https://www.1crm.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm sm:text-base md:text-lg rounded-xl sm:rounded-2xl transition-all duration-200 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] group"
+                      >
+                        Visit Website
+                        <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 4Degrees products details */}
+                <div className="bg-white rounded-2xl sm:rounded-3xl border border-gray-200 shadow-sm hover:shadow-lg mt-4 sm:p-8 transition-shadow duration-300 overflow-hidden">
+                  <div className="p-6  md:p-8 lg:p-10">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
+                      <div className="flex items-center gap-3 sm:gap-4">
+                        {/* Logo */}
+                        <div className="flex-shrink-0">
+                          <Image
+                            src="/images/4Degrees.png" // Replace with your actual logo path
+                            alt="4Degrees Logo"
+                            width={80}
+                            height={80}
+                            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
+                            priority
+                          />
+                        </div>
+
+                        {/* Title and Review Link */}
+                        <div className="min-w-0 flex-1">
+                          <h1 className="text-xl sm:text-xl md:text-2xl lg:text-4xl font-bold text-gray-900 mb-1 sm:mb-2">
+                            4Degrees
+                          </h1>
+                          <Link
+                            href="/reviews/zoho-projects"
+                            className="text-sm sm:text-base md:text-lg text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200 font-medium"
+                          >
+                            Leave a Review
+                          </Link>
+                        </div>
+                      </div>
+
+                      {/* Compare Button */}
+                      <div className="flex-shrink-0">
+                        <button className="flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 text-sm sm:text-base md:text-lg font-semibold text-blue-600 hover:text-blue-800 border border-blue-600 hover:border-blue-800 rounded-lg hover:bg-blue-50 transition-all duration-200 group">
+                          <Plus className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-90 transition-transform duration-200" />
+                          Compare
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Good For Section */}
+                    <div className="mb-6 sm:mb-8">
+                      <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-sm sm:text-base md:text-lg">
+                        <span className="font-semibold text-gray-700">
+                          Good for:
+                        </span>
+                        <div className="flex flex-wrap items-center gap-1">
+                          <span className="text-gray-600">
+                            Any company size
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Description Section */}
+                    <div className="mb-6 sm:mb-8">
+                      <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6">
+                        4Degrees is a cloud-based customer relationship
+                        management (CRM) solution, which helps businesses
+                        leverage their relationships. 4Degrees integrates into
+                        email, calendar, and a number of third party data
+                        sources to automatically populate a team's relationship
+                        network, minimize data entry about the people and
+                        companies in that network, and suggests ways to engage
+                        that network over time.
+                      </p>
+
+                      <Link
+                        href="/learn-more/zoho-projects"
+                        className="text-sm sm:text-base md:text-lg text-orange-600 hover:text-orange-800 hover:underline transition-colors duration-200 font-semibold"
+                      >
+                        Learn More About 4Degrees
+                      </Link>
+                    </div>
+
+                    {/* Visit Website Button */}
+                    <div className="flex justify-end">
+                      <Link
+                        href="https://www.4degrees.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm sm:text-base md:text-lg rounded-xl sm:rounded-2xl transition-all duration-200 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] group"
+                      >
+                        Visit Website
+                        <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Aarialife Technologies - A Zoho CRM Provider products details */}
+                <div className="bg-white rounded-2xl sm:rounded-3xl border border-gray-200 shadow-sm hover:shadow-lg mt-4 sm:p-8 transition-shadow duration-300 overflow-hidden">
+                  <div className="p-6  md:p-8 lg:p-10">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
+                      <div className="flex items-center gap-3 sm:gap-4">
+                        {/* Logo */}
+                        <div className="flex-shrink-0">
+                          <Image
+                            src="/images/Aarialife.png" // Replace with your actual logo path
+                            alt=" 2Aarialife Technologies Logo"
+                            width={80}
+                            height={80}
+                            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
+                            priority
+                          />
+                        </div>
+
+                        {/* Title and Review Link */}
+                        <div className="min-w-0 flex-1">
+                          <h1 className="text-xl sm:text-xl md:text-2xl lg:text-4xl font-bold text-gray-900 mb-1 sm:mb-2">
+                            Aarialife Technologies - A Zoho CRM Provider
+                          </h1>
+                          <Link
+                            href="/reviews/zoho-projects"
+                            className="text-sm sm:text-base md:text-lg text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200 font-medium"
+                          >
+                            Leave a Review
+                          </Link>
+                        </div>
+                      </div>
+
+                      {/* Compare Button */}
+                      <div className="flex-shrink-0">
+                        <button className="flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 text-sm sm:text-base md:text-lg font-semibold text-blue-600 hover:text-blue-800 border border-blue-600 hover:border-blue-800 rounded-lg hover:bg-blue-50 transition-all duration-200 group">
+                          <Plus className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-90 transition-transform duration-200" />
+                          Compare
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Good For Section */}
+                    <div className="mb-6 sm:mb-8">
+                      <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-sm sm:text-base md:text-lg">
+                        <span className="font-semibold text-gray-700">
+                          Good for:
+                        </span>
+                        <div className="flex flex-wrap items-center gap-1">
+                          <span className="text-gray-600">
+                            Medium (250-999 Employees),
+                          </span>
+
+                          <span className="text-gray-600">
+                            Large (1,000-4,999 Employees),
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Description Section */}
+                    <div className="mb-6 sm:mb-8">
+                      <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6">
+                        Aarialife is a Zoho Premium Partner and has the
+                        knowledge, skills, and competency to consult and help
+                        implement a highly-customized solution to meet various
+                        customer's business and sales automation needs, while
+                        suggesting leading practices.
+                      </p>
+
+                      <Link
+                        href="/learn-more/24SevenOffice"
+                        className="text-sm sm:text-base md:text-lg text-orange-600 hover:text-orange-800 hover:underline transition-colors duration-200 font-semibold"
+                      >
+                        Learn More About Aarialife Technologies
+                      </Link>
+                    </div>
+
+                    {/* Visit Website Button */}
+                    <div className="flex justify-end">
+                      <Link
+                        href="https://www.aarialife.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm sm:text-base md:text-lg rounded-xl sm:rounded-2xl transition-all duration-200 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] group"
+                      >
+                        Visit Website
+                        <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/*Accelo  products details */}
+                <div className="bg-white rounded-2xl sm:rounded-3xl border border-gray-200 shadow-sm hover:shadow-lg mt-4 sm:p-8 transition-shadow duration-300 overflow-hidden">
+                  <div className="p-6  md:p-8 lg:p-10">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
+                      <div className="flex items-center gap-3 sm:gap-4">
+                        {/* Logo */}
+                        <div className="flex-shrink-0">
+                          <Image
+                            src="/images/accelo.png" // Replace with your actual logo path
+                            alt="Accelo Logo"
+                            width={80}
+                            height={80}
+                            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
+                            priority
+                          />
+                        </div>
+
+                        {/* Title and Review Link */}
+                        <div className="min-w-0 flex-1">
+                          <h1 className="text-xl sm:text-xl md:text-2xl lg:text-4xl font-bold text-gray-900 mb-1 sm:mb-2">
+                            Accelo
+                          </h1>
+                          <Link
+                            href="/reviews/zoho-projects"
+                            className="text-sm sm:text-base md:text-lg text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200 font-medium"
+                          >
+                            Leave a Review
+                          </Link>
+                        </div>
+                      </div>
+
+                      {/* Compare Button */}
+                      <div className="flex-shrink-0">
+                        <button className="flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 text-sm sm:text-base md:text-lg font-semibold text-blue-600 hover:text-blue-800 border border-blue-600 hover:border-blue-800 rounded-lg hover:bg-blue-50 transition-all duration-200 group">
+                          <Plus className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-90 transition-transform duration-200" />
+                          Compare
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Good For Section */}
+                    <div className="mb-6 sm:mb-8">
+                      <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-sm sm:text-base md:text-lg">
+                        <span className="font-semibold text-gray-700">
+                          Good for:
+                        </span>
+                        <div className="flex flex-wrap items-center gap-1">
+                          <span className="text-gray-600">
+                            Medium (250-999 Employees),
+                          </span>
+
+                          <span className="text-gray-600">
+                            Large (1,000-4,999 Employees),
+                          </span>
+                          <span className="text-gray-600">
+                            Small (50-249 Employees)
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Description Section */}
+                    <div className="mb-6 sm:mb-8">
+                      <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6">
+                        Accelo is a comprehensive Professional Services
+                        Automation (PSA) platform designed to help service
+                        organizations streamline operations, manage projects,
+                        and improve profitability. By centralizing business
+                        processes, it provides full visibility, real-time
+                        insights, and automation, helping teams deliver work
+                        more efficiently and detect issues early. Accelo
+                        supports scalability and enables growth with integrated
+                        solutions for project, client, and financial management
+                        from quote-to-cash.
+                      </p>
+
+                      <Link
+                        href="/learn-more/4castplus"
+                        className="text-sm sm:text-base md:text-lg text-orange-600 hover:text-orange-800 hover:underline transition-colors duration-200 font-semibold"
+                      >
+                        Learn More About Accelo
+                      </Link>
+                    </div>
+
+                    {/* Visit Website Button */}
+                    <div className="flex justify-end">
+                      <Link
+                        href="https://www.accelo.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm sm:text-base md:text-lg rounded-xl sm:rounded-2xl transition-all duration-200 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] group"
+                      >
+                        Visit Website
+                        <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Affinaquest products details */}
+                <div className="bg-white rounded-2xl sm:rounded-3xl border border-gray-200 shadow-sm hover:shadow-lg mt-4 sm:p-8 transition-shadow duration-300 overflow-hidden">
+                  <div className="p-6  md:p-8 lg:p-10">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
+                      <div className="flex items-center gap-3 sm:gap-4">
+                        {/* Logo */}
+                        <div className="flex-shrink-0">
+                          <Image
+                            src="/images/Affinaquest.png" // Replace with your actual logo path
+                            alt="Affinaquest Logo"
+                            width={80}
+                            height={80}
+                            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
+                            priority
+                          />
+                        </div>
+
+                        {/* Title and Review Link */}
+                        <div className="min-w-0 flex-1">
+                          <h1 className="text-xl sm:text-xl md:text-2xl lg:text-4xl font-bold text-gray-900 mb-1 sm:mb-2">
+                            5day.io
+                          </h1>
+                          <Link
+                            href="/reviews/zoho-projects"
+                            className="text-sm sm:text-base md:text-lg text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200 font-medium"
+                          >
+                            Leave a Review
+                          </Link>
+                        </div>
+                      </div>
+
+                      {/* Compare Button */}
+                      <div className="flex-shrink-0">
+                        <button className="flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 text-sm sm:text-base md:text-lg font-semibold text-blue-600 hover:text-blue-800 border border-blue-600 hover:border-blue-800 rounded-lg hover:bg-blue-50 transition-all duration-200 group">
+                          <Plus className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-90 transition-transform duration-200" />
+                          Compare
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Good For Section */}
+                    <div className="mb-6 sm:mb-8">
+                      <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-sm sm:text-base md:text-lg">
+                        <span className="font-semibold text-gray-700">
+                          Good for:
+                        </span>
+                        <div className="flex flex-wrap items-center gap-1">
+                          <span className="text-gray-600">
+                            Medium (250-999 Employees),
+                          </span>
+                          <span className="text-gray-600">
+                            Enterprise (5,000+ Employees),
+                          </span>
+                          <span className="text-gray-600">
+                            Large (1,000-4,999 Employees)
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Description Section */}
+                    <div className="mb-6 sm:mb-8">
+                      <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6">
+                        Affinaquest is a full-featured customer relationship
+                        management (CRM) system built specifically for nonprofit
+                        organizations.
+                      </p>
+
+                      <Link
+                        href="/learn-more/5day-io"
+                        className="text-sm sm:text-base md:text-lg text-orange-600 hover:text-orange-800 hover:underline transition-colors duration-200 font-semibold"
+                      >
+                        Learn More About Affinaquest
+                      </Link>
+                    </div>
+
+                    {/* Visit Website Button */}
+                    <div className="flex justify-end">
+                      <Link
+                        href="https://www.affinaquest.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm sm:text-base md:text-lg rounded-xl sm:rounded-2xl transition-all duration-200 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] group"
+                      >
+                        Visit Website
+                        <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/* 5Affinity products details */}
+                <div className="bg-white rounded-2xl sm:rounded-3xl border border-gray-200 shadow-sm hover:shadow-lg mt-4 sm:p-8 transition-shadow duration-300 overflow-hidden">
+                  <div className="p-6  md:p-8 lg:p-10">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
+                      <div className="flex items-center gap-3 sm:gap-4">
+                        {/* Logo */}
+                        <div className="flex-shrink-0">
+                          <Image
+                            src="/images/Affinity.jpg" // Replace with your actual logo path
+                            alt="Affinity Logo"
+                            width={80}
+                            height={80}
+                            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
+                            priority
+                          />
+                        </div>
+
+                        {/* Title and Review Link */}
+                        <div className="min-w-0 flex-1">
+                          <h1 className="text-xl sm:text-xl md:text-2xl lg:text-4xl font-bold text-gray-900 mb-1 sm:mb-2">
+                            Affinity
+                          </h1>
+                          <Link
+                            href="/reviews/zoho-projects"
+                            className="text-sm sm:text-base md:text-lg text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200 font-medium"
+                          >
+                            Leave a Review
+                          </Link>
+                        </div>
+                      </div>
+
+                      {/* Compare Button */}
+                      <div className="flex-shrink-0">
+                        <button className="flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 text-sm sm:text-base md:text-lg font-semibold text-blue-600 hover:text-blue-800 border border-blue-600 hover:border-blue-800 rounded-lg hover:bg-blue-50 transition-all duration-200 group">
+                          <Plus className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-90 transition-transform duration-200" />
+                          Compare
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Good For Section */}
+                    <div className="mb-6 sm:mb-8">
+                      <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-sm sm:text-base md:text-lg">
+                        <span className="font-semibold text-gray-700">
+                          Good for:
+                        </span>
+                        <div className="flex flex-wrap items-center gap-1">
+                          <span className="text-gray-600">
+                            Any company size
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Description Section */}
+                    <div className="mb-6 sm:mb-8">
+                      <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6">
+                        Affinity is a relationship intelligence platform
+                        enabling teams to leverage their network and close
+                        deals. Using patent-pending technology, Affinity allows
+                        teams to manage relationships by auto-populating the
+                        pipeline and allowing introductions to decision makers.
+                      </p>
+
+                      <Link
+                        href="/learn-more/zoho-projects"
+                        className="text-sm sm:text-base md:text-lg text-orange-600 hover:text-orange-800 hover:underline transition-colors duration-200 font-semibold"
+                      >
+                        Learn More About Affinity
+                      </Link>
+                    </div>
+
+                    {/* Visit Website Button */}
+                    <div className="flex justify-end">
+                      <Link
+                        href="https://www.affinity.co/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm sm:text-base md:text-lg rounded-xl sm:rounded-2xl transition-all duration-200 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] group"
+                      >
+                        Visit Website
+                        <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/* AgencyBloc  products details */}
+                <div className="bg-white rounded-2xl sm:rounded-3xl border border-gray-200 shadow-sm hover:shadow-lg mt-4 sm:p-8 transition-shadow duration-300 overflow-hidden">
+                  <div className="p-6  md:p-8 lg:p-10">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
+                      <div className="flex items-center gap-3 sm:gap-4">
+                        {/* Logo */}
+                        <div className="flex-shrink-0">
+                          <Image
+                            src="/images/AgencyBloc.png" // Replace with your actual logo path
+                            alt="AgencyBloc Logo"
+                            width={80}
+                            height={80}
+                            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
+                            priority
+                          />
+                        </div>
+
+                        {/* Title and Review Link */}
+                        <div className="min-w-0 flex-1">
+                          <h1 className="text-xl sm:text-xl md:text-2xl lg:text-4xl font-bold text-gray-900 mb-1 sm:mb-2">
+                            AgencyBloc
+                          </h1>
+                          <Link
+                            href="/reviews/zoho-projects"
+                            className="text-sm sm:text-base md:text-lg text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200 font-medium"
+                          >
+                            Leave a Review
+                          </Link>
+                        </div>
+                      </div>
+
+                      {/* Compare Button */}
+                      <div className="flex-shrink-0">
+                        <button className="flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 text-sm sm:text-base md:text-lg font-semibold text-blue-600 hover:text-blue-800 border border-blue-600 hover:border-blue-800 rounded-lg hover:bg-blue-50 transition-all duration-200 group">
+                          <Plus className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-90 transition-transform duration-200" />
+                          Compare
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Good For Section */}
+                    <div className="mb-6 sm:mb-8">
+                      <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-sm sm:text-base md:text-lg">
+                        <span className="font-semibold text-gray-700">
+                          Good for:
+                        </span>
+                        <div className="flex flex-wrap items-center gap-1">
+                          <span className="text-gray-600">
+                            Any company size
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Description Section */}
+                    <div className="mb-6 sm:mb-8">
+                      <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6">
+                        AgencyBloc is an agency management system that helps
+                        life and health insurance agencies grow their business
+                        by organizing and automating their operations using a
+                        combination of an industry-specific CRM, commissions
+                        processing, and integrated marketing automation.
+                        AgencyBloc’s mission is to provide powerful solutions by
+                        making the convoluted straightforward.
+                      </p>
+
+                      <Link
+                        href="/learn-more/zoho-projects"
+                        className="text-sm sm:text-base md:text-lg text-orange-600 hover:text-orange-800 hover:underline transition-colors duration-200 font-semibold"
+                      >
+                        Learn More About AgencyBloc
+                      </Link>
+                    </div>
+
+                    {/* Visit Website Button */}
+                    <div className="flex justify-end">
+                      <Link
+                        href="https://www.agencybloc.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm sm:text-base md:text-lg rounded-xl sm:rounded-2xl transition-all duration-200 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] group"
+                      >
+                        Visit Website
+                        <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/*AgentCubed products details */}
+                <div className="bg-white rounded-2xl sm:rounded-3xl border border-gray-200 shadow-sm hover:shadow-lg mt-4 sm:p-8 transition-shadow duration-300 overflow-hidden">
+                  <div className="p-6  md:p-8 lg:p-10">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
+                      <div className="flex items-center gap-3 sm:gap-4">
+                        {/* Logo */}
+                        <div className="flex-shrink-0">
+                          <Image
+                            src="/images/AgentCubed.jpg" // Replace with your actual logo path
+                            alt="AgentCubed Logo"
+                            width={80}
+                            height={80}
+                            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
+                            priority
+                          />
+                        </div>
+
+                        {/* Title and Review Link */}
+                        <div className="min-w-0 flex-1">
+                          <h1 className="text-xl sm:text-xl md:text-2xl lg:text-4xl font-bold text-gray-900 mb-1 sm:mb-2">
+                            AgentCubed
+                          </h1>
+                          <Link
+                            href="/reviews/zoho-projects"
+                            className="text-sm sm:text-base md:text-lg text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200 font-medium"
+                          >
+                            Leave a Review
+                          </Link>
+                        </div>
+                      </div>
+
+                      {/* Compare Button */}
+                      <div className="flex-shrink-0">
+                        <button className="flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 text-sm sm:text-base md:text-lg font-semibold text-blue-600 hover:text-blue-800 border border-blue-600 hover:border-blue-800 rounded-lg hover:bg-blue-50 transition-all duration-200 group">
+                          <Plus className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-90 transition-transform duration-200" />
+                          Compare
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Good For Section */}
+                    <div className="mb-6 sm:mb-8">
+                      <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-sm sm:text-base md:text-lg">
+                        <span className="font-semibold text-gray-700">
+                          Good for:
+                        </span>
+                        <div className="flex flex-wrap items-center gap-1">
+                          <span className="text-gray-600">
+                            Medium (250-999 Employees),
+                          </span>
+                          <span className="text-gray-600">
+                            Enterprise (5,000+ Employees),
+                          </span>
+                          <span className="text-gray-600">
+                            Large (1,000-4,999 Employees),
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Description Section */}
+                    <div className="mb-6 sm:mb-8">
+                      <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6">
+                        AgentCubed was developed as a lead management tool as
+                        well as a customer relationship management (CRM)
+                        solution for the insurance industry. It offers three
+                        different cloud-based products that cater to the needs
+                        of either agents, agencies, or call centers. AgentCubed
+                        provides free product demos, and its agency and call
+                        center solutions can be customized to the specific needs
+                        of the client depending on how many individuals will be
+                        using the system.
+                      </p>
+
+                      <Link
+                        href="/learn-more/zoho-projects"
+                        className="text-sm sm:text-base md:text-lg text-orange-600 hover:text-orange-800 hover:underline transition-colors duration-200 font-semibold"
+                      >
+                        Learn More About AgentCubed
+                      </Link>
+                    </div>
+
+                    {/* Visit Website Button */}
+                    <div className="flex justify-end">
+                      <Link
+                        href="https://www.agentcubed.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm sm:text-base md:text-lg rounded-xl sm:rounded-2xl transition-all duration-200 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] group"
+                      >
+                        Visit Website
+                        <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Agile CRM  products details */}
+                <div className="bg-white rounded-2xl sm:rounded-3xl border border-gray-200 shadow-sm hover:shadow-lg mt-4 sm:p-8 transition-shadow duration-300 overflow-hidden">
+                  <div className="p-6  md:p-8 lg:p-10">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
+                      <div className="flex items-center gap-3 sm:gap-4">
+                        {/* Logo */}
+                        <div className="flex-shrink-0">
+                          <Image
+                            src="/images/AgileCRM.png" // Replace with your actual logo path
+                            alt="Agile CRM Logo"
+                            width={80}
+                            height={80}
+                            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
+                            priority
+                          />
+                        </div>
+
+                        {/* Title and Review Link */}
+                        <div className="min-w-0 flex-1">
+                          <h1 className="text-xl sm:text-xl md:text-2xl lg:text-4xl font-bold text-gray-900 mb-1 sm:mb-2">
+                            Agile CRM
+                          </h1>
+                          <Link
+                            href="/reviews/zoho-projects"
+                            className="text-sm sm:text-base md:text-lg text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200 font-medium"
+                          >
+                            Leave a Review
+                          </Link>
+                        </div>
+                      </div>
+
+                      {/* Compare Button */}
+                      <div className="flex-shrink-0">
+                        <button className="flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 text-sm sm:text-base md:text-lg font-semibold text-blue-600 hover:text-blue-800 border border-blue-600 hover:border-blue-800 rounded-lg hover:bg-blue-50 transition-all duration-200 group">
+                          <Plus className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-90 transition-transform duration-200" />
+                          Compare
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Good For Section */}
+                    <div className="mb-6 sm:mb-8">
+                      <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-sm sm:text-base md:text-lg">
+                        <span className="font-semibold text-gray-700">
+                          Good for:
+                        </span>
+                        <div className="flex flex-wrap items-center gap-1">
+                          <span className="text-gray-600">
+                            Any company size
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Description Section */}
+                    <div className="mb-6 sm:mb-8">
+                      <p className="text-gray-700 text-sm sm:text-base md:text-lg leading-relaxed mb-4 sm:mb-6">
+                        With Agile CRM, it is possible to engage your sales
+                        force like never before by treating sales like a game.
+                        Features include custom leader boards, real-time alerts
+                        and advanced sales metrics. Track each and every key
+                        performance indicator (KPI) with cohort analysis,
+                        conversion reports and advanced analytics. Know your
+                        customer’s profile, social presence, web activity and
+                        track every interaction through a neatly arranged
+                        timeline tracking the customer’s journey
+                      </p>
+
+                      <Link
+                        href="/learn-more/zoho-projects"
+                        className="text-sm sm:text-base md:text-lg text-orange-600 hover:text-orange-800 hover:underline transition-colors duration-200 font-semibold"
+                      >
+                        Learn More About Agile CRM
+                      </Link>
+                    </div>
+
+                    {/* Visit Website Button */}
+                    <div className="flex justify-end">
+                      <Link
+                        href="https://www.agilecrm.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm sm:text-base md:text-lg rounded-xl sm:rounded-2xl transition-all duration-200 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] group"
+                      >
+                        Visit Website
+                        <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Amity  products details */}
+                <div className="bg-white rounded-2xl sm:rounded-3xl border border-gray-200 shadow-sm hover:shadow-lg mt-4 sm:p-8 transition-shadow duration-300 overflow-hidden">
+                  <div className="p-6  md:p-8 lg:p-10">
+                    <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
+                      <div className="flex items-center gap-3 sm:gap-4">
+                        {/* Logo */}
+                        <div className="flex-shrink-0">
+                          <Image
+                            src="/images/Amity.jpg" // Replace with your actual logo path
+                            alt="Amity Logo"
+                            width={80}
+                            height={80}
+                            className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 object-contain"
+                            priority
+                          />
+                        </div>
+
+                        {/* Title and Review Link */}
+                        <div className="min-w-0 flex-1">
+                          <h1 className="text-xl sm:text-xl md:text-2xl lg:text-4xl font-bold text-gray-900 mb-1 sm:mb-2">
+                            Amity
+                          </h1>
+                          <Link
+                            href="/reviews/zoho-projects"
+                            className="text-sm sm:text-base md:text-lg text-blue-600 hover:text-blue-800 hover:underline transition-colors duration-200 font-medium"
+                          >
+                            Leave a Review
+                          </Link>
+                        </div>
+                      </div>
+
+                      {/* Compare Button */}
+                      <div className="flex-shrink-0">
+                        <button className="flex items-center gap-2 px-4 py-2 sm:px-5 sm:py-2.5 md:px-6 md:py-3 text-sm sm:text-base md:text-lg font-semibold text-blue-600 hover:text-blue-800 border border-blue-600 hover:border-blue-800 rounded-lg hover:bg-blue-50 transition-all duration-200 group">
+                          <Plus className="w-4 h-4 sm:w-5 sm:h-5 group-hover:rotate-90 transition-transform duration-200" />
+                          Compare
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Description Section */}
+                    <div className="mb-6 sm:mb-8">
+                      <Link
+                        href="/learn-more/zoho-projects"
+                        className="text-sm sm:text-base md:text-lg text-orange-600 hover:text-orange-800 hover:underline transition-colors duration-200 font-semibold"
+                      >
+                        Learn More About Amity
+                      </Link>
+                    </div>
+
+                    {/* Visit Website Button */}
+                    <div className="flex justify-end">
+                      <Link
+                        href="https://www.amity.co/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 md:px-10 md:py-5 bg-orange-600 hover:bg-orange-700 text-white font-semibold text-sm sm:text-base md:text-lg rounded-xl sm:rounded-2xl transition-all duration-200 hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] group"
+                      >
+                        Visit Website
+                        <ExternalLink className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-200" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              {/* Common Features Section */}
+              <section id="key-features" className="mt-8 max-w-7xl mx-auto">
+                {" "}
+                <div className="max-w-none">
+                  {/* Main Heading */}
+                  <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-8 sm:mb-10 md:mb-12 lg:mb-16">
+                    Key CRM features to consider for your use case
+                  </h1>
+
+                  {/* First Paragraph */}
+                  <div className="mb-8 sm:mb-10 md:mb-12 lg:mb-16">
+                    <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed sm:leading-relaxed md:leading-relaxed lg:leading-relaxed">
+                      While there are certainly software solutions that are
+                      objectively “bad,” the majority of options in any given
+                      vertical will be valued by how well they satisfy the
+                      intended use case. Trying to apply the tool outside the
+                      parameters it was designed for may fail to meet
+                      expectations, but that does not necessarily mean the
+                      software itself is of poor quality. It’s just a bad match.
+                    </p>
+                  </div>
+
+                  {/* Second Paragraph with Links */}
+                  <div className="mb-12 sm:mb-16 md:mb-20 lg:mb-24">
+                    <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed sm:leading-relaxed md:leading-relaxed lg:leading-relaxed">
+                      Below are some core areas of concern for CRM consumers to
+                      consider when shopping around to help them find a tool
+                      that aligns with their needs.{" "}
+                      <Link
+                        href="/enterprise-project-management"
+                        className="text-orange-600 hover:text-orange-800 hover:underline transition-colors duration-200 font-medium"
+                      >
+                        The Different Types of Roles & Responsibilities in a CRM
+                      </Link>{" "}
+                    </p>
+                  </div>
+
+                  {/* Contact management Section */}
+                  <div>
+                    {/* Contact management Heading */}
+                    <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight mb-6 sm:mb-8 md:mb-10 lg:mb-12">
+                      Contact management
+                    </h2>
+
+                    {/* Contact management Paragraph */}
+                    <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed sm:leading-relaxed md:leading-relaxed lg:leading-relaxed mb-6">
+                      For CRM tools, the most foundational functionality is that
+                      of collecting and organizing contact information. At the
+                      very least, it needs to be a step up from simply dumping
+                      leads into a spreadsheet only to immediately be forgotten.
+                      Spreadsheets have their place, but they aren’t optimized
+                      for automation or to serve as living records. If a CRM
+                      can’t improve on manual data entry, manual data scrubbing,
+                      and manual retrieval, then it’s just Excel with extra
+                      steps.
+                    </p>
+
+                    {/* Additional Contact Management Info */}
+                    <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed sm:leading-relaxed md:leading-relaxed lg:leading-relaxed mb-4">
+                      Contact management features in CRM and sales software, it
+                      should be noted, vary widely from system to system. But
+                      the common upgrades to functionality will likely look
+                      familiar to anyone who’s been using digital devices in the
+                      past two decades:
+                    </p>
+
+                    <ul className="list-disc list-inside text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed space-y-2">
+                      <li>Automated data importing</li>
+                      <li>
+                        Data export flexibility (via EDI, CSV, or other formats)
+                      </li>
+                      <li>
+                        Integrations with other platforms, apps, and databases
+                      </li>
+                      <li>Filters and search functions</li>
+                      <li>Analytics and reporting functions</li>
+                    </ul>
+                  </div>
+                </div>
+                {/*Communication recordsSection */}
+                <div>
+                  {/* Communication records Heading */}
+                  <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight mb-6 sm:mb-8 md:mb-10 lg:mb-12">
+                    Communication records
+                  </h2>
+
+                  {/* Communication records Paragraph */}
+                  <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed sm:leading-relaxed md:leading-relaxed lg:leading-relaxed mb-6">
+                    By now, nearly everyone is familiar with the “This call may
+                    be recorded for quality assurance purposes” line spoken to
+                    customers calling in to a business for support. Having a
+                    record of customer/client/lead interactions can be
+                    indispensable. And not just for maintaining excellent
+                    service, either.
+                  </p>
+
+                  <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed mb-6">
+                    Using recorded calls, chats, and other communication,
+                    businesses can achieve a multitude of important objectives,
+                    including:
+                  </p>
+
+                  <ul className="list-disc list-inside text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed space-y-2 mb-6">
+                    <li>
+                      Improving effectiveness of staff training, onboarding,
+                      company policies, and more
+                    </li>
+                    <li>
+                      Compiling data for analytics (which can help identify
+                      patterns, predict trends, and even recommend strategies)
+                    </li>
+                    <li>
+                      Providing evidence to help navigate legal concerns and
+                      protect against loss
+                    </li>
+                  </ul>
+
+                  <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed">
+                    If benefits like these factor into your CRM and sales
+                    software choices, then be aware that some software includes
+                    functionality to support it, while some does not.
+                  </p>
+                </div>
+                {/* Integrations Section */}
+                <div>
+                  {/* Integrations Heading */}
+                  <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight mb-6 sm:mb-8 md:mb-10 lg:mb-12">
+                    Integrations
+                  </h2>
+
+                  {/* Integrations Paragraphs */}
+                  <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed mb-4">
+                    Implementing new software systems can be difficult, and
+                    onboarding users only becomes more problematic when the
+                    system doesn’t play well with existing solutions in the
+                    workflow.
+                  </p>
+
+                  <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed mb-4">
+                    Some CRMs are built as part of a larger platform of business
+                    solutions, and are intended to be used as a holistic unit.
+                    This is a bit of a trade-off, and some cost-benefit
+                    evaluations will be needed to determine if a complete
+                    workflow overhaul will net positive or negative returns for
+                    the trouble.
+                  </p>
+
+                  <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed mb-4">
+                    However, if maintaining the stability and functionality of
+                    other systems is of equal importance, then finding a CRM
+                    software that can integrate with them successfully is
+                    critical. Depending on what integrations are needed, there
+                    may be plug-ins or add-ons available already to users of the
+                    tool.
+                  </p>
+
+                  <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed mb-4">
+                    For less common integrations, some more code-heavy API
+                    customization may be necessary. In these cases, it’s a good
+                    idea to ask which side of the client-vendor partnership will
+                    be building the integration.
+                  </p>
+
+                  <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed">
+                    What should be avoided is the addition of a CRM that only
+                    further complicates workflows and requires additional manual
+                    processes to hold the system together.
+                  </p>
+                </div>
+                <div>
+                  {/* Marketing Automation Heading */}
+                  <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight mb-6 sm:mb-8 md:mb-10 lg:mb-12">
+                    Marketing automation
+                  </h2>
+
+                  {/* Marketing Automation Paragraphs */}
+                  <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed mb-4">
+                    Marketing automation is a specific example of the
+                    integration concerns above, but it merits its own spot on
+                    this list due to the amount of overlap between marketing and
+                    sales efforts. Like other sales-adjacent functions, there
+                    are a lot of advantages to having the CRM trigger automatic
+                    tasks such as sending confirmation emails, email nurture
+                    campaigns, and more.
+                  </p>
+
+                  <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed mb-4">
+                    Worst-case scenario, similar to what’s mentioned above, is
+                    that the new CRM complicates already existing processes,
+                    rather than integrating or replacing them. If your CRM or
+                    sales software adds another step in the process of, for
+                    example, sending outreach emails because staff members have
+                    to manually dig for contact info in the database, that’s a
+                    net loss.
+                  </p>
+
+                  <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed mb-4">
+                    At the very least, the CRM should leave any existing
+                    processes intact and unhindered. Most likely, however, your
+                    organization will benefit from some form of integration, or
+                    a CRM that includes marketing automation features natively.
+                  </p>
+                </div>
+                <div>
+                  {/* Quotes and Invoicing Heading */}
+                  <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight mb-6 sm:mb-8 md:mb-10 lg:mb-12">
+                    Quotes and invoicing
+                  </h2>
+
+                  {/* Quotes and Invoicing Paragraphs */}
+                  <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed mb-4">
+                    Next in line for important functions in the sales process
+                    that may or may not be handled by sales team members are
+                    financials, such as quotes, invoices, and other AP/AR
+                    responsibilities. The same philosophy applies here as above.
+                    If an all-in-one solution upgrades your workflow, prioritize
+                    that aspect in your research.
+                  </p>
+
+                  <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed">
+                    If integration will suffice, then double-check with vendors
+                    for the specific platforms you need to be interoperable.
+                    Even if your current process is efficient enough currently,
+                    be sure that the CRM software doesn’t create additional
+                    headaches for anyone in the workflow.
+                  </p>
+                </div>
+                <div>
+                  {/* Data Privacy Heading */}
+                  <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight mb-6 sm:mb-8 md:mb-10 lg:mb-12">
+                    Data privacy
+                  </h2>
+
+                  {/* Data Privacy Paragraphs */}
+                  <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed mb-4">
+                    Cybersecurity is, arguably, a priority for every
+                    organization (or, at least it should be). Some verticals
+                    deal with higher risk than others, however, and may need
+                    additional security protocols for their CRM to protect
+                    themselves or even to comply with industry mandates.
+                  </p>
+
+                  <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed mb-4">
+                    This is one that may require consulting with IT, InfoSec, or
+                    other I&O staff in the organization. Many of the technical
+                    details that factor into whether or not a CRM software is
+                    sufficiently secure may be outside the expertise of anyone
+                    without a background in computer systems, and it’s not one
+                    to leave to chance.
+                  </p>
+
+                  <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed">
+                    Check with internal SMEs, and leverage their experience to
+                    further vet your shortlist of CRMs. It may even be
+                    worthwhile to have a 3rd-party vendor risk assessment done
+                    for any that meet all other criteria, just to cover your
+                    bases.
+                  </p>
+                </div>
+                <div>
+                  {/* Project Management Heading */}
+                  <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-900 leading-tight mb-6 sm:mb-8 md:mb-10 lg:mb-12">
+                    Project management
+                  </h2>
+
+                  {/* Project Management Paragraphs */}
+                  <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed mb-4">
+                    This list of supplemental functions that might be relevant
+                    would be pretty long if it were comprehensive. All-in-one
+                    systems, analytics and reporting, ease of use, pipeline
+                    management, and many more might fit here. Many of these have
+                    been touched on above, and others are likely known
+                    quantities already.
+                  </p>
+
+                  <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed mb-4">
+                    So instead, this part of the list will finish with one final
+                    consideration: project management.
+                  </p>
+
+                  <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed mb-4">
+                    Organizations that have, until now, used less formalized
+                    workflow processes may not realize how much of an upgrade a
+                    well-designed project management strategy can be. As teams
+                    grow, workloads become heavier, and processes become more
+                    intricate and complex, tracking things on paper proves a
+                    substantial challenge.
+                  </p>
+
+                  <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed">
+                    With effective implementation, project management tools can
+                    provide visibility and accountability across the board.
+                    Better still, it can help staff achieve greater levels of
+                    autonomy by giving them the tools needed to stay organized
+                    and on top of their responsibilities. Some CRM and sales
+                    software tools include project management (PM) features in
+                    their toolset, while others can integrate with popular
+                    platforms via APIs. Either way, for any team larger than a
+                    handful of employees, it’s worth discussing the potential
+                    value a CRM with PM enablement might bring to the table.
+                  </p>
+                </div>
+              </section>
+              {/* How-to-choose */}
+              <section id="how-to-choose" className="mt-8 max-w-7xl mx-auto">
+                {" "}
+                <div className="max-w-none">
+                  {/* Main Heading */}
+                  <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-8 sm:mb-10 md:mb-12 lg:mb-16">
+                    Choosing the right CRM and sales software
+                  </h1>
+
+                  {/* First Paragraph */}
+                  <div className="mb-8 sm:mb-10 md:mb-12 lg:mb-16">
+                    <p className="text-base sm:text-sm md:text-lg lg:text-lg text-gray-700 leading-relaxed sm:leading-relaxed md:leading-relaxed lg:leading-relaxed">
+                      After diving into the world of CRM solutions, you’ve
+                      likely noticed there’s no shortage of options. This
+                      abundance is actually a good thing – it means you have the
+                      flexibility to find a CRM that fits your business like a
+                      glove, whether you’re running a small startup or managing
+                      a large company. If you’re a small business owner, you
+                      might be looking for something straightforward and
+                      budget-friendly. On the other hand, if you’re at the helm
+                      of a larger company, you might need a CRM with all the
+                      bells and whistles – think advanced features and seamless
+                      integrations with your existing tech stack.
+                    </p>
+                  </div>
+                </div>
+              </section>
+              {/* FAQs */}
+              <FAQ faqsData={faqData} />
             </div>
-            <p className="ml-3 text-base">AI-powered lead scoring and prioritization</p>
-          </li>
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-[#000e54] rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">Visual pipeline tracking and management</p>
-          </li>
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-[#000e54] rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">Behavior-based lead nurturing workflows</p>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    {/* Marketing Automation */}
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-      <div className="h-2 bg-purple-600"></div>
-      <div className="p-8">
-        <div className="flex items-center mb-6">
-          <div className="bg-purple-100 p-3 rounded-lg mr-4">
-            <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-            </svg>
           </div>
-          <h3 className="text-2xl font-semibold text-gray-800">Marketing Automation</h3>
-        </div>
-        <ul className="space-y-4 text-gray-700">
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">Multi-channel campaign management</p>
-          </li>
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">Personalized email workflows and sequences</p>
-          </li>
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">Behavior-triggered communications</p>
-          </li>
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-purple-600 rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">A/B testing and performance analytics</p>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    {/* Sales Enablement */}
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-      <div className="h-2 bg-green-600"></div>
-      <div className="p-8">
-        <div className="flex items-center mb-6">
-          <div className="bg-green-100 p-3 rounded-lg mr-4">
-            <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-          </div>
-          <h3 className="text-2xl font-semibold text-gray-800">Sales Enablement</h3>
-        </div>
-        <ul className="space-y-4 text-gray-700">
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-green-600 rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">AI-powered sales forecasting</p>
-          </li>
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-green-600 rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">Deal stage tracking and probability scoring</p>
-          </li>
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-green-600 rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">Document and proposal generation</p>
-          </li>
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-green-600 rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">Meeting scheduling and call logging</p>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    {/* Analytics & Reporting */}
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-      <div className="h-2 bg-orange-600"></div>
-      <div className="p-8">
-        <div className="flex items-center mb-6">
-          <div className="bg-orange-100 p-3 rounded-lg mr-4">
-            <svg className="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-          </div>
-          <h3 className="text-2xl font-semibold text-gray-800">Analytics & Reporting</h3>
-        </div>
-        <ul className="space-y-4 text-gray-700">
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">Customizable dashboards and reports</p>
-          </li>
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">Revenue forecasting and trend analysis</p>
-          </li>
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">Team performance metrics</p>
-          </li>
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-orange-600 rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">ROI tracking for marketing campaigns</p>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    {/* Integrations */}
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-      <div className="h-2 bg-indigo-600"></div>
-      <div className="p-8">
-        <div className="flex items-center mb-6">
-          <div className="bg-indigo-100 p-3 rounded-lg mr-4">
-            <svg className="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path>
-            </svg>
-          </div>
-          <h3 className="text-2xl font-semibold text-gray-800">Integrations</h3>
-        </div>
-        <ul className="space-y-4 text-gray-700">
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-indigo-600 rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">Email and calendar synchronization</p>
-          </li>
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-indigo-600 rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">Marketing automation platforms</p>
-          </li>
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-indigo-600 rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">ERP and accounting software</p>
-          </li>
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-indigo-600 rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">Custom API connections</p>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-    {/* Mobile & Accessibility */}
-    <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
-      <div className="h-2 bg-red-600"></div>
-      <div className="p-8">
-        <div className="flex items-center mb-6">
-          <div className="bg-red-100 p-3 rounded-lg mr-4">
-            <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
-            </svg>
-          </div>
-          <h3 className="text-2xl font-semibold text-gray-800">Mobile & Accessibility</h3>
-        </div>
-        <ul className="space-y-4 text-gray-700">
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-red-600 rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">Native iOS and Android apps</p>
-          </li>
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-red-600 rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">Offline access with sync capabilities</p>
-          </li>
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-red-600 rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">Voice commands and dictation</p>
-          </li>
-          <li className="flex items-start">
-            <div className="flex-shrink-0 mt-1">
-              <div className="w-2 h-2 bg-red-600 rounded-full"></div>
-            </div>
-            <p className="ml-3 text-base">Accessibility compliant interfaces</p>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-  {/* How CRM Enhances Lead Generation & Email Marketing */}
-  <div id="lead-generation" className="">
-    <h2 className="text-4xl font-semibold text-gray-900 mb-4">How CRM Enhances Lead Generation & Email Marketing</h2>
-    <p className="text-gray-800 text-base mb-6">
-      A CRM-powered lead generation system allows businesses to attract, nurture, and convert leads effectively.
-    </p>
-    <div className="bg-white rounded-lg  p-6 mb-8 text-base">
-      <h3 className="text-xl font-semibold mb-4 text-base">Lead Generation Process with CRM:</h3>
-      <ul className="space-y-6">
-        <li className="flex items-start">
-          <span className="font-semibold mr-2">1.</span>
-          <div>
-            <p className="font-semibold text-xl">Attract Leads</p>
-            <ul className="text-gray-600 ml-4 list-disc space-y-1 mt-1 text-base">
-  <li>Capture new contacts through landing pages, social media campaigns, and digital ads.</li>
-  <li>Track where each lead comes from to measure marketing ROI more effectively.</li>
-  <li>Use website visitor tracking to identify companies and understand visitor behavior.</li>
-  <li>Create gated content that automatically adds leads into your CRM system.</li>
-  <li>Handle event sign-ups and manage webinar attendees all in one place.</li>
-  <li>Deploy chatbots that collect data and sync directly with your CRM.</li>
-</ul>
-
-          </div>
-        </li>
-        <li className="flex items-start">
-          <span className="font-semibold mr-2">2.</span>
-          <div>
-            <p className="font-semibold text-xl">Qualify Leads</p>
-            <ul className="text-gray-600 ml-4 list-disc space-y-1 mt-1 text-base">
-  <li>Score leads to focus on those most likely to convert into valuable customers.</li>
-  <li>Use AI-powered predictive scoring to identify high-potential prospects faster.</li>
-  <li>Apply qualification methods like BANT or MEDDIC to assess lead readiness.</li>
-  <li>Set up rules to automatically assign leads based on their profile or behavior.</li>
-  <li>Create tailored nurturing journeys for leads at different qualification stages.</li>
-  <li>Track engagement like clicks and replies to spot when leads are ready for sales.</li>
-</ul>
-
-          </div>
-        </li>
-        <li className="flex items-start">
-          <span className="font-semibold mr-2">3.</span>
-          <div>
-            <p className="font-semibold text-base">Nurture with Email Marketing</p>
-            <ul className="text-gray-600 ml-4 list-disc space-y-1 mt-1 text-base">
-  <li>Set up automated drip campaigns to keep leads engaged over time.</li>
-  <li>Deliver tailored content journeys based on industry or business type.</li>
-  <li>Run re-engagement campaigns to bring back leads that have gone cold.</li>
-  <li>Share educational content that helps solve common customer pain points.</li>
-  <li>Send relevant case studies based on each lead’s industry interests.</li>
-  <li>Trigger targeted campaigns when leads take specific actions or show intent.</li>
-</ul>
-
-          </div>
-        </li>
-        <li className="flex items-start">
-          <span className="font-semibold mr-2">4.</span>
-          <div>
-            <p className="font-semibold text-base">Convert into Customers</p>
-            <ul className="text-gray-600 ml-4 list-disc space-y-1 mt-1 text-base">
-  <li>Guide leads smoothly through the sales funnel to drive conversions.</li>
-  <li>Automate meeting scheduling to easily connect leads with sales reps.</li>
-  <li>Generate proposals and quotes with built-in tracking for better follow-ups.</li>
-  <li>Set up automated follow-up sequences after sales meetings to keep the momentum going.</li>
-  <li>Integrate contract management and e-signatures to simplify the closing process.</li>
-  <li>Trigger onboarding sequences automatically once a deal is closed.</li>
-</ul>
-
-          </div>
-        </li>
-      </ul>
-      
-    </div>
-    <div className="w-full max-w-4xl overflow-hidden rounded-lg ">
-    <img
-      src="https://blog.clickpointsoftware.com/hs-fs/hubfs/lead%20management.jpg?width=1200&height=750&name=lead%20management.jpg"
-      alt="CRM Process Diagram"
-      className="w-full h-auto object-cover"
-      loading="lazy"
-    />
-  </div>
-  </div>
-  
-  {/* How CRM Supports Email Marketing & Automation */}
-  <div id="email-marketing" className="py-2">
-    <h2 className="text-4xl font-semibold text-gray-900 mb-4">How CRM Supports Email Marketing & Automation</h2>
-    <p className="text-gray-800 text-base mb-6">
-      CRM-driven email marketing ensures timely and relevant communication with leads.
-    </p>
-    <div className="bg-white rounded-lg p-6 mb-8">
-      <ul className="space-y-6">
-        <li className="flex items-start">
-          <span className="font-semibold mr-2">1.</span>
-          <div>
-            <p className="font-semibold text-base">Automated Drip Campaigns</p>
-            <ul className="text-gray-800 ml-4 list-disc space-y-1 mt-1 text-base">
-  <li>Send emails in a thoughtful sequence based on what the user does</li>
-  <li>Figure out the best time gaps between emails for maximum impact</li>
-  <li>Begin with helpful info and slowly shift toward promoting your product</li>
-  <li>Blend email efforts with social media and retargeting ads for better reach</li>
-  <li>Measure how well the campaign performs—look at completions and conversions</li>
-  <li>A sample flow: Welcome email → Helpful tips → Case study → Product comparison → Sales message → Reminder → Special offer</li>
-</ul>
-
-          </div>
-        </li>
-        <li className="flex items-start">
-          <span className="font-semibold mr-2">2.</span>
-          <div>
-            <p className="font-semibold text-base">Email Personalization & Segmentation</p>
-            <ul className="text-gray-800 ml-4 list-disc space-y-1 mt-1 text-base">
-  <li>Organize leads by their industry, interests, and how they interact</li>
-  <li>Use content blocks that adapt based on who the recipient is</li>
-  <li>Add personal touches like company names, contact names, or industry terms</li>
-  <li>Segment users by how they engage with different types of content</li>
-  <li>Track site activity to group leads based on what they’re interested in</li>
-  <li>Use company data to tailor messages specific to their business profile</li>
-  <li>Suggest helpful content or products using recommendation tools</li>
-</ul>
-
-          </div>
-        </li>
-        <li className="flex items-start">
-          <span className="font-semibold mr-2 text-base">3.</span>
-          <div>
-            <p className="font-semibold text-base">A/B Testing & Analytics</p>
-            <ul className="text-gray-800 ml-4 list-disc space-y-1 mt-1 text-base">
-  <li>Try out different subject lines, buttons, and content to boost email results</li>
-  <li>Test various send times to see when users are most likely to open emails</li>
-  <li>Compare formats like plain text vs. HTML, or short vs. long messages</li>
-  <li>Experiment with where and how CTAs appear to improve clicks</li>
-  <li>Test whether using a person’s name or the company name works better</li>
-  <li>Use clear dashboards to track how each email performs</li>
-  <li>Link email interactions back to revenue with proper attribution tracking</li>
-</ul>
-
-          </div>
-        </li>
-        <li className="flex items-start">
-          <span className="font-semibold mr-2">4.</span>
-          <div>
-            <p className="font-semibold text-base">Engagement Monitoring & Scoring</p>
-            <ul className="text-gray-600 ml-4 list-disc space-y-1 mt-1 text-base">
-  <li>Keep an eye on open rates, clicks, and how people interact with content</li>
-  <li>Score user activity to spot leads with the most potential</li>
-  <li>Notify sales teams when someone’s engagement hits a key level</li>
-  <li>Watch unsubscribe and complaint trends to keep your list healthy</li>
-  <li>Run re-engagement campaigns to win back inactive subscribers</li>
-  <li>Track who’s forwarding or sharing emails to find your biggest advocates</li>
-  <li>Tie email performance into your broader lead scoring system</li>
-</ul>
-
-          </div>
-        </li>
-      </ul>
-      <div className="my-6 md:my-12 px-4 flex justify-center">
-  <div className="w-full max-w-4xl overflow-hidden rounded-lg ">
-    <img
-      src="https://www.deskera.com/blog/content/images/2021/05/automation.jpg"
-      alt="CRM Process Diagram"
-      className="w-full h-auto object-cover"
-      loading="lazy"
-    />
-  </div>
-</div>
-    </div>
-    
-  </div>
-
-  {/* Integration Capabilities: CRM in a B2B Tech Stack */}
-  <div id="integration" className="py-2">
-  <h2 className="text-4xl font-semibold text-gray-900 mb-4">Integration Platform: Connecting Your B2B Tech Stack</h2>
-  <p className="text-gray-800 text-base mb-6">
-    Modern integration platforms serve as the central hub connecting various business systems.
-  </p>
-  
-  {/* Card Grid Layout */}
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-    {/* Cloud Services Card */}
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      <div className="bg-[#000e54] px-4 py-3">
-        <h3 className="text-xl font-semibold text-white">1. Cloud Services</h3>
-      </div>
-      <div className="p-5">
-        <div className="mb-3 pb-3 border-b border-gray-200">
-          <p className="font-semibold text-gray-800">Web Services</p>
-          <p className="text-gray-600">RESTful APIs and web-based integrations</p>
-        </div>
-        <div className="mb-3 pb-3 border-b border-gray-200">
-          <p className="font-semibold text-gray-800">SaaS Applications</p>
-          <p className="text-gray-600">Connect with subscription-based software platforms</p>
-        </div>
-        <div className="mb-3 pb-3 border-b border-gray-200">
-          <p className="font-semibold text-gray-800">Mobile Apps</p>
-          <p className="text-gray-600">Synchronize data with field-based applications</p>
-        </div>
-        <div className="mb-3 pb-3 border-b border-gray-200">
-          <p className="font-semibold text-gray-800">Public Cloud</p>
-          <p className="text-gray-600">Leverage AWS, Azure, or Google Cloud resources</p>
-        </div>
-        <div className="mb-3">
-          <p className="font-semibold text-gray-800">Private Cloud</p>
-          <p className="text-gray-600">Connect with secure dedicated environments</p>
         </div>
       </div>
-    </div>
 
-    {/* On-Premises Systems Card */}
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      <div className="bg-green-600 px-4 py-3">
-        <h3 className="text-xl font-semibold text-white">2. On-Premises Systems</h3>
-      </div>
-      <div className="p-5">
-        <div className="mb-3 pb-3 border-b border-gray-200">
-          <p className="font-semibold text-gray-800">EDI Systems</p>
-          <p className="text-gray-600">Electronic data interchange with customers and suppliers</p>
-        </div>
-        <div className="mb-3 pb-3 border-b border-gray-200">
-          <p className="font-semibold text-gray-800">B2B Databases</p>
-          <p className="text-gray-600">Manage partner and customer relationship data</p>
-        </div>
-        <div className="mb-3 pb-3 border-b border-gray-200">
-          <p className="font-semibold text-gray-800">Internal Databases</p>
-          <p className="text-gray-600">Connect with core operational systems</p>
-        </div>
-        <div className="mb-3 pb-3 border-b border-gray-200">
-          <p className="font-semibold text-gray-800">Enterprise Applications</p>
-          <p className="text-gray-600">Integrate with ERP and other critical systems</p>
-        </div>
-        <div className="mb-3">
-          <p className="font-semibold text-gray-800">Legacy Systems</p>
-          <p className="text-gray-600">Bridge connections with established technologies</p>
-        </div>
-      </div>
-    </div>
+      <Article title="Latest Articles" items={articles} />
+      <Advice />
 
-    {/* Custom Development Card */}
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      <div className="bg-purple-600 px-4 py-3">
-        <h3 className="text-xl font-semibold text-white">3. Custom Development</h3>
-      </div>
-      <div className="p-5">
-        <div className="mb-3 pb-3 border-b border-gray-200">
-          <p className="font-semibold text-gray-800">Custom Applications</p>
-          <p className="text-gray-600">Integrate with proprietary business solutions</p>
-        </div>
-        <div className="mb-3 pb-3 border-b border-gray-200">
-          <p className="font-semibold text-gray-800">Microservices</p>
-          <p className="text-gray-600">Connect with modular application components</p>
-        </div>
-        <div className="mb-3 pb-3 border-b border-gray-200">
-          <p className="font-semibold text-gray-800">API Gateways</p>
-          <p className="text-gray-600">Manage authentication and traffic across systems</p>
-        </div>
-        <div className="mb-3 pb-3 border-b border-gray-200">
-          <p className="font-semibold text-gray-800">Webhook Handlers</p>
-          <p className="text-gray-600">Process real-time event notifications</p>
-        </div>
-        <div className="mb-3">
-          <p className="font-semibold text-gray-800">Data Transformation</p>
-          <p className="text-gray-600">Convert between different formats</p>
-        </div>
-      </div>
-    </div>
-
-    {/* Security Infrastructure Card */}
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
-      <div className="bg-red-600 px-4 py-3">
-        <h3 className="text-xl font-semibold text-white">4. Security Infrastructure</h3>
-      </div>
-      <div className="p-5">
-        <div className="mb-3 pb-3 border-b border-gray-200">
-          <p className="font-semibold text-gray-800">Firewalls</p>
-          <p className="text-gray-600">Secure traffic between cloud and on-premises systems</p>
-        </div>
-        <div className="mb-3 pb-3 border-b border-gray-200">
-          <p className="font-semibold text-gray-800">Identity Management</p>
-          <p className="text-gray-600">Control access across integrated platforms</p>
-        </div>
-        <div className="mb-3 pb-3 border-b border-gray-200">
-          <p className="font-semibold text-gray-800">Data Encryption</p>
-          <p className="text-gray-600">Protect sensitive information during transfers</p>
-        </div>
-        <div className="mb-3 pb-3 border-b border-gray-200">
-          <p className="font-semibold text-gray-800">Compliance Monitoring</p>
-          <p className="text-gray-600">Ensure regulatory requirements are met</p>
-        </div>
-        <div className="mb-3">
-          <p className="font-semibold text-gray-800">Audit Logging</p>
-          <p className="text-gray-600">Track system interactions for security purposes</p>
-        </div>
-      </div>
-    </div>
-
-    {/* Integration Capabilities Card - Full Width */}
-    <div className="bg-white rounded-lg shadow-md overflow-hidden md:col-span-2">
-      <div className="bg-yellow-600 px-4 py-3">
-        <h3 className="text-xl font-semibold text-white">5. Integration Capabilities</h3>
-      </div>
-      <div className="p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="mb-3 pb-3 border-b border-gray-200 md:border-r md:pr-4">
-          <p className="font-semibold text-gray-800">Centralized Management</p>
-          <p className="text-gray-600">Control all connections from one platform</p>
-        </div>
-        <div className="mb-3 pb-3 border-b border-gray-200">
-          <p className="font-semibold text-gray-800">Real-time Data Synchronization</p>
-          <p className="text-gray-600">Keep systems updated automatically</p>
-        </div>
-        <div className="mb-3 md:border-r md:pr-4">
-          <p className="font-semibold text-gray-800">Workflow Automation</p>
-          <p className="text-gray-600">Trigger actions across multiple systems</p>
-        </div>
-        <div className="mb-3">
-          <p className="font-semibold text-gray-800">Error Handling & Scalability</p>
-          <p className="text-gray-600">Manage failures and support growing requirements</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  
- 
-
-    <div className="my-12 flex justify-center">
-        <img 
-          src="https://www.codelessplatforms.com/wp-content/uploads/2022/11/What-is-system-integration.png" 
-          alt="CRM Process Diagram" 
-          className="w-full max-w-4xl rounded-lg " 
-        />
-      </div>
-  </div>
-
-
-
-  {/* How Compare Bazaar Can Use CRM for Growth */}
-  <div id="case-studies" className="py-12 px-4 sm:px-6 lg:px-8">
-  <div className="max-w-7xl mx-auto">
-    <h2 className="text-4xl font-semibold text-gray-900 mb-6 text-center">How Compare Bazaar Can Use CRM for Growth</h2>
-    <p className="text-gray-800 text-base mb-10 text-center max-w-3xl mx-auto">
-  With the right CRM system in place, Compare Bazaar can run more smoothly, connect better with customers, and grow steadily across all its comparison services.
-</p>
-
-
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-      <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow border border-gray-100">
-        <div className="flex items-center mb-4">
-          <div className="bg-blue-100 p-3 rounded-lg mr-4">
-            <svg className="w-6 h-6 text-[#000e54]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-            </svg>
-          </div>
-          <h3 className="text-xl font-semibold text-gray-800 text-base">Customer Insights & Personalization</h3>
-        </div>
-        <ul className="space-y-3">
-          <li className="flex items-start">
-            <span className="text-green-500 mr-2">•</span>
-            <p className="text-gray-800 text-base">Create detailed customer profiles with preference and comparison history</p>
-          </li>
-          <li className="flex items-start">
-            <span className="text-green-500 mr-2">•</span>
-            <p className="text-gray-800 text-base">Develop targeted content recommendations based on previous comparisons</p>
-          </li>
-          <li className="flex items-start">
-            <span className="text-green-500 mr-2">•</span>
-            <p className="text-gray-800 text-base">Generate detailed reports on comparison trends and customer preferences</p>
-          </li>
-        </ul>
-      </div>
-
-
-      <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow border border-gray-100">
-        <div className="flex items-center mb-4">
-          <div className="bg-purple-100 p-3 rounded-lg mr-4">
-            <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-            </svg>
-          </div>
-          <h3 className="text-xl font-semibold text-gray-800 text-base">Marketing Optimization</h3>
-        </div>
-        <ul className="space-y-3">
-          <li className="flex items-start">
-            <span className="text-green-500 mr-2">•</span>
-            <p className="text-gray-800 text-base">Improve conversion rates with personalized email campaigns targeted by industry</p>
-          </li>
-          <li className="flex items-start">
-            <span className="text-green-500 mr-2">•</span>
-            <p className="text-gray-800 text-base">Optimize marketing ROI with data-driven strategies and attribution modeling</p>
-          </li>
-          <li className="flex items-start">
-            <span className="text-green-500 mr-2">•</span>
-            <p className="tex-gray-800 text-base">Build segmented nurturing campaigns for different comparison verticals</p>
-          </li>
-        </ul>
-      </div>
-
-  
-      <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow border border-gray-100">
-        <div className="flex items-center mb-4">
-          <div className="bg-green-100 p-3 rounded-lg mr-4">
-            <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-            </svg>
-          </div>
-          <h3 className="text-xl font-semibold text-gray-800">Sales Automation</h3>
-        </div>
-        <ul className="space-y-3">
-          <li className="flex items-start">
-            <span className="text-green-500 mr-2">•</span>
-            <p className="text-gray-800  text-base">Automate lead generation and follow-ups across comparison categories</p>
-          </li>
-          <li className="flex items-start">
-            <span className="text-green-500 mr-2">•</span>
-            <p className="text-gray-800  text-base">Develop automated cross-selling between complementary service categories</p>
-          </li>
-          <li className="flex items-start">
-            <span className="text-green-500 mr-2">•</span>
-            <p className="text-gray-800  text-base">Implement referral programs with tracking and reward automation</p>
-          </li>
-        </ul>
-      </div>
-
-    
-      <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow border border-gray-100">
-        <div className="flex items-center mb-4">
-          <div className="bg-red-100 p-3 rounded-lg mr-4">
-            <svg className="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-            </svg>
-          </div>
-          <h3 className="text-xl font-semibold text-gray-800">Relationship Management</h3>
-        </div>
-        <ul className="space-y-3">
-          <li className="flex items-start">
-            <span className="text-green-500 mr-2">•</span>
-            <p className="text-gray-800  text-base">Strengthen customer relationships for long-term success and repeat business</p>
-          </li>
-          <li className="flex items-start">
-            <span className="text-green-500 mr-2">•</span>
-            <p className="text-gray-800  text-base">Track provider relationships and performance metrics in a centralized system</p>
-          </li>
-          <li className="flex items-start">
-            <span className="text-green-500 mr-2">•</span>
-            <p className="text-gray-800  text-base">Streamline provider onboarding and relationship management</p>
-          </li>
-        </ul>
-      </div>
-
-     
-      <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow border border-gray-100">
-        <div className="flex items-center mb-4">
-          <div className="bg-yellow-100 p-3 rounded-lg mr-4">
-            <svg className="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-            </svg>
-          </div>
-          <h3 className="text-xl font-semibold text-gray-800">Data Analytics & Reporting</h3>
-        </div>
-        <ul className="space-y-3">
-          <li className="flex items-start">
-            <span className="text-green-500 mr-2">•</span>
-            <p className="text-gray-800  text-base">Track user behavior across comparison journeys for insights</p>
-          </li>
-          <li className="flex items-start">
-            <span className="text-green-500 mr-2">•</span>
-            <p className="text-gray-800  text-base">Generate real-time performance dashboards for all categories</p>
-          </li>
-          <li className="flex items-start">
-            <span className="text-green-500 mr-2">•</span>
-            <p className="text-gray-800  text-base">Identify most profitable comparison verticals and customer segments</p>
-          </li>
-        </ul>
-      </div>
-
-     
-      <div className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow border border-gray-100">
-        <div className="flex items-center mb-4">
-          <div className="bg-indigo-100 p-3 rounded-lg mr-4">
-            <svg className="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-            </svg>
-          </div>
-          <h3 className="text-xl font-semibold text-gray-800">Operational Efficiency</h3>
-        </div>
-        <ul className="space-y-3">
-          <li className="flex items-start">
-            <span className="text-green-500 mr-2">•</span>
-            <p className="text-gray-800  text-base">Automate routine customer service inquiries with CRM-powered chatbots</p>
-          </li>
-          <li className="flex items-start">
-            <span className="text-green-500 mr-2">•</span>
-            <p className="text-gray-800  text-base">Centralize all customer interactions across channels in one platform</p>
-          </li>
-          <li className="flex items-start">
-            <span className="text-green-500 mr-2">•</span>
-            <p className="text-gray-800  text-base">Reduce manual data entry with automated data capture from comparison activities</p>
-          </li>
-        </ul>
-      </div>
-    </div>
-
-
-    <div className="mt-14 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-8 max-w-6xl mx-auto border border-gray-200  text-base">
-      <h3 className="text-2xl font-semibold text-gray-800 mb-5 text-center  text-base">Strategic CRM Implementation Benefits</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <h4 className="text-base font-semibold text-gray-800 mb-3  text-base">Customer-Centric Advantages</h4>
-          <ul className="list-disc pl-5 space-y-2 text-gray-800">
-            <li>360° customer view across all comparison activities</li>
-            <li>Personalized recommendations increasing engagement by 40-60%</li>
-            <li>Faster response times to customer inquiries</li>
-            <li>Consistent experience across web and mobile platforms</li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-base font-semibold text-gray-700 mb-3">Business Growth Impact</h4>
-          <ul className="list-disc pl-5 space-y-2 text-gray-700">
-            <li>30-50% improvement in lead conversion rates</li>
-            <li>20-35% reduction in customer acquisition costs</li>
-            <li>15-25% increase in customer lifetime value</li>
-            <li>Data-driven decision making for category expansion</li>
-          </ul>
-        </div>
-      </div>
-      <div className="mt-8 bg-white p-5 rounded-lg shadow-inner border border-gray-200">
-        <p className="text-gray-700 text-center italic">
-          "A well-implemented CRM system can become Compare Bazaar's competitive advantage, transforming how customers discover and compare services while delivering measurable business growth across all verticals."
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-
-  {/* Conclusion: Why B2B Companies Need CRM */}
-  <div id="conclusion" className="">
-    <h2 className="text-3xl font-semibold text-gray-900 mb-4">Conclusion: Why B2B Companies Need CRM</h2>
-    <p className="text-gray-700 text-base mb-6 text-base">
-      A well-implemented CRM is the backbone of B2B marketing success.
-    </p>
-    <div className=" rounded-lg  p-6 mb-8">
-    <ul className="space-y-3">
-  <li className="flex items-start">
-    <span className="text-blue-500 mr-2">•</span>
-    <p className="text-gray-800 text-base">Reach out to leads in a personal way using smart automation that helps build real connections</p>
-  </li>
-  <li className="flex items-start">
-    <span className="text-blue-500 mr-2">•</span>
-    <p className="text-gray-800 text-base">Make your sales process smoother and close more deals with efficient workflows</p>
-  </li>
-  <li className="flex items-start">
-    <span className="text-blue-500 mr-2">•</span>
-    <p className="text-gray-800 text-base">Build stronger customer bonds and keep them coming back with regular, thoughtful communication</p>
-  </li>
-  <li className="flex items-start">
-    <span className="text-blue-500 mr-2">•</span>
-    <p className="text-gray-800 text-base">Send automated emails triggered by user behavior to guide leads along the journey</p>
-  </li>
-  <li className="flex items-start">
-    <span className="text-blue-500 mr-2">•</span>
-    <p className="text-gray-800 text-base">Cut down on repetitive tasks by 23% using automation to handle admin work</p>
-  </li>
-  <li className="flex items-start">
-    <span className="text-blue-500 mr-2">•</span>
-    <p className="text-gray-800 text-base">Help your team get more done—boosting productivity by 34% with easier access to shared info</p>
-  </li>
-  <li className="flex items-start">
-    <span className="text-blue-500 mr-2">•</span>
-    <p className="text-gray-800 text-base">Keep your data clean and reliable by removing isolated information systems</p>
-  </li>
-  <li className="flex items-start">
-    <span className="text-blue-500 mr-2">•</span>
-    <p className="text-gray-800 text-base">Improve sales by 29% with smarter lead scoring and prioritization techniques</p>
-  </li>
-  <li className="flex items-start">
-    <span className="text-blue-500 mr-2">•</span>
-    <p className="text-gray-800 text-base">Make customers happier—boost satisfaction by 35% with quicker, better service</p>
-  </li>
-  <li className="flex items-start">
-    <span className="text-blue-500 mr-2">•</span>
-    <p className="text-gray-800 text-base">Support better business decisions with in-depth analytics and insights</p>
-  </li>
-</ul>
-
-<p className="mt-6 text-gray-800 text-base">
-  A well-chosen CRM can help Compare Bazaar grow faster, work more efficiently, and thrive in the B2B space. Most companies see a return on their CRM investment in about 13 months—and top performers often see results in just 5 to 8 months.
-</p>
-
-    </div>
-  </div>
-
-  {/* Implementation Process */}
-  <div id="implementation" className="">
-    <h2 className="text-4xl font-semibold text-gray-900 mb-4">Implementation Process</h2>
-    <p className="text-gray-800 text-base mb-6 text-base">
-      Implementing a CRM system involves planning, customization, data migration, and training. A well-executed implementation ensures that the CRM system meets your business needs and delivers the expected ROI.
-    </p>
-    <div className="bg-white rounded-lg  p-6 mb-8">
-      <h3 className="text-xl font-semibold mb-4 text-base">CRM Implementation Steps</h3>
-      <ol className="space-y-4">
-        <li className="flex items-start">
-          <span className="font-semibold mr-2">1.</span>
-          <div>
-            <p className="font-semibold text-base">Define Objectives & Requirements</p>
-            <p className="text-gray-800 text-base">Clearly identify what you want to achieve with your CRM system.</p>
-          </div>
-        </li>
-        <li className="flex items-start">
-          <span className="font-semibold mr-2">2.</span>
-          <div>
-            <p className="font-semibold text-base">Select the Right CRM Solution</p>
-            <p className="text-gray-800 text-base">Based on your requirements, choose a CRM that fits your business needs.</p>
-          </div>
-        </li>
-        <li className="flex items-start">
-          <span className="font-semibold mr-2">3.</span>
-          <div>
-            <p className="font-semibold text-base">Plan Data Migration</p>
-            <p className="text-gray-800 text-base">Prepare your existing data for migration to the new system.</p>
-          </div>
-        </li>
-        <li className="flex items-start">
-          <span className="font-semibold mr-2">4.</span>
-          <div>
-            <p className="font-semibold text-base">Customize & Configure</p>
-            <p className="text-gray-800 text-base">Tailor the CRM to match your business processes and workflows.</p>
-          </div>
-        </li>
-        <li className="flex items-start">
-          <span className="font-semibold mr-2">5.</span>
-          <div>
-            <p className="font-semibold text-base">Test the System</p>
-            <p className="text-gray-800 text-base">Thoroughly test all features and functionalities before full deployment.</p>
-          </div>
-        </li>
-        <li className="flex items-start">
-          <span className="font-semibold mr-2">6.</span>
-          <div>
-            <p className="font-semibold text-base">Train Users</p>
-            <p className="text-gray-800 text-base">Provide comprehensive training to ensure effective adoption.</p>
-          </div>
-        </li>
-        <li className="flex items-start">
-          <span className="font-semibold mr-2">7.</span>
-          <div>
-            <p className="font-semibold text-base">Go Live & Monitor</p>
-            <p className="text-gray-800 text-base">Launch the system and continuously monitor its performance.</p>
-          </div>
-        </li>
-      </ol>
-    </div>
-  </div>
-{/* Implementation Process - Horizontal Visual */}
-<div id="implementation-visual" className="py-2 ">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-base">
-    <h3 className="text-2xl font-semibold text-center text-gray-900 mb-10 text-base">CRM Implementation Journey</h3>
-    
-    <div className="relative">
-      {/* Progress line */}
-      <div className="absolute left-0 right-0 top-1/2 h-1 bg-gray-200 transform -translate-y-1/2"></div>
-      
-      {/* Parent container with responsive flex wrap */}
-      <div className="flex flex-wrap md:flex-nowrap justify-center gap-2 sm:gap-4 md:gap-1 lg:gap-2">
-  {/* Step 1 - Define Objectives */}
-  <div className="flex flex-col items-center w-[45%] sm:w-[30%] md:w-full z-10 mb-4 md:mb-0">
-    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#000e54] flex items-center justify-center mb-2 sm:mb-3 shadow-lg">
-      <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
-      </svg>
-    </div>
-    <p className="text-center font-semibold text-gray-900 text-sm sm:text-base">Define Objectives</p>
-  </div>
-
-  {/* Step 2 - Select CRM */}
-  <div className="flex flex-col items-center w-[45%] sm:w-[30%] md:w-full z-10 mb-4 md:mb-0">
-    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#000e54] flex items-center justify-center mb-2 sm:mb-3 shadow-lg">
-      <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-      </svg>
-    </div>
-    <p className="text-center font-semibold text-gray-900 text-sm sm:text-base">Select CRM</p>
-  </div>
-
-  {/* Step 3 - Data Migration */}
-  <div className="flex flex-col items-center w-[45%] sm:w-[30%] md:w-full z-10 mb-4 md:mb-0">
-    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#000e54] flex items-center justify-center mb-2 sm:mb-3 shadow-lg">
-      <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"></path>
-      </svg>
-    </div>
-    <p className="text-center font-semibold text-gray-900 text-sm sm:text-base">Data Migration</p>
-  </div>
-
-  {/* Step 4 - Customize */}
-  <div className="flex flex-col items-center w-[45%] sm:w-[30%] md:w-full z-10 mb-4 md:mb-0">
-    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#000e54] flex items-center justify-center mb-2 sm:mb-3 shadow-lg">
-      <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-      </svg>
-    </div>
-    <p className="text-center font-semibold text-gray-900 text-sm sm:text-base">Customize</p>
-  </div>
-
-  {/* Step 5 - Test System */}
-  <div className="flex flex-col items-center w-[45%] sm:w-[30%] md:w-full z-10 mb-4 md:mb-0">
-    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#000e54] flex items-center justify-center mb-2 sm:mb-3 shadow-lg">
-      <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
-      </svg>
-    </div>
-    <p className="text-center font-semibold text-gray-900 text-sm sm:text-base">Test System</p>
-  </div>
-
-  {/* Step 6 - Train Users */}
-  <div className="flex flex-col items-center w-[45%] sm:w-[30%] md:w-full z-10 mb-4 md:mb-0">
-    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#000e54] flex items-center justify-center mb-2 sm:mb-3 shadow-lg">
-      <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-      </svg>
-    </div>
-    <p className="text-center font-semibold text-gray-900 text-sm sm:text-base">Train Users</p>
-  </div>
-
-  {/* Step 7 - Go Live */}
-  <div className="flex flex-col items-center w-[45%] sm:w-[30%] md:w-full z-10 mb-4 md:mb-0">
-    <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-[#000e54] flex items-center justify-center mb-2 sm:mb-3 shadow-lg">
-      <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-      </svg>
-    </div>
-    <p className="text-center font-semibold text-gray-900 text-sm sm:text-base">Go Live</p>
-  </div>
-</div>
-    </div>
-
-    {/* Detailed Steps Below */}
-    <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-        <h4 className="font-semibold text-base text-[#000e54] mb-3">Planning Phase</h4>
-        <ul className="space-y-2 text-gray-700">
-          <li className="flex items-start">
-            <svg className="w-5 h-5 text-[#000e54] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span>Stakeholder interviews</span>
-          </li>
-          <li className="flex items-start">
-            <svg className="w-5 h-5 text-[#000e54] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span>Requirement documentation</span>
-          </li>
-          <li className="flex items-start">
-            <svg className="w-5 h-5 text-[#000e54] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span>Success metrics definition</span>
-          </li>
-        </ul>
-      </div>
-
-      <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-        <h4 className="font-semibold text-base text-[#000e54] mb-3">Setup Phase</h4>
-        <ul className="space-y-2 text-gray-700">
-          <li className="flex items-start">
-            <svg className="w-5 h-5 text-[#000e54] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span>System configuration</span>
-          </li>
-          <li className="flex items-start">
-            <svg className="w-5 h-5 text-[#000e54] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span>Data cleaning & migration</span>
-          </li>
-          <li className="flex items-start">
-            <svg className="w-5 h-5 text-[#000e54] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span>Custom field creation</span>
-          </li>
-        </ul>
-      </div>
-
-      <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-        <h4 className="font-semibold text-base text-[#000e54] mb-3">Testing Phase</h4>
-        <ul className="space-y-2 text-gray-700">
-          <li className="flex items-start">
-            <svg className="w-5 h-5 text-[#000e54] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span>User acceptance testing</span>
-          </li>
-          <li className="flex items-start">
-            <svg className="w-5 h-5 text-[#000e54] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span>Workflow validation</span>
-          </li>
-          <li className="flex items-start">
-            <svg className="w-5 h-5 text-[#000e54] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span>Performance testing</span>
-          </li>
-        </ul>
-      </div>
-
-      <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-        <h4 className="font-semibold text-base text-[#000e54] mb-3">Deployment</h4>
-        <ul className="space-y-2 text-gray-700">
-          <li className="flex items-start">
-            <svg className="w-5 h-5 text-[#000e54] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span>Phased rollout strategy</span>
-          </li>
-          <li className="flex items-start">
-            <svg className="w-5 h-5 text-[#000e54] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span>Ongoing support plan</span>
-          </li>
-          <li className="flex items-start">
-            <svg className="w-5 h-5 text-[#000e54] mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
-            </svg>
-            <span>Continuous improvement</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
- 
-  <CRMComparison/>
-   {/* What Are Features to Look for in a CRM? */}
-   <div id="features" className="bg-white rounded-lg  p-6 mb-8 text-base">
-  <h3 className="text-xl font-semibold mb-4 text-base">What Are Features to Look for in a CRM?</h3>
-  <p className="text-gray-800 mb-6 text-base">
-  CRM tools come in all shapes and sizes—from simple solutions for managing leads and customer relationships to advanced platforms with e-commerce support and deep analytics. Here are some key features to keep an eye out for.
-</p>
-
-  
-  <div className="mb-6">
-    <div className="flex items-center mb-2">
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#000e54] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-      </svg>
-      <h4 className="text-base font-semibold text-gray-900">Sales Tools</h4>
-    </div>
-    <p className="text-gray-800">
-  Your CRM should help you manage both leads and deals, making it easier to track your pipeline and guide prospects through the sales process. It should allow you to score and qualify leads, reach out through phone or email, and close deals with ease. Plus, you’ll need tools to plan, track, and measure sales campaigns. These features are essential for streamlining and improving your sales efforts.
-</p>
-
-  </div>
-  
-  <div className="mb-6">
-    <div className="flex items-center mb-2">
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#000e54] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
-      </svg>
-      <h4 className="text-base font-semibold text-gray-900">Marketing Tools</h4>
-    </div>
-    <p className="text-gray-600">
-  Today’s CRMs come with powerful tools to create, run, and track marketing campaigns. They often include built-in email features and other communication options, or allow easy integration with third-party services. Many CRMs also offer social media capabilities, like tracking brand mentions on platforms like Instagram. Having marketing tools within your CRM helps align your marketing strategies with your sales goals.
-</p>
-
-  </div>
-  
-  <div className="mb-6">
-    <div className="flex items-center mb-2">
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#000e54] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-      </svg>
-      <h4 className="text-base font-semibold text-gray-900">Customer Service Tools</h4>
-    </div>
-    <p className="text-gray-600">
-  Since the main goal of CRM software is to manage customer relationships, your CRM should make it easy to communicate with clients and handle support requests. Your customer service team can use the CRM to manage tickets, track open cases, monitor satisfaction, and collaborate with other teams when issues come up. To keep building strong relationships, you can set up reminders for important dates, like a customer’s anniversary with your business, and automatically send a thank-you email for their ongoing partnership.
-</p>
-
-  </div>
-  
-  <div className="mb-6">
-    <div className="flex items-center mb-2">
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#000e54] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-      </svg>
-      <h4 className="text-base font-semibold text-gray-900">Reporting Tools</h4>
-    </div>
-    <p className="text-gray-600">
-  CRM reports provide valuable insights into how your sales and marketing efforts are performing, such as the number of prospects or sales within a specific period, where leads are dropping off, and how many calls each sales rep has made. These reports help you make better decisions for your business, which is why having strong analytics in your CRM is essential.
-</p>
-
-  </div>
-  
-  <div>
-    <div className="flex items-center mb-2">
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-[#000e54] mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-      </svg>
-      <h4 className="text-base font-semibold text-gray-900">Workflow Automation</h4>
-    </div>
-    <p className="text-gray-600">
-  The best CRM systems automate actions based on workflows you set up. For instance, when a customer fills out a form, your CRM can automatically notify the right sales rep. This automation cuts down on time-consuming tasks like data entry and information sharing, freeing up your team to focus on making sales. It also reduces the risk of leads or customer complaints getting lost or overlooked.
-</p>
-
-  </div>
-</div>
-{/* cost */}
-<div id="cost" className="p-6 mb-8">
-  {/* New Cost Section */}
-  <div className="p-6">
-    <div className="flex items-start mb-4">
-      <div className="mr-4 flex-shrink-0">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#000e54]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      </div>
-      <div>
-        <h3 className="text-xl font-semibold text-gary-900 mb-2">How Much Would CRM Software Cost?</h3>
-        <div className="flex justify-end mb-2">
-          <span className="text-sm text-[#ff8633] font-semibold text-2xl font-semibold ">Powered by Compare-bazaar</span>
-        </div>
-      </div>
-    </div>
-    
-    <p className="text-gray-800 mb-4 text-base">
-  The cost of CRM software for your business depends on several factors, like how many users you have and what features you need. There are affordable or even free CRMs, which work well for small teams or microbusinesses and offer integration options if you need additional features. On the other hand, more advanced CRM platforms can be pricey but come with a wider range of features (both built-in and add-ons), offering greater flexibility and scalability as your business grows.
-</p>
-
-    
-    <h4 className="text-base font-semobold text-gray-800 mb-2">Here's the general price range of CRM software:</h4>
-    
-    <ul className="space-y-3 mb-4">
-  <li className="flex items-start">
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#000e54] mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-    </svg>
-    <div>
-      <span className="font-semibold text-gray-800 text-base">Affordable cloud-based CRMs</span> often have free versions for small teams (up to 10 users). Paid subscriptions usually start around $15 per user per month.
-    </div>
-  </li>
-  <li className="flex items-start">
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#000e54] mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-    </svg>
-    <div>
-      <span className="font-semibold text-gray-800 text-base">Midrange cloud CRM options</span> usually range from $20 to $40 per user per month, catering to most small business needs. If lighter, budget-friendly solutions aren’t cutting it, this tier could offer a better fit.
-    </div>
-  </li>
-  <li className="flex items-start">
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#000e54] mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-    </svg>
-    <div>
-      <span className="font-semibold text-gray-800 text-base">Enterprise-level CRMs</span> typically cost between $50 and $150 per user per month, offering higher customization, more features, and tailored support or training.
-    </div>
-  </li>
-  <li className="flex items-start">
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#000e54] mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-    </svg>
-    <div>
-      <span className="font-semibold text-gray-800 text-base">Premium cloud CRM subscriptions</span> can exceed $250 per user per month, but they offer a broad range of features that most small and mid-sized businesses won’t require.
-    </div>
-  </li>
-  <li className="flex items-start">
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#000e54] mr-2 mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-    </svg>
-    <div>
-      <span className="font-semibold text-gray-800 text-base">On-premises CRM software</span> can cost upwards of $900 per user per month. These systems provide more control but require a significant upfront investment and advanced technical skills to maintain.
-    </div>
-  </li>
-</ul>
-
-    
-<p className="text-gray-800 mb-4 text-base">
-  Most cloud-based CRM providers allow you to choose between monthly or annual billing, with discounts of up to 20% for paying annually. On the other hand, vendors offering on-premises CRMs—where the system is hosted on your own network—usually charge a one-time, flat fee per user.
-</p>
-
-    
-<p className="text-gray-800 mb-4 text-base">
-  Things get more complicated with add-ons, storage upgrades, implementation fees, and automatic updates. While one CRM may seem cheaper per user at first, when you factor in the necessary add-ons to get the features you need, it could end up being more expensive.
-</p>
-
-<p className="text-gray-800 mb-4 text-base">
-  When choosing a CRM, aim to find a balance between your current business needs, future growth, and budget. Be sure to fully understand the pricing structure of the CRM you’re considering. Before committing, specifically ask about automatic upgrades, storage limits, and user restrictions to avoid surprises later on.
-</p>
-
-    
-    <h4 className="text-base font-semibold text-gray-800 mb-2">Key CRM Data Points to Track:</h4>
-    
-    <div className="p-4 mb-4">
-      <ul className="space-y-3">
-        <li className="flex items-start">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#000e54] mr-2 mt-1" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-          </svg>
-          <div>
-            <span className="font-semibold text-gray-800 text-base">Cost per lead / customer acquisition cost:</span> This dollar figure tells you how much your business is spending in its marketing efforts to acquire each new lead.
-          </div>
-        </li>
-        <li className="flex items-start">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#000e54] mr-2 mt-1" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-          </svg>
-          <div>
-            <span className="font-semibold text-blue-gray text-base">Sales conversion rate / close rate:</span> This percentage indicates how many of your leads and prospects become customers.
-          </div>
-        </li>
-        <li className="flex items-start">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#000e54] mr-2 mt-1" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-          </svg>
-          <div>
-            <span className="font-semibold text-gray-800 text-gray">Renewal rate:</span> This number shows the percentage of your existing customers who renew their purchases or buy from you again.
-          </div>
-        </li>
-        <li className="flex items-start">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-[#000e54] mr-2 mt-1" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-          </svg>
-          <div>
-            <span className="font-semibold text-gray-800 text-gray">Customer lifetime value:</span> This figure estimates the revenue you can expect to generate from a customer over the length of your relationship.
-          </div>
-        </li>
-      </ul>
-    </div>
-    
-    <div className="flex justify-center mt-6">
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-24 w-24 text-[#000e54]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-        <line x1="8" y1="21" x2="16" y2="21"></line>
-        <line x1="12" y1="17" x2="12" y2="21"></line>
-        <path d="M6 8h.01M6 12h.01"></path>
-        <circle cx="14" cy="10" r="4"></circle>
-        <path d="M14 6v8"></path>
-        <path d="M10 10h8"></path>
-      </svg>
-    </div>
-    
-    <div className="text-center mt-2 text-[#000e54] font-semibold">
-      Compare CRM options at Compare-bazaar
-    </div>
-
-    {/* Workflow Automation SVG */}
-    <div className="flex justify-center mt-8">
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-24 w-24 text-[#000e54]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-      </svg>
-    </div>
-    <div className="text-center mt-2 text-[#000e54] font-semibold">
-      Workflow Automation
-    </div>
-  </div>
-</div>
-{/* choose crm */}
-<div id="Choose CRM" className="rounded-lg p-6 mb-8">
-  <div className="p-6 rounded-lg ">
-    <div className="flex items-start mb-4">
-      <div className="mr-4 flex-shrink-0">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#000e54]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      </div>
-      <div>
-        <h3 className="text-xl font-semibold text-[#000e54] mb-2">How to Choose CRM Software</h3>
-        <div className="flex justify-end mb-2">
-          <span className="text-sm text-[#000e54] font-semibold">Powered by Compare-bazaar</span>
-        </div>
-      </div>
-    </div>
-    
-    <p className="text-gray-800 mb-4 text-base">
-  To choose the right CRM software, start by identifying your company’s needs. What goals do you want to achieve with the CRM, and which features are necessary to meet those goals? Next, determine your budget—how much can you spend on a monthly subscription for a cloud-based system or a one-time fee for an on-premises solution? Once you have a clear understanding of your required features and budget, do some research using buying guides like this one to find CRM systems that offer the right functionality at a price that fits your budget.
-</p>
-
-    
-    <p className="text-gray-800 mb-4 text-base">
-      There are, however, some other factors to keep in mind. compare-bazaar.com spoke to dozens of business owners and leaders about the criteria they prioritized when deciding which CRM to purchase for the first time or when switching CRMs.
-    </p>
-    
-    <div className="grid md:grid-cols-2 gap-6 mt-6">
-      <div className="p-4 rounded-lg">
-        <h4 className="text-base font-semibold text-[#000e54] mb-2 flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-          Usability
-        </h4>
-        <p className="text-gray-700">
-  Robert Resz, owner of Rad Bronco Parts, shared that “ease of use” was a key factor when choosing a CRM. He wanted something that would improve their sales process without slowing down day-to-day work. In the end, he picked a system that helped his small team be more efficient and productive.
-</p>
-
-<p className="text-gray-700 mt-2">
-  Zach Dannett, co-founder of Tumble, admitted that his team "rushed into picking a CRM without fully understanding our needs" and ended up with one that was too complicated for them. His advice? Choose a system your team will actually enjoy using day-to-day.
-</p>
-
-      </div>
-      
-      <div className="p-4 rounded-lg">
-        <h4 className="text-base font-semibold text-[#000e54] mb-2 flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-          Integrations
-        </h4>
-        <p className="text-gray-700">
-  Reade Taylor, CEO of Cyber Command, stressed how crucial it is for a CRM to integrate with tools like ConnectWise Manage and Office 365. "Look for a CRM that works with the tools you already use," he advised. "The more connected your tech stack, the better the customer experience."
-</p>
-
-<p className="text-gray-700 mt-2">
-  Brad Smith, owner of Omni Home Ideas, also prioritized strong integration capabilities to ensure seamless compatibility with his project management and accounting tools.
-</p>
-
-      </div>
-      
-      <div className="p-4 rounded-lg">
-        <h4 className="text-base font-semibold text-[#000e54] mb-2 flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-          Scalability
-        </h4>
-        <p className="text-gray-700">
-  Brad Smith also emphasized the importance of scalability when selecting a CRM: "Don't just think about what your business needs now. Consider where you want to be in five years and choose a CRM that can scale and evolve as your business grows."
-</p>
-
-<p className="text-gray-700 mt-2">
-  Angela Green Urbaczewski, owner of RevOppAI, echoed this sentiment, stating, "Free options can be a good starting point, but it’s important to ask—will the paid system best support your future needs?"
-</p>
-
-      </div>
-      
-      <div className="p-4 rounded-lg">
-        <h4 className="text-base font-semibold text-[#000e54] mb-2 flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-          Customer Support & Training
-        </h4>
-        <p className="text-gray-800 text-base">
-  Angela Green Urbaczewski emphasized the value of implementation support and customer service, advising, "If it's your first CRM setup, investing in strong onboarding assistance can accelerate your business growth far more effectively than scattered paid ads or generic marketing efforts."
-</p>
-
-<p className="text-gray-800 mt-2 text-base">
-  Robert Resz stressed the importance of training: “Leverage implementation resources and available training to maximize your investment. A CRM is only as effective as your team’s ability to use it well.”
-</p>
-
-      </div>
-    </div>
-  </div>
-</div>
-
- 
-  {/* methrlodgy */}
-  <div id="methrlodgy" className="bg-white   p-6 mb-8">
-  <div className=" p-6 ">
-    <div className="flex items-start mb-4">
-      <div className="mr-4 flex-shrink-0">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-[#000e54]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      </div>
-      <div>
-        <h3 className="text-4xl font-semibold text-[#000e54] mb-2">Methodology</h3>
-        <div className="flex justify-end mb-2">
-          <span className="text-base text-[#000e54] font-xl">Powered by Compare-bazaar</span>
-        </div>
-      </div>
-    </div>
-    
-    <p className="text-gray-800 mb-4 text-base">
-  To determine the best CRM software available, our team of sales experts and software analysts started with an initial list of 65 platforms. After thorough evaluation, we narrowed the list down to 13 contenders for further investigation and ultimately selected 10 CRM programs as our top recommendations.
-</p>
-
-<p className="text-gray-800 mb-4 text-base">
-  To refine our choices at each stage and identify the best options, we conducted vendor interviews, participated in product demos, and tested the software ourselves. We evaluated plan options, feature sets, and customization possibilities, while also considering add-on services, such as whether email marketing tools were part of the core system or only offered as an extra. In addition, we examined independent user reviews to compare real-world experiences with our own testing results.
-</p>
-
-<p className="text-gray-800 mb-4 text-base">
-  In the end, our experts and analysts evaluated each CRM solution’s functionality across more than 30 factors. These factors were weighted according to their importance to business owners when selecting software and making purchasing decisions.
-</p>
-
-    
-    <h4 className="text-base font-semibold text-[#000e54] mb-2">Key Evaluation Criteria:</h4>
-    
-    <div className="grid md:grid-cols-2 gap-6 mt-6">
-      <div className=" p-4 rounded-lg">
-        <h4 className="text-base font-semibold text-[#000e54] mb-2 flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-          Pricing (30%)
-        </h4>
-        <p className="text-gray-800 text-base">
-  Our experts and analysts carefully compared and contrasted each vendor’s plans, evaluating which packages provided the best value for your investment. We considered factors such as monthly subscription rates, per-user fees, costs for cloud-based versus on-premises systems, implementation fees, and additional expenses for add-ons.
-</p>
-
-      </div>
-      
-      <div className="text-base p-4 rounded-lg">
-        <h4 className="text-base font-semibold text-[#000e54] mb-2 flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-          Features (25%)
-        </h4>
-        <p className="text-gray-700 text-base">
-  We evaluated core CRM functions, including lead, contact, and campaign management, automated workflows, revenue tracking, and forecasting tools. Additionally, we assessed available integrations and awarded extra points for advanced features such as omnichannel communications, no-code customization, AI-powered tools, and customer self-service options.
-</p>
-
-      </div>
-      
-      <div className=" p-4 rounded-lg">
-        <h4 className="text-base font-semibold text-[#000e54] mb-2 flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-          Ease of Use (25%)
-        </h4>
-        <p className="text-gray-700 text-base">
-  We tested the software firsthand, evaluating each solution’s learning curve, ease of use, and customization options. We also considered the availability of user-friendly marketing features and whether the vendor offered a fully featured mobile app to manage customer relationships and sales tasks on the go.
-</p>
-
-      </div>
-      
-      <div className=" p-4 rounded-lg">
-        <h4 className="text-base font-semibold text-[#000e54] mb-2 flex items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-          Customer Service (15%)
-        </h4>
-        <p className="text-gray-700 text-base ">
-          We evaluated the range of each provider’s customer service options, including whether phone assistance was included with all package tiers. We also examined each vendor’s online resources for businesses interested in self-guided help.
-        </p>
-      </div>
-    </div>
-    
-    <p className="text-gray-800 mt-6 text-base bg-white">
-  After thorough evaluation, we identified CRM systems that not only earned our readers' trust but also excelled in addressing specific business needs. Each platform stood out for its unique strengths, whether it was optimizing certain workflows, supporting specialized industries, or enhancing customer relationships. These insights shaped the "Best for" use cases featured on this page, guiding businesses to the CRM that best fits their goals.
-</p>
-
-    
-    <p className="text-gray-800 mt-4 text-base">
-      To learn more about our methodology, see our full editorial process.
-    </p>
-    
-  
-    <div className="mt-8 flex justify-center">
-    <div className="my-12 flex justify-center">
-        <img 
-          src="https://bigbang360.com/wp-content/uploads/2023/02/CRM-blog-12-Things-to-Consider-When-Choosing-a-CRM.png" 
-          alt="CRM Process Diagram" 
-          className="w-full max-w-4xl rounded-lg " 
-        />
-      </div>
-    </div>
-    
-    <div className="text-center mt-4 text-[#000e54] text-base font-semobold">
-      Compare CRM options at Compare-bazaar
-    </div>
-  </div>
-</div>
-{/* <WhitePaperForm/> */}
-</div>
-<div id="d-article">
-        <Article
-          title="Related Articles"
-          items={articles}
-          buttonText="View Post"
-          buttonColor="bg-[#ff8633]"
-       />
-</div>
-<div id="gpsfleet-faq" className="">
-        <FAQ faqs={ crmFAQs}/>
-</div>
-
-<Advice/>
-
-{/* <Feedback 
+      {/* <Feedback 
         title="What Our Customers Say"
         testimonials={crmTestimonials}
       /> */}
-       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <CRMForm/>
-         </Modal>
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <CRMForm />
+      </Modal>
     </>
   );
 };
 
 export default BestCRMSoftware;
-
-
-
-

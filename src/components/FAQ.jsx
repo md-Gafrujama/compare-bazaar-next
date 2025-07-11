@@ -1,58 +1,84 @@
 // components/FAQ.js
 import React, { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import {
+  Home,
+  CheckCircle2,
+  Calendar,
+  ChevronDown,
+  ChevronUp,
+  Plus,
+  Minus,
+  ExternalLink,
+  Search,
+  Filter,
+  Star,
+  Users,
+  DollarSign,
+  Clock,
+  Check,
+  X,
+} from "lucide-react";
 
-const FAQ = ({ faqs }) => {
-  const [expandedIndex, setExpandedIndex] = useState(null);
+const FAQ = ({ faqsData }) => {
+   const [openItems, setOpenItems] = useState({});
 
-  const toggleFAQ = (index) => {
-    setExpandedIndex(expandedIndex === index ? null : index);
+ const toggleItem = (index) => {
+    setOpenItems((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
   };
 
   return (
-    <div id="faq-section" className="faq-section py-10 px-10 max-w-6xl mx-auto">
-      <h2 className="text-4xl font-semibold text-gray-900 mb-8 text-center">Frequently Asked Questions</h2>
-      
-      <div className="space-y-4">
-        {faqs.map((faq, index) => (
-          <div key={index} className="faq-item border-b border-gray-200 pb-4">
-            <button
-              onClick={() => toggleFAQ(index)}
-              className="w-full text-left flex justify-between items-center focus:outline-none group"
-              aria-expanded={expandedIndex === index}
-            >
-              <h3 className="text-base font-semibold text-gray-800 group-hover:text-[#ff8633] transition-colors">
-                {faq.question}
-              </h3>
-              <span className="text-gray-800">
-                {expandedIndex === index ? (
-                  <ChevronUp className="w-5 h-5" />
-                ) : (
-                  <ChevronDown className="w-5 h-5" />
-                )}
-              </span>
-            </button>
-            
-            {expandedIndex === index && (
-              <div className="mt-3 text-gray-800 transition-all duration-300 ease-in-out">
-                {Array.isArray(faq.answer) ? (
-                  <ul className="space-y-2">
-                    {faq.answer.map((item, i) => (
-                      <li key={i} className="flex items-start text-base">
-                        <span className="inline-block h-1.5 w-1.5 rounded-full bg-gray-400 mt-2 mr-2 "></span>
-                        <span>{item}</span>
-                      </li>
+     <section id="crm-faqs" className="mt-8 max-w-7xl mx-auto">
+                <div className="max-w-none">
+                  {/* Main Heading */}
+                  <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-tight mb-8 sm:mb-10 md:mb-12 lg:mb-16">
+                    Frequently Asked Questions (FAQ)
+                  </h1>
+
+                  {/* FAQ Accordion */}
+                  <div className="space-y-0 -mt-8">
+                    {faqsData.map((item, index) => (
+                      <div key={index} className="border-b border-gray-200">
+                        {/* Question Button */}
+                        <button
+                          onClick={() => toggleItem(index)}
+                          className="w-full flex items-center justify-between py-6 sm:py-7 md:py-8 lg:py-9 text-left hover:bg-gray-50 transition-colors duration-200"
+                        >
+                          <h3 className="text-base sm:text-lg md:text-xl lg:text-xl font-semibold text-gray-700 leading-relaxed pr-4 sm:pr-6 md:pr-8">
+                            {item.question}
+                          </h3>
+
+                          {/* Plus/Minus Icon */}
+                          <div
+                            className={`flex-shrink-0 w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 lg:w-11 lg:h-11 rounded-md flex items-center justify-center transition-all duration-200 ${
+                              openItems[index]
+                                ? "bg-orange-600 hover:bg-orange-700"
+                                : "bg-orange-600 hover:bg-orange-700"
+                            }`}
+                          >
+                            {openItems[index] ? (
+                              <Minus className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" />
+                            ) : (
+                              <Plus className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white" />
+                            )}
+                          </div>
+                        </button>
+
+                        {/* Answer Content */}
+                        {openItems[index] && (
+                          <div className="pb-6 sm:pb-7 md:pb-8 lg:pb-9 pr-12 sm:pr-16 md:pr-20 lg:pr-24 animate-in slide-in-from-top-2 duration-300">
+                            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed sm:leading-relaxed md:leading-relaxed lg:leading-relaxed">
+                              {item.answer}
+                            </p>
+                          </div>
+                        )}
+                      </div>
                     ))}
-                  </ul>
-                ) : (
-                  <p className="leading-relaxed text-base">{faq.answer}</p>
-                )}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
+                  </div>
+                </div>
+              </section>
   );
 };
 
