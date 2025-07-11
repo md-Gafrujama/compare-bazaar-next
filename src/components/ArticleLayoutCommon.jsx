@@ -32,7 +32,7 @@ const Article = ({ title, items, buttonText, buttonColor, variant = 'default' })
   const currentVariant = variants[variant] || variants.default;
 
   return (
-    <div className="w-full py-16">
+    <div className="w-full bg-white py-16">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-semibold text-gray-900 mb-4 relative inline-block">
