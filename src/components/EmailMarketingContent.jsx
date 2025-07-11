@@ -368,11 +368,11 @@ const toggleSection = (sectionKey, labelKey = null) => {
   //     });
   //   };
 
-  //   // Set initial active state
-  //   handleScroll();
+  //    handleScroll();
 
   //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
+  //   retur // Set initial active state
+  // n () => window.removeEventListener("scroll", handleScroll);
   // }, []);
 
     
@@ -2094,7 +2094,7 @@ const toggleSection = (sectionKey, labelKey = null) => {
   </div>
    {/* faq */}
       
-    <FAQ faqsData={faqData} />
+                    <FAQ faqsData={faqData} />
   </section>
          
 
@@ -2351,7 +2351,12 @@ const toggleSection = (sectionKey, labelKey = null) => {
         />
       </section>
 
-    
+      {/* faq */}
+      
+                    {/* <FAQ faqsData={faqData} /> */}
+      {/* <section id="email-faq" className="">
+        <FAQ faqs={ emailFAQs} />
+      </section> */}
     </>
   );
 };
