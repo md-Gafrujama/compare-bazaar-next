@@ -68,16 +68,17 @@ const EmailMarketing = () => {
   ];
 
   const contents = [
-    { id: 1, title: "Introduction to Best Email Marketing", slug: "intro-email" },
-    { id: 2, title: "What Is Email Marketing?", slug: "what-is-emailmarketing" },
-    { id: 3, title: "How Does Email Marketing Works", slug: "emailmarketing-working" },
-    { id: 4, title: "Benefits of Email Marketing", slug: "emailmarketing-benefits" },
-    { id: 5, title: "Key Features For Email Marketing services", slug: "email-features" },
-    { id: 6, title: "How to Choose Email Marketing Service?", slug: "email-howchoose" },
-    { id: 7, title: "Is Email Marketing Worthit?", slug: "email-worthit" },
-    { id: 8, title: "What Are Some Alternative Email Marketing Services?", slug: "email-alternative" },
-    { id: 9, title: "Related Articles", slug: "email-articles" },
-    { id: 10, title: "FAQs", slug: "email-faq" } ,
+    { id: "intro-email" , title: "Introduction to Best Email Marketing", active:false },
+    { id: "what-is-emailmarketing", title: "What Is Email Marketing?", active:false },
+    { id: "emailmarketing-working", title: "How Does Email Marketing Works", active:false },
+    { id: "emailmarketing-benefits", title: "Benefits of Email Marketing", active:false },
+    { id: "platforms", title: "Best Business Email Marketing Platforms", active:false },
+    { id: "email-features", title: "Key Features For Email Marketing services", active:false },
+    { id: "email-howchoose", title: "How to Choose Email Marketing Service?", active:false},
+   
+   
+    { id: "d-article", title: "Related Articles", active:false },
+    { id: "email-faq" , title: "FAQs", active:false } ,
   ];
   const homeTestimonials = [
     {
@@ -154,15 +155,36 @@ const EmailMarketing = () => {
         ))}
       </div>
     </div>
-    <TableOfContents contents={contents} />
-<EmailMarketingContent/>
-{/* <Feedback 
-        title="What Our Customers Say"
-        testimonials={homeTestimonials}
-      /> */}
-    <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <EmailMarketingForm />
-      </Modal>
+   <div className="min-h-screen bg-gray-50">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    {/* Layout: Sidebar + Content */}
+    <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8">
+      
+      {/* Left Sidebar */}
+      <aside className="lg:sticky lg:top-24 self-start">
+        <TableOfContents contents={contents} />
+      </aside>
+      
+      {/* Right Content */}
+      <main className="flex flex-col max-w-4xl w-full">
+        <EmailMarketingContent />
+        
+        {/* Optional: Feedback (currently commented out) */}
+        {/* 
+        <Feedback 
+          title="What Our Customers Say"
+          testimonials={homeTestimonials}
+        /> 
+        */}
+
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <EmailMarketingForm />
+        </Modal>
+      </main>
+    </div>
+  </div>
+</div>
+
     </>
   );
 };

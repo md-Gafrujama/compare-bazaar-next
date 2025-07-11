@@ -1,21 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import FAQ from './FAQ';
 import Article from './ArticleLayoutCommon';
+
 // import busimage from '/images/honey.png';
 import { ChevronRight, Users,TrendingUp,DollarSign, 
     BarChart2,   Zap, 
     Maximize, 
     Globe, 
-    Clock, 
+     Plus,
+  Minus,
     Award, 
     MessageSquare, 
-    Heart, Mail, PieChart, Settings, Check, UserPlus, Repeat, Target, BarChart3, Edit, SendHorizontal } from 'lucide-react';
-
+    Heart, Mail, PieChart, Settings, UserPlus, Repeat, Target, BarChart3, Edit, SendHorizontal ,ExternalLink,
+  
+  Clock,
+  Check,
+  X,} from 'lucide-react';
+import Link from "next/link";
+import Image from "next/image";
+import Head from "next/head";
 
 
 
 const EmailMarketingContent = () => {
-    
+  const [openSections, setOpenSections] = useState({});
+   const [isMobile, setIsMobile] = useState(false);
+   const [expandedSections, setExpandedSections] = useState({});
+
   // faq
   const emailFAQs = [
     {
@@ -116,6 +127,7 @@ const articles = [
     link: "#",
   },
 ];
+
     const steps = [
         {
           title: "Define Your Audience",
@@ -188,6 +200,154 @@ const articles = [
           ]
         }
       ];
+
+      //compare email
+     const emailData = [
+  {
+    id: 1,
+    
+    image: "/images/ooma.png",
+    alt: "Ooma Office",
+    expertScore: 4.5,
+    bestFor: "Best for small business communication",
+    visitUrl: "ooma",
+    keyFeatures: [
+      "Virtual receptionist",
+      "Voicemail-to-email",
+      "Call forwarding and email alerts",
+    ],
+    freeTrial: true,
+    freeVersion: false,
+  },
+  {
+    id: 2,
+    
+    image: "/images/ringcentral.png",
+    alt: "RingEX",
+    expertScore: 4.4,
+    bestFor: "Best for all-in-one communication",
+    visitUrl: "ringex",
+    keyFeatures: [
+      "Integrated email and messaging",
+      "Advanced analytics",
+      "AI transcription and summaries",
+    ],
+    freeTrial: true,
+    freeVersion: false,
+  },
+  {
+    id: 3,
+    
+    image: "/images/zoom.png",
+    alt: "Zoom",
+    expertScore: 4.3,
+    bestFor: "Best for webinars and event-based marketing",
+    visitUrl: "zoom",
+    keyFeatures: [
+      "Zoom Mail and Calendar integration",
+      "Webinar tools",
+      "Email campaign automation",
+    ],
+    freeTrial: true,
+    freeVersion: true,
+  },
+  {
+    id: 4,
+   
+    image: "/images/nextiva.png",
+    alt: "NextivaONE",
+    expertScore: 4.2,
+    bestFor: "Best for unified communication and email support",
+    visitUrl: "nextiva",
+    keyFeatures: [
+      "Email-to-voice features",
+      "CRM + email integration",
+      "Multichannel campaign tracking",
+    ],
+    freeTrial: true,
+    freeVersion: false,
+  },
+  {
+    id: 5,
+    
+    image: "/images/vonage.png",
+    alt: "Vonage",
+    expertScore: 4.1,
+    bestFor: "Best for scalable business communication",
+    visitUrl: "vonage",
+    keyFeatures: [
+      "Vonage Campaigns",
+      "Email + SMS marketing suite",
+      "API-driven automation",
+    ],
+    freeTrial: true,
+    freeVersion: false,
+  },
+];
+const toggleSection = (sectionKey, labelKey = null) => {
+    setExpandedSections((prev) => ({
+      ...prev,
+      [sectionKey]: !prev[sectionKey],
+    }));
+
+    if (labelKey) {
+      setActiveSection((prev) => (prev === sectionKey ? null : sectionKey));
+      setOpenSection((prev) => (prev === labelKey ? null : labelKey));
+    }
+
+    setOpenSections((prev) => ({
+      ...prev,
+      [sectionKey]: !prev[sectionKey],
+    }));
+  };
+
+  const toggleItem = (index) => {
+    setOpenItems((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = document.querySelectorAll("section[id]");
+      const scrollPosition = window.scrollY + 100;
+
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        const sectionId = section.getAttribute("id");
+
+        if (
+          scrollPosition >= sectionTop &&
+          scrollPosition < sectionTop + sectionHeight
+        ) {
+          setTableOfContents((prev) =>
+            prev.map((item) => ({
+              ...item,
+              active: item.id === sectionId,
+            }))
+          );
+        }
+      });
+    };
+
+    // Set initial active state
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
     
       // Email marketing statistics
       const stats = [
@@ -300,6 +460,189 @@ const articles = [
         }
       };
     
+      //email products
+      const toolsContent = {
+  OomaOffice: {
+    title: "Ooma Office - Best for Small Business Communication Integration",
+    logo: "/images/ooma.png",
+    button: {
+      text: "Visit Website",
+      link: "#",
+    },
+    scores: [
+      { label: "Overall Score", score: "4.6/5" },
+      { label: "Pricing", score: "4.7/5" },
+      { label: "Email Features", score: "4.5/5" },
+      { label: "Integrations", score: "4.6/5" },
+      { label: "Ease of Use", score: "4.8/5" },
+      { label: "Support", score: "4.6/5" },
+    ],
+    pros: [
+      "Affordable plans ideal for SMBs",
+      "Combines VoIP and email marketing",
+      "Easy setup and user-friendly dashboard",
+      "Reliable support team",
+    ],
+    cons: [
+      "Limited advanced email automation",
+      "Best suited for smaller teams",
+    ],
+    why: {
+      intro: `Ooma Office stands out for businesses that want simple, integrated communication tools. It combines phone, messaging, and email functionality into one clean system.`,
+      bullets: [
+        "Perfect for small businesses that want VoIP and marketing in one dashboard.",
+        "Highly rated for ease of use, offering strong basic email campaign features.",
+      ],
+      outro: `If you're a small business seeking simplicity and integration with your VoIP system, Ooma Office is a smart choice.`,
+    },
+  },
+
+  RingEX: {
+    title: "RingEX - Best for Unified Communication and Email Workflows",
+    logo: "/images/ringcentral.png",
+    button: {
+      text: "Visit Website",
+      link: "#",
+    },
+    scores: [
+      { label: "Overall Score", score: "4.7/5" },
+      { label: "Pricing", score: "4.5/5" },
+      { label: "Email Features", score: "4.7/5" },
+      { label: "Integrations", score: "4.9/5" },
+      { label: "Ease of Use", score: "4.6/5" },
+      { label: "Support", score: "4.5/5" },
+    ],
+    pros: [
+      "Highly scalable for large teams",
+      "Advanced email campaign management",
+      "Excellent third-party app integrations",
+      "Secure and compliant communication",
+    ],
+    cons: [
+      "Pricing can be steep for smaller teams",
+      "Setup is more complex than basic tools",
+    ],
+    why: {
+      intro: `RingEX delivers powerful communication and marketing tools all under one platform. It’s especially well-suited for growing companies with complex needs.`,
+      bullets: [
+        "Advanced features such as email scheduling, auto-responses, and analytics.",
+        "Seamlessly integrates with CRMs, productivity tools, and VoIP systems.",
+      ],
+      outro: `RingEX is ideal for mid-sized to large businesses that need advanced email workflows tightly connected with voice and messaging solutions.`,
+    },
+  },
+
+  Zoom: {
+    title: "Zoom - Best for Webinar and Campaign Integration",
+    logo: "/images/zoom.png",
+    button: {
+      text: "Visit Website",
+      link: "#",
+    },
+    scores: [
+      { label: "Overall Score", score: "4.5/5" },
+      { label: "Pricing", score: "4.3/5" },
+      { label: "Email Features", score: "4.4/5" },
+      { label: "Integrations", score: "4.7/5" },
+      { label: "Ease of Use", score: "4.9/5" },
+      { label: "Support", score: "4.5/5" },
+    ],
+    pros: [
+      "Excellent for event-driven campaigns",
+      "Zoom Webinars and Meetings integration",
+      "User-friendly interface",
+      "Strong reporting and analytics tools",
+    ],
+    cons: [
+      "Limited email design customization",
+      "Not a full-featured email marketing suite",
+    ],
+    why: {
+      intro: `Zoom has expanded beyond video and meetings to offer strong tools for webinar-driven email marketing.`,
+      bullets: [
+        "Integrates event registration with automated follow-up emails.",
+        "Excellent for brands doing webinars, product launches, or onboarding series.",
+      ],
+      outro: `Zoom is a natural fit for content marketers and educators using webinars as the backbone of their email strategy.`,
+    },
+  },
+
+  NextivaONE: {
+    title: "NextivaONE - Best All-in-One Communication Suite",
+    logo: "/images/nextiva.png",
+    button: {
+      text: "Visit Website",
+      link: "#",
+    },
+    scores: [
+      { label: "Overall Score", score: "4.6/5" },
+      { label: "Pricing", score: "4.4/5" },
+      { label: "Email Features", score: "4.5/5" },
+      { label: "Integrations", score: "4.6/5" },
+      { label: "Ease of Use", score: "4.7/5" },
+      { label: "Support", score: "4.7/5" },
+    ],
+    pros: [
+      "Combines CRM, VoIP, and email in one platform",
+      "Automation and segmentation tools included",
+      "Great customer service",
+      "Reliable infrastructure",
+    ],
+    cons: [
+      "Email builder is less advanced than standalone tools",
+      "Some features locked behind higher tiers",
+    ],
+    why: {
+      intro: `NextivaONE is a true all-in-one business communications hub, ideal for teams looking to consolidate software.`,
+      bullets: [
+        "Email campaigns work smoothly alongside calls, chats, and CRM features.",
+        "Strong automation rules help streamline outreach without complexity.",
+      ],
+      outro: `NextivaONE is for businesses wanting a unified experience without needing five different platforms to manage.`,
+    },
+  },
+
+  Vonage: {
+    title: "Vonage - Best for Developer-Friendly Email and SMS APIs",
+    logo: "/images/vonage.png",
+    button: {
+      text: "Visit Website",
+      link: "#",
+    },
+    scores: [
+      { label: "Overall Score", score: "4.4/5" },
+      { label: "Pricing", score: "4.3/5" },
+      { label: "Email Features", score: "4.2/5" },
+      { label: "Integrations", score: "4.5/5" },
+      { label: "Ease of Use", score: "4.4/5" },
+      { label: "Support", score: "4.3/5" },
+    ],
+    pros: [
+      "Best-in-class API flexibility",
+      "Supports SMS + Email flows",
+      "Good documentation for dev teams",
+      "Secure and enterprise-ready",
+    ],
+    cons: [
+      "Requires some technical knowledge to set up",
+      "Limited visual marketing tools",
+    ],
+    why: {
+      intro: `Vonage is the best pick for businesses wanting full control via APIs, especially when combining email with SMS, voice, or chat.`,
+      bullets: [
+        "Loved by developers for its documentation and flexibility.",
+        "Ideal for creating custom, automated marketing journeys across channels.",
+      ],
+      outro: `Vonage is a solid pick for SaaS companies, mobile apps, and enterprises that want communication on their terms.`,
+    },
+  },
+};
+
+// Convert toolsContent object to array for mapping
+  const toolsArray = Object.entries(toolsContent).map(([key, value]) => ({
+    id: key,
+    ...value,
+  }));
       // Success stories
       const successStories = [
         {
@@ -416,12 +759,53 @@ const articles = [
         { value: '81%', label: 'SMBs rely on email' },
         { value: '59%', label: 'Influence on purchases' }
       ];
+      const renderStars = (score) => {
+    const stars = [];
+    const fullStars = Math.floor(score);
+    const hasHalfStar = score % 1 !== 0;
+
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(
+        <svg
+          key={i}
+          className="w-5 h-5 text-yellow-400 fill-current"
+          viewBox="0 0 24 24"
+        >
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+      );
+    }
+
+    if (hasHalfStar) {
+      stars.push(
+        <svg
+          key="half"
+          className="w-5 h-5 text-yellow-400 fill-current"
+          viewBox="0 0 24 24"
+        >
+          <defs>
+            <linearGradient id="half">
+              <stop offset="50%" stopColor="currentColor" />
+              <stop offset="50%" stopColor="transparent" />
+            </linearGradient>
+          </defs>
+          <path
+            fill="url(#half)"
+            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+          />
+        </svg>
+      );
+    }
+
+    return stars;
+  };
 
   return (
     <>
 
       {/* introduction */}
-      <div id="intro-email" className="max-w-6xl mx-auto py-16 px-4">
+      
+      <section id="intro-email" className="flex-1 max-w-4xl mx-auto py-16 px-10">
   <div className="relative rounded-2xl overflow-hidden">
     {/* Decorative SVG elements */}
     <div className="absolute top-0 right-0 opacity-10">
@@ -473,7 +857,12 @@ const articles = [
         </div>
       </div>
 
-      {/* Right side stats */}
+{/* //extra */}
+
+{/* extra */}
+
+
+  {/* Right side stats */}
       <div className="md:w-5/12 md:pl-8 flex items-center justify-center z-10">
         <div className="bg-white/120 rounded-xl shadow-xl p-6 w-full">
           <h3 className="text-xl font-semibold text-gray-800 mb-4 text-center">Why Email Marketing Works</h3>
@@ -501,7 +890,7 @@ const articles = [
       </div>
     </div>
   </div>
-</div>
+</section>
 
       {/* what is emailmarketing*/}
       <section id="what-is-emailmarketing" className="py-12 max-w-6xl mx-auto">
@@ -542,7 +931,7 @@ const articles = [
 </div>
 
     {/* Key Components Grid */}
-    <div className="mb-20 max-w-6xl mx-auto p-8">
+    {/* <div className="mb-20 max-w-6xl mx-auto p-8">
       <h3 className="text-4xl font-semibold text-gray-900 text-center mb-10">Key Parts of a Winning Email Strategy </h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-base">
         {[
@@ -584,7 +973,7 @@ const articles = [
           </div>
         ))}
       </div>
-    </div>
+    </div> */}
 
     {/* Types of Email Campaigns */}
     <div className="mb-20 max-w-6xl mx-auto p-8">
@@ -784,7 +1173,7 @@ const articles = [
 </section>
 
 {/* working of emailmarkeing */}
-<div id="emailmarketing-working" className="  rounded-lg  max-w-6xl mx-auto p-4">
+<section id="emailmarketing-working" className="  rounded-lg  max-w-6xl mx-auto p-4">
       <div className="text-center mb-12 max-w-6xl mx-auto p-4">
         <h1 className="text-4xl font-semibold text-gray-900 mb-4">The Email Marketing Process</h1>
         <p className="text-xl text-gray-800 max-w-3xl mx-auto">
@@ -825,7 +1214,7 @@ const articles = [
       </div>
 
       {/* Stats section */}
-      <div className="mb-16 p-4 max-w-6xl mx-auto">
+      {/* <div className="mb-16 p-4 max-w-6xl mx-auto">
         <h2 className="text-4xl font-semibold text-gray-900 mb-8 text-center">Email Marketing Performance Metrics</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -837,10 +1226,10 @@ const articles = [
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {/* Best practices */}
-      <div>
+      {/* <div>
         <h2 className="text-4xl font-semibold text-gray-900 mb-8 text-center">Email Marketing Best Practices</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
@@ -874,13 +1263,13 @@ const articles = [
             <p className="text-gray-800 text-base">Test different elements of your emails to figure out what works best for your audience. Whether it's the subject line, CTA, or layout, A/B testing helps you continuously improve your emails.</p>
           </div>
         </div>
-      </div>
-    </div>
+      </div> */}
+    </section>
 
 
 
  {/* Benefits of email marketing Section */}
- <div id="emailmarketing-benefits" className=" max-w-6xl mx-auto min-h-screen p-8">
+ <section id="emailmarketing-benefits" className=" max-w-6xl mx-auto min-h-screen p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
@@ -1054,10 +1443,278 @@ const articles = [
           </div>
         </div>
       </div>
-    </div>
+    </section>
+    {/* //scroller */}
+    <section id="platforms" className="mt-8">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                  <div className="text-center mb-8 sm:mb-12">
+                    <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
+                     Best Business Email Marketing Platforms
+                    </h1>
+                    <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
+                  </div>
+
+                  {/* Unified Table Layout for All Screen Sizes */}
+                  <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-full">
+                        <thead>
+                          <tr className="border-b border-gray-200 bg-gray-50">
+                            <th className="text-left py-3 sm:py-6 px-2 sm:px-8 font-semibold text-gray-700 text-sm sm:text-lg">
+                               Platform
+                            </th>
+                            <th className="text-center py-3 sm:py-6 px-2 sm:px-6 font-semibold text-gray-700 text-sm sm:text-lg">
+                              Expert Score
+                            </th>
+                            <th className="text-center py-3 sm:py-6 px-2 sm:px-6 font-semibold text-gray-700 text-sm sm:text-lg">
+                              Best for
+                            </th>
+                            <th className="text-center py-3 sm:py-6 px-2 sm:px-6 font-semibold text-gray-700 text-sm sm:text-lg">
+                              Key Features
+                            </th>
+                            <th className="text-center py-3 sm:py-6 px-2 sm:px-6 font-semibold text-gray-700 text-sm sm:text-lg">
+                              Free Trial
+                            </th>
+                            <th className="text-center py-3 sm:py-6 px-2 sm:px-6 font-semibold text-gray-700 text-sm sm:text-lg">
+                              Free Version
+                            </th>
+                            <th className="text-center py-3 sm:py-6 px-2 sm:px-8 font-semibold text-gray-700 text-sm sm:text-lg">
+                              Action
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {emailData.map((email, index) => (
+                            <tr
+                              key={email.id}
+                              className={`border-b border-gray-100 hover:bg-gray-50 transition-colors duration-200 ${
+                                index % 2 === 0 ? "bg-white" : "bg-gray-50/50"
+                              }`}
+                            >
+                              <td className="py-4 sm:py-8 px-2 sm:px-8">
+                                <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-3">
+                                  <div className="w-16 h-8 sm:w-32 sm:h-12 bg-white rounded-lg shadow-md flex items-center justify-center overflow-hidden flex-shrink-0">
+                                    <img
+                                      src={email.image}
+                                      alt={email.alt}
+                                      className="w-full h-full object-contain"
+                                    />
+                                  </div>
+                                  <div className="text-center sm:text-left">
+                                    <span className="font-medium text-gray-800 text-xs sm:text-base">
+                                      {email.name}
+                                    </span>
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="py-4 sm:py-8 px-2 sm:px-6 text-center">
+                                <div className="flex flex-col items-center space-y-1 sm:space-y-2">
+                                  <span className="text-lg sm:text-2xl font-bold text-gray-800">
+                                    {email.expertScore}
+                                  </span>
+                                  <div className="flex space-x-1 scale-75 sm:scale-100">
+                                    {renderStars(email.expertScore)}
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="py-4 sm:py-8 px-2 sm:px-6 text-center">
+                                <span className="inline-block bg-blue-100 text-gray-800 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
+                                  {email.bestFor}
+                                </span>
+                              </td>
+                              <td className="py-4 sm:py-8 px-2 sm:px-6">
+                                <ul className="space-y-1 sm:space-y-2">
+                                  {email.keyFeatures.map((feature, idx) => (
+                                    <li
+                                      key={idx}
+                                      className="text-xs sm:text-sm text-gray-600 flex items-start sm:items-center"
+                                    >
+                                      <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-800 rounded-full mr-2 sm:mr-3 flex-shrink-0 mt-1.5 sm:mt-0"></div>
+                                      <span className="leading-tight sm:leading-normal">
+                                        {feature}
+                                      </span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </td>
+                              <td className="py-4 sm:py-8 px-2 sm:px-6 text-center">
+                                <div className="flex justify-center">
+                                  {email.freeTrial ? (
+                                    <div className="w-6 h-6 sm:w-8 sm:h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                      <Check className="w-3 h-3 sm:w-5 sm:h-5 text-gray-800" />
+                                    </div>
+                                  ) : (
+                                    <div className="w-6 h-6 sm:w-8 sm:h-8 bg-red-100 rounded-full flex items-center justify-center">
+                                      <X className="w-3 h-3 sm:w-5 sm:h-5 text-red-600" />
+                                    </div>
+                                  )}
+                                </div>
+                              </td>
+                              <td className="py-4 sm:py-8 px-2 sm:px-6 text-center">
+                                <div className="flex justify-center">
+                                  {email.freeVersion ? (
+                                    <div className="w-6 h-6 sm:w-8 sm:h-8 bg-green-100 rounded-full flex items-center justify-center">
+                                      <Check className="w-3 h-3 sm:w-5 sm:h-5 text-gray-800" />
+                                    </div>
+                                  ) : (
+                                    <div className="w-6 h-6 sm:w-8 sm:h-8 bg-red-100 rounded-full flex items-center justify-center">
+                                      <X className="w-3 h-3 sm:w-5 sm:h-5 text-red-600" />
+                                    </div>
+                                  )}
+                                </div>
+                              </td>
+                              <td className="py-4 sm:py-8 px-2 sm:px-8">
+                                <button className="bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-800 hover:to-gray-900 text-white font-medium py-2 px-3 sm:py-3 sm:px-6 rounded-lg transition-all duration-200 flex items-center space-x-1 sm:space-x-2 mx-auto text-xs sm:text-sm">
+                                  <span>Visit Website</span>
+                                  <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <div className="text-center mt-12">
+                    <p className="text-gray-600 text-sm">
+                      * Scores and recommendations are based on expert analysis
+                      and user reviews
+                    </p>
+                  </div>
+                </div>
+              </section>
+    
+          {/* //email products */}
+ {/* Map through the tools array */}
+                {toolsArray.map((tool) => (
+                  <div
+                    key={tool.id}
+                    className="bg-white rounded-2xl sm:rounded-3xl border mt-4  border-gray-200  p-6 mb-8"
+                  >
+                    {/* Tool Header */}
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                      <div className="flex items-center gap-4">
+                        <div className="w-12 h-12 bg-gray-100 rounded-lg flex items-center justify-center">
+                          <Image
+                            src={tool.logo}
+                            alt={`${tool.title} logo`}
+                            width={48}
+                            height={48}
+                            className="object-contain"
+                          />
+                        </div>
+                        <h2 className="text-2xl font-bold text-black">
+                          {tool.title}
+                        </h2>
+                      </div>
+                      <a
+                        href={tool.button.link}
+                        className="bg-gray-800 text-white px-4 py-2 rounded-full text-sm hover:bg-gray-900"
+                      >
+                        {tool.button.text}
+                      </a>
+                    </div>
+
+                    {/* Scores */}
+                    <div className="space-y-4 text-black mb-6">
+                      {tool.scores.map((score, index) => (
+                        <div key={index}>
+                          <div className="flex justify-between text-sm font-medium mb-1">
+                            <span>{score.label}</span>
+                            <span>{score.score}</span>
+                          </div>
+                          <div className="w-full bg-gray-100 rounded-full h-2">
+                            <div
+                              className="bg-gray-800 h-2 rounded-full"
+                              style={{
+                                width: `${
+                                  (parseFloat(score.score) / 5) * 100
+                                }%`,
+                              }}
+                            ></div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Pros and Cons */}
+                    <div className="grid md:grid-cols-2 text-black gap-6 mb-6">
+                      <div>
+                        <h3 className="text-lg font-semibold mb-2">Pros</h3>
+                        <ul className="list-disc pl-5 space-y-1">
+                          {tool.pros.map((pro, index) => (
+                            <li key={index}>{pro}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold mb-2">Cons</h3>
+                        <ul className="list-disc pl-5 space-y-1">
+                          {tool.cons.map((con, index) => (
+                            <li key={index}>{con}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    {/* Why I Chose Section */}
+                    <div className="mb-6 text-black">
+                      <h3 className="text-lg font-semibold mb-2">
+                        Why I chose {tool.title.split(":")[0]}
+                      </h3>
+                      <p className="mb-4">{tool.why.intro}</p>
+                      {tool.why.bullets && (
+                        <ul className="list-disc pl-5 space-y-1 mb-4">
+                          {tool.why.bullets.map((bullet, index) => (
+                            <li key={index}>{bullet}</li>
+                          ))}
+                        </ul>
+                      )}
+                      <p>{tool.why.outro}</p>
+                    </div>
+
+                    {/* Expandable Sections */}
+                    {tool.why.extras &&
+                      Object.entries(tool.why.extras).map(
+                        ([label, content]) => {
+                          const sectionKey = `${tool.id}-${label}`;
+                          return (
+                            <div
+                              key={sectionKey}
+                              className="border-t text-black pt-4 mb-4"
+                            >
+                              <button
+                                onClick={() => toggleSection(sectionKey)}
+                                className="w-full flex justify-between items-center font-medium"
+                              >
+                                <span>{label}</span>
+                                <span className="text-green-600">
+                                  {openSections[sectionKey] ? (
+                                    <Minus className="w-5 h-5" />
+                                  ) : (
+                                    <Plus className="w-5 h-5" />
+                                  )}
+                                </span>
+                              </button>
+                              {openSections[sectionKey] && (
+                                <div className="mt-2 text-gray-700">
+                                  {typeof content === "string" ? (
+                                    <p>{content}</p>
+                                  ) : (
+                                    content
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        }
+                      )}
+                  </div>
+                ))}
 
 {/* features of email marketing section */}
-<div id="email-features" className=" py-16 px-4 sm:px-6  max-w-6xl mx-auto">
+<section id="email-features" className=" py-16 px-4 sm:px-6  max-w-6xl mx-auto">
       <div className="max-w-7xl mx-auto">
         <div className="text-center">
           <h2 className="text-4xl font-semibold text-gray-900 sm:text-4xl sm:tracking-tight lg:text-4xl">
@@ -1087,10 +1744,10 @@ const articles = [
           ))}
         </div>
       </div>
-    </div>
+    </section>
 
 {/* how to choose the service */}
-    <div id="email-howchoose" className="min-h-screen p-4 md:p-8 max-w-6xl mx-auto">
+    <section id="email-howchoose" className="min-h-screen p-4 md:p-8 max-w-6xl mx-auto">
       <div className="max-w-6xl mx-auto bg-white rounded-xl  overflow-hidden">
         <div className="bg-[#000e54] p-6 md:p-8">
           <h1 className="text-4xl md:text-3xl font-semibold text-white">Choosing the Right Email Marketing Service</h1>
@@ -1408,11 +2065,11 @@ const articles = [
 
   </div>
   </div>
-  </div>
+  </section>
          
 
 {/* alternative */}
-<div id="email-alternative" className="max-w-6xl mx-auto p-6  rounded-xl ">
+{/* <div id="email-alternative" className="max-w-6xl mx-auto p-6  rounded-xl ">
       <div className="mb-8 text-center">
         <h1 className="text-4xl font-semibold text-gray-900 mb-4">Email Marketing Service Alternatives</h1>
         <p className="text-xl text-gray-800">Explore smarter, more effective tools for your email campaigns</p>
@@ -1444,13 +2101,13 @@ const articles = [
           </div>
         ))}
       </div>
-    </div>
+    </div> */}
 
   {/* is email worthit */}
-   <div id="email-worthit" className=" py-16 px-4 sm:px-6 lg:px-8 rounded-xl">
-      <div className="max-w-6xl mx-auto">
+   {/* <div id="email-worthit" className=" py-16 px-4 sm:px-6 lg:px-8 rounded-xl">
+      <div className="max-w-6xl mx-auto"> */}
         {/* Header */}
-        <div className="text-center mb-12">
+        {/* <div className="text-center mb-12">
           <h2 className="text-4xl md:text-4xl font-semibold text-gray-900 mb-4 leading-tight">
             Is Email Marketing <span className="text-[#000e54]">Worth It?</span>
           </h2>
@@ -1556,10 +2213,10 @@ const articles = [
               </ul>
             </div>
           </div>
-        </div>
+        </div> */}
         
         {/* Targeting Section */}
-        <div className="bg-white rounded-xl shadow-xl overflow-hidden mb-10">
+        {/* <div className="bg-white rounded-xl shadow-xl overflow-hidden mb-10">
           <div className="p-6 md:p-8 border-b border-gray-100">
             <div className="flex items-center mb-4">
               <div className="bg-[#000e54] h-8 w-8 rounded-full flex items-center justify-center mr-3">
@@ -1603,10 +2260,10 @@ const articles = [
               </ul>
             </div>
           </div>
-        </div>
+        </div> */}
         
         {/* Analytics Section */}
-        <div className="bg-white rounded-xl shadow-xl overflow-hidden mb-12">
+        {/* <div className="bg-white rounded-xl shadow-xl overflow-hidden mb-12">
           <div className="p-6 md:p-8">
             <div className="flex items-center mb-4">
               <div className="bg-[#000e54] h-8 w-8 rounded-full flex items-center justify-center mr-3">
@@ -1651,23 +2308,23 @@ const articles = [
           </div>
         </div>
       </div>
-    </div>
+    </div> */}
 
 
 {/* related articles */}
-<div id="d-article">
+<section id="d-article">
         <Article
           title="Related Articles"
           items={articles}
           buttonText="View Post"
           buttonColor="bg-[#ff8633]"
         />
-      </div>
+      </section>
 
       {/* faq */}
-      <div id="email-faq" className="">
+      <section id="email-faq" className="">
         <FAQ faqs={ emailFAQs} />
-      </div>
+      </section>
     </>
   );
 };
