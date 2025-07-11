@@ -344,36 +344,36 @@ const toggleSection = (sectionKey, labelKey = null) => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = document.querySelectorAll("section[id]");
-      const scrollPosition = window.scrollY + 100;
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const sections = document.querySelectorAll("section[id]");
+  //     const scrollPosition = window.scrollY + 100;
 
-      sections.forEach((section) => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        const sectionId = section.getAttribute("id");
+  //     sections.forEach((section) => {
+  //       const sectionTop = section.offsetTop;
+  //       const sectionHeight = section.clientHeight;
+  //       const sectionId = section.getAttribute("id");
 
-        if (
-          scrollPosition >= sectionTop &&
-          scrollPosition < sectionTop + sectionHeight
-        ) {
-          setTableOfContents((prev) =>
-            prev.map((item) => ({
-              ...item,
-              active: item.id === sectionId,
-            }))
-          );
-        }
-      });
-    };
+  //       if (
+  //         scrollPosition >= sectionTop &&
+  //         scrollPosition < sectionTop + sectionHeight
+  //       ) {
+  //         setTableOfContents((prev) =>
+  //           prev.map((item) => ({
+  //             ...item,
+  //             active: item.id === sectionId,
+  //           }))
+  //         );
+  //       }
+  //     });
+  //   };
 
-    // Set initial active state
-    handleScroll();
+  //   // Set initial active state
+  //   handleScroll();
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
 
     
       // Email marketing statistics
@@ -2094,7 +2094,7 @@ const toggleSection = (sectionKey, labelKey = null) => {
   </div>
    {/* faq */}
       
-                    <FAQ faqsData={faqData} />
+    <FAQ faqsData={faqData} />
   </section>
          
 
@@ -2351,12 +2351,7 @@ const toggleSection = (sectionKey, labelKey = null) => {
         />
       </section>
 
-      {/* faq */}
-      
-                    <FAQ faqsData={faqData} />
-      {/* <section id="email-faq" className="">
-        <FAQ faqs={ emailFAQs} />
-      </section> */}
+    
     </>
   );
 };
