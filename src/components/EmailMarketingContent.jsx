@@ -1,24 +1,16 @@
 import React, { useState,useEffect } from 'react';
 import FAQ from './FAQ';
 import Article from './ArticleLayoutCommon';
-
-// import busimage from '/images/honey.png';
-import { ChevronRight, Users,TrendingUp,DollarSign, 
-    BarChart2,   Zap, 
-    Maximize, 
-    Globe, 
-     Plus,
-  Minus,
-    Award, 
-    MessageSquare, 
-    Heart, Mail, PieChart, Settings, UserPlus, Repeat, Target, BarChart3, Edit, SendHorizontal ,ExternalLink,
-  
-  Clock,
-  Check,
-  X,} from 'lucide-react';
-import Link from "next/link";
 import Image from "next/image";
-import Head from "next/head";
+// import busimage from '/images/honey.png';
+import { ChevronRight, Users, TrendingUp, DollarSign, 
+  BarChart2, Zap, Maximize, Globe, Plus, Minus, Award, 
+  MessageSquare, Heart, Settings, UserPlus, Repeat, Target, 
+  BarChart3, Edit, SendHorizontal, ExternalLink, Clock, Check, X, Mail // <-- add Mail here
+} from 'lucide-react';
+
+
+
 
 
 
@@ -27,62 +19,8 @@ const EmailMarketingContent = () => {
    const [isMobile, setIsMobile] = useState(false);
    const [expandedSections, setExpandedSections] = useState({});
 
-  // faq
-  const emailFAQs = [
-    {
-      question: "How does email marketing improve my business operations?",
-      answer: [
-        "Direct communication with targeted customer segments",
-        "Automated lead nurturing and customer onboarding",
-        "Increased conversion rates with personalized content",
-        "Measurable ROI tracking for marketing campaigns",
-        "Better customer engagement with timely promotions"
-      ]
-    },
-    {
-      question: "What types of businesses can benefit from email marketing?",
-      answer: "Our email marketing solutions work for all types of businesses including e-commerce stores, service providers, B2B companies, nonprofits, and educational institutions. The platform is scalable regardless of your industry or business size."
-    },
-    {
-      question: "How can I improve my email deliverability rates?",
-      answer: "Our systems maintain deliverability rates above 98% using advanced authentication protocols like DKIM and SPF. We provide automated list cleaning, bounce management, and sender reputation monitoring to ensure your emails reach the inbox."
-    },
-    {
-      question: "Can I track customer behavior with email marketing?",
-      answer: [
-        "Yes, our system tracks and reports on:",
-        "Open rates and times",
-        "Click-through behavior",
-        "Conversion tracking",
-        "Website activity after email clicks",
-        "Provides comprehensive engagement analytics"
-      ]
-    },
-    {
-      question: "What happens if my emails go to spam folders?",
-      answer: "The platform constantly monitors spam complaints and provides actionable suggestions to improve deliverability. We offer spam testing tools before sending and automatically optimize sending patterns to avoid triggering spam filters."
-    },
-    {
-      question: "How often should I send marketing emails to my list?",
-      answer: "Optimal sending frequency varies by industry, but our data shows 1-2 emails per week typically provides the best engagement. Our AI-powered send time optimization determines the ideal timing for each individual subscriber based on their past behavior."
-    },
-    {
-      question: "Can I set up automated email sequences and workflows?",
-      answer: [
-        "Yes, you can configure automated emails for:",
-        "Welcome sequences for new subscribers",
-        "Abandoned cart recovery",
-        "Post-purchase follow-ups",
-        "Re-engagement campaigns",
-        "Birthday and anniversary messages",
-        "Behavior-triggered notifications"
-      ]
-    },
-    {
-      question: "Is the email marketing platform difficult to use?",
-      answer: "Our drag-and-drop editor requires no coding skills and includes hundreds of responsive templates. Most users can create and launch their first campaign within 30 minutes of signup. We also offer comprehensive onboarding and free template customization services."
-    }
-  ];
+  
+  
 
  
 
@@ -203,28 +141,28 @@ const articles = [
 
 const faqData = [
     {
-      question: "What is an example of a CRM program?",
+      question: "What are the types of email marketing?",
       answer:
-        "TSalesforce is a widely recognized CRM program that offers a variety of customer relationship management services.",
+        "There are several types of email marketing. The most common type is the informational newsletter, which provides general company news and updates, transactional emails that are part of the sales or billing process (order and shipping confirmations, receipts, invoices, etc.), and behavioral emails that are sent after a subscriber takes a certain action on your website (signs up for a mailing list, abandons their cart, sends an inquiry, etc.).",
     },
     {
-      question: "What is the most popular CRM software?",
+      question: "Who should use email marketing?",
       answer:
-        "ISalesforce is often considered the most popular CRM software due to its extensive features and widespread adoption across industries. But don’t let popularity keep you from checking out their competitors like Pipedrive and HubSpot. At a fraction of the cost and with a lot less work, they can provide a robust CRM system that will serve your business well.",
+        "Any business that wants to build strong customer relationships and improve their website traffic and revenue for a relatively low cost should consider email marketing.",
     },
     {
-      question: "What is CRM mainly used for?",
+      question: "Does email marketing software integrate with other software?",
       answer:
-        "CRM is primarily used for managing interactions with current and potential customers, streamlining processes, and improving profitability through organizing customer information and automating sales and marketing interactions.",
+        "Yes, email marketing software integrates with other business software, such as top CRM systems and other marketing tools. These integrations create a seamless connection that allows these individual platforms to share data, reducing the need for double-entry and the risk of human error, as well as keeping all stakeholders apprised of new developments in real time.",
     },
     {
-      question: "Is Excel a CRM tool?",
+      question: "Can you automate email marketing blasts?",
       answer:
-        "Excel is not a dedicated CRM tool; it is a spreadsheet application that can be used for basic data management but lacks the automation, integration, and analytics capabilities of specialized CRM software.",
+        "Yes, you can automate email marketing blasts so they’re scheduled for delivery ahead of time. You can set these up to run once or on a recurring basis. However, when setting up automated email marketing blasts repeatedly, you should periodically check the content to ensure it remains accurate and up to date.",
     },
     {
-      question: "What is the point of having a CRM?",
-      answer: `A CRM system helps businesses manage customer data, track interactions, and automate various marketing, sales, and customer service processes, leading to improved customer relationships and increased efficiency.`,
+      question: "Is email marketing worth it for your business?",
+      answer: "Yes, email marketing is worthwhile for almost every business and can generate a return on investment when best practices are followed. Many users make purchases directly through email marketing content and even more are influenced by this content toward making a purchase at a later date.",
     },
   ];
 
@@ -377,12 +315,7 @@ const toggleSection = (sectionKey, labelKey = null) => {
 
     
       // Email marketing statistics
-      const stats = [
-        { label: "ROI", value: "$42", subtext: "for every $1 spent" },
-        { label: "Open Rate", value: "18%", subtext: "industry average" },
-        { label: "Conversion", value: "3.7%", subtext: "average rate" },
-        { label: "Subscribers", value: "81%", subtext: "check email daily" }
-      ];
+      
       const [activeCategory, setActiveCategory] = useState('roi');
       const categories = {
         roi: {
@@ -753,39 +686,9 @@ const toggleSection = (sectionKey, labelKey = null) => {
         }
       ];
 
-      const alternatives = [
-        {
-          name: "Mailchimp Alternative",
-          description: "More affordable email marketing with similar features but better pricing tiers.",
-          features: ["User-friendly interface", "Advanced automation", "Better pricing for growing businesses"],
-          bestFor: "Small to medium businesses looking for cost-effective solutions"
-        },
-        {
-          name: "Constant Contact Alternative",
-          description: "Modern email marketing platform with superior analytics and integration capabilities.",
-          features: ["Detailed performance metrics", "Better template designs", "Seamless CRM integration"],
-          bestFor: "Businesses focused on data-driven marketing decisions"
-        },
-        {
-          name: "SendinBlue Alternative",
-          description: "All-in-one marketing solution with enhanced deliverability rates.",
-          features: ["SMS marketing included", "Transactional email options", "Advanced segmentation tools"],
-          bestFor: "Companies needing multi-channel marketing capabilities"
-        },
-        {
-          name: "Campaign Monitor Alternative",
-          description: "Simplified workflow with robust personalization options.",
-          features: ["Drag-and-drop editor", "Dynamic content", "Automated customer journeys"],
-          bestFor: "Marketing teams wanting to create highly personalized campaigns"
-        }
-      ];
+      
     
-      const worthStats = [
-        { value: '4200%', label: 'Average ROI' },
-        { value: '$42', label: 'Return per $1 spent' },
-        { value: '81%', label: 'SMBs rely on email' },
-        { value: '59%', label: 'Influence on purchases' }
-      ];
+      
       const renderStars = (score) => {
     const stars = [];
     const fullStars = Math.floor(score);
@@ -1026,7 +929,7 @@ const toggleSection = (sectionKey, labelKey = null) => {
           {
             title: "Promotional Emails",
             icon: <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>,
             color: "bg-purple-600",
             description: "Got a sale or special offer? Use promo emails to create excitement and encourage customers to jump on great deals."
@@ -1335,6 +1238,7 @@ const toggleSection = (sectionKey, labelKey = null) => {
                   <button
                     key={key}
                     className={`flex items-center gap-3 w-full p-3 rounded-xl text-base border transition-all duration-300 
+ 
                       ${activeCategory === key ? categories[key].activeColor : categories[key].color} 
                       ${categories[key].hoverColor}`}
                     onClick={() => setActiveCategory(key)}
@@ -1478,7 +1382,7 @@ const toggleSection = (sectionKey, labelKey = null) => {
                     <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">
                      Best Business Email Marketing Platforms
                     </h1>
-                    <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
+                    <div className="w-24 h-1 bg-gradient-to-r from-orange-600 to-orange-700 mx-auto rounded-full"></div>
                   </div>
 
                   {/* Unified Table Layout for All Screen Sizes */}
@@ -1487,25 +1391,25 @@ const toggleSection = (sectionKey, labelKey = null) => {
                       <table className="w-full min-w-full">
                         <thead>
                           <tr className="border-b border-gray-200 bg-gray-50">
-                            <th className="text-left py-3 sm:py-6 px-2 sm:px-8 font-semibold text-gray-700 text-sm sm:text-lg">
+                            <th className="text-left py-3 sm:py-6 px-2 sm:px-8 font-semibold text-black text-sm sm:text-lg">
                                Platform
                             </th>
-                            <th className="text-center py-3 sm:py-6 px-2 sm:px-6 font-semibold text-gray-700 text-sm sm:text-lg">
+                            <th className="text-center py-3 sm:py-6 px-2 sm:px-6 font-semibold text-black text-sm sm:text-lg">
                               Expert Score
                             </th>
-                            <th className="text-center py-3 sm:py-6 px-2 sm:px-6 font-semibold text-gray-700 text-sm sm:text-lg">
+                            <th className="text-center py-3 sm:py-6 px-2 sm:px-6 font-semibold text-black text-sm sm:text-lg">
                               Best for
                             </th>
-                            <th className="text-center py-3 sm:py-6 px-2 sm:px-6 font-semibold text-gray-700 text-sm sm:text-lg">
+                            <th className="text-center py-3 sm:py-6 px-2 sm:px-6 font-semibold text-black text-sm sm:text-lg">
                               Key Features
                             </th>
-                            <th className="text-center py-3 sm:py-6 px-2 sm:px-6 font-semibold text-gray-700 text-sm sm:text-lg">
+                            <th className="text-center py-3 sm:py-6 px-2 sm:px-6 font-semibold text-black text-sm sm:text-lg">
                               Free Trial
                             </th>
-                            <th className="text-center py-3 sm:py-6 px-2 sm:px-6 font-semibold text-gray-700 text-sm sm:text-lg">
+                            <th className="text-center py-3 sm:py-6 px-2 sm:px-6 font-semibold text-black text-sm sm:text-lg">
                               Free Version
                             </th>
-                            <th className="text-center py-3 sm:py-6 px-2 sm:px-8 font-semibold text-gray-700 text-sm sm:text-lg">
+                            <th className="text-center py-3 sm:py-6 px-2 sm:px-8 font-semibold text-black text-sm sm:text-lg">
                               Action
                             </th>
                           </tr>
@@ -1528,7 +1432,7 @@ const toggleSection = (sectionKey, labelKey = null) => {
                                     />
                                   </div>
                                   <div className="text-center sm:text-left">
-                                    <span className="font-medium text-gray-800 text-xs sm:text-base">
+                                    <span className="font-medium text-blacktext-xs sm:text-base">
                                       {email.name}
                                     </span>
                                   </div>
@@ -1536,7 +1440,7 @@ const toggleSection = (sectionKey, labelKey = null) => {
                               </td>
                               <td className="py-4 sm:py-8 px-2 sm:px-6 text-center">
                                 <div className="flex flex-col items-center space-y-1 sm:space-y-2">
-                                  <span className="text-lg sm:text-2xl font-bold text-gray-800">
+                                  <span className="text-lg sm:text-2xl font-bold text-black">
                                     {email.expertScore}
                                   </span>
                                   <div className="flex space-x-1 scale-75 sm:scale-100">
@@ -1545,7 +1449,7 @@ const toggleSection = (sectionKey, labelKey = null) => {
                                 </div>
                               </td>
                               <td className="py-4 sm:py-8 px-2 sm:px-6 text-center">
-                                <span className="inline-block bg-blue-100 text-gray-800 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
+                                <span className="inline-block bg-blue-100 text-black px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium">
                                   {email.bestFor}
                                 </span>
                               </td>
@@ -1554,9 +1458,9 @@ const toggleSection = (sectionKey, labelKey = null) => {
                                   {email.keyFeatures.map((feature, idx) => (
                                     <li
                                       key={idx}
-                                      className="text-xs sm:text-sm text-gray-600 flex items-start sm:items-center"
+                                      className="text-xs sm:text-sm text-black flex items-start sm:items-center"
                                     >
-                                      <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-gray-800 rounded-full mr-2 sm:mr-3 flex-shrink-0 mt-1.5 sm:mt-0"></div>
+                                      <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 text-black rounded-full mr-2 sm:mr-3 flex-shrink-0 mt-1.5 sm:mt-0"></div>
                                       <span className="leading-tight sm:leading-normal">
                                         {feature}
                                       </span>
@@ -1568,7 +1472,7 @@ const toggleSection = (sectionKey, labelKey = null) => {
                                 <div className="flex justify-center">
                                   {email.freeTrial ? (
                                     <div className="w-6 h-6 sm:w-8 sm:h-8 bg-green-100 rounded-full flex items-center justify-center">
-                                      <Check className="w-3 h-3 sm:w-5 sm:h-5 text-gray-800" />
+                                      <Check className="w-3 h-3 sm:w-5 sm:h-5 text-orange-600" />
                                     </div>
                                   ) : (
                                     <div className="w-6 h-6 sm:w-8 sm:h-8 bg-red-100 rounded-full flex items-center justify-center">
@@ -1581,7 +1485,7 @@ const toggleSection = (sectionKey, labelKey = null) => {
                                 <div className="flex justify-center">
                                   {email.freeVersion ? (
                                     <div className="w-6 h-6 sm:w-8 sm:h-8 bg-green-100 rounded-full flex items-center justify-center">
-                                      <Check className="w-3 h-3 sm:w-5 sm:h-5 text-gray-800" />
+                                      <Check className="w-3 h-3 sm:w-5 sm:h-5 text-orange-600" />
                                     </div>
                                   ) : (
                                     <div className="w-6 h-6 sm:w-8 sm:h-8 bg-red-100 rounded-full flex items-center justify-center">
@@ -1591,7 +1495,7 @@ const toggleSection = (sectionKey, labelKey = null) => {
                                 </div>
                               </td>
                               <td className="py-4 sm:py-8 px-2 sm:px-8">
-                                <button className="bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-800 hover:to-gray-900 text-white font-medium py-2 px-3 sm:py-3 sm:px-6 rounded-lg transition-all duration-200 flex items-center space-x-1 sm:space-x-2 mx-auto text-xs sm:text-sm">
+                                <button className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-600 hover:to-orange 700 text-white font-medium py-2 px-3 sm:py-3 sm:px-6 rounded-lg transition-all duration-200 flex items-center space-x-1 sm:space-x-2 mx-auto text-xs sm:text-sm">
                                   <span>Visit Website</span>
                                   <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
                                 </button>
@@ -1604,7 +1508,7 @@ const toggleSection = (sectionKey, labelKey = null) => {
                   </div>
 
                   <div className="text-center mt-12">
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-black text-sm">
                       * Scores and recommendations are based on expert analysis
                       and user reviews
                     </p>
@@ -1637,7 +1541,7 @@ const toggleSection = (sectionKey, labelKey = null) => {
                       </div>
                       <a
                         href={tool.button.link}
-                        className="bg-gray-800 text-white px-4 py-2 rounded-full text-sm hover:bg-gray-900"
+                        className="bg-orange-600 text-white px-4 py-2 rounded-full text-sm hover:bg-orange-600"
                       >
                         {tool.button.text}
                       </a>
@@ -1653,7 +1557,7 @@ const toggleSection = (sectionKey, labelKey = null) => {
                           </div>
                           <div className="w-full bg-gray-100 rounded-full h-2">
                             <div
-                              className="bg-gray-800 h-2 rounded-full"
+                              className="bg-orange-600 h-2 rounded-full"
                               style={{
                                 width: `${
                                   (parseFloat(score.score) / 5) * 100
@@ -1716,7 +1620,7 @@ const toggleSection = (sectionKey, labelKey = null) => {
                                 className="w-full flex justify-between items-center font-medium"
                               >
                                 <span>{label}</span>
-                                <span className="text-green-600">
+                                <span className="text-orange-600">
                                   {openSections[sectionKey] ? (
                                     <Minus className="w-5 h-5" />
                                   ) : (
@@ -1759,11 +1663,11 @@ const toggleSection = (sectionKey, labelKey = null) => {
               className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
             >
               <div className="p-8">
-                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-[#000e54] text-white">
+                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-orange-600 text-white">
                   {feature.icon}
                 </div>
                 <h3 className="mt-4 text-xl font-semibold text-gray-800">{feature.title}</h3>
-                <p className="mt-2 text-base text-gray-800">
+                <p className="mt-2 text-base text-black">
                   {feature.description}
                 </p>
               </div>
@@ -1869,28 +1773,35 @@ const toggleSection = (sectionKey, labelKey = null) => {
                   <ul className="space-y-2">
                     <li className="flex items-center text-gray-800 text-base">
                       <svg className="w-4 h-4 text-[#000e54] mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        <path fillRule="evenodd" d="M16 5a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1h12zm-7 9a1 1 0 100-2 1 1 0 000 2zm0-4a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
                       </svg>
                       Drag-and-drop editor
                     </li>
                     <li className="flex items-center text-gray-800 text-base">
                       <svg className="w-4 h-4 text-[#000e54] mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        <path fillRule="evenodd" d="M16 5a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1h12zm-7 9a1 1 0 100-2 1 1 0 000 2zm0-4a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
                       </svg>
                       Mobile-friendly templates
                     </li>
                     <li className="flex items-center text-gray-800 text-base">
                       <svg className="w-4 h-4 text-[#000e54] mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        <path fillRule="evenodd" d="M16 5a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1h12zm-7 9a1 1 0 100-2 1 1 0 000 2zm0-4a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
                       </svg>
                       List management
                     </li>
                     <li className="flex items-center text-gray-800 text-base">
                       <svg className="w-4 h-4 text-[#000e54] mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        <path fillRule="evenodd" d="M16 5a1 1 0 011 1v10a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1h12zm-7 9a1 1 0 100-2 1 1 0 000 2zm0-4a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
                       </svg>
                       Basic reports
                     </li>
+                  </ul>
+                </div>
+                <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                  <h3 className="font-semibold text-base text-gray-800 mb-2">Advanced Features</h3>
+                  <ul className="space-y-2">
+                    <li className="flex items-center text-gray-800 text-base">
+                      <svg className="w-4 h-4 text-[#000e54] mr-2" fill="currentColor" viewBox="0 0 20 20">
                   </ul>
                 </div>
                 <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
@@ -2056,30 +1967,30 @@ const toggleSection = (sectionKey, labelKey = null) => {
                     </li>
                   </ul>
                 </div>
-                <div className="flex-1 bg-gray-50 p-4 rounded-lg border-l-4 border-orange-500">
+                <div className="flex-1 bg-gray-50 p-4 rounded-lg border-l-4 border-[#000e54] ">
                   <h3 className="font-semibold text-gray-800 mb-2 text-base">Security Features</h3>
                   <p className="text-gray-800 text-base">Look for services that offer these important security features:</p>
                   <ul className="mt-2 space-y-1">
                     <li className="flex items-center text-gray-700 text-base">
-                      <svg className="w-4 h-4 text-orange-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-4 h-4 text-[#000e54]  mr-1" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                       Two-factor authentication
                     </li>
                     <li className="flex items-center text-gray-700 text-base">
-                      <svg className="w-4 h-4 text-orange-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-4 h-4 text-[#000e54]  mr-1" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                       Data encryption
                     </li>
                     <li className="flex items-center text-gray-700 text-base">
-                      <svg className="w-4 h-4 text-orange-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-4 h-4 text-[#000e54]  mr-1" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                       HTTPS protection
                     </li>
                     <li className="flex items-center text-gray-700 text-base">
-                      <svg className="w-4 h-4 text-orange-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-4 h-4 text-[#000e54]  mr-1" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                       Regular security audits
