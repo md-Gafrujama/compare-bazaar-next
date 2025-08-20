@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
 import FAQ from './FAQ';
 import Article from './ArticleLayoutCommon';
 import Image from "next/image";
@@ -6,124 +6,140 @@ import Image from "next/image";
 import { ChevronRight, Users, TrendingUp, DollarSign, 
   BarChart2, Zap, Maximize, Globe, Plus, Minus, Award, 
   MessageSquare, Heart, Settings, UserPlus, Repeat, Target, 
-  BarChart3, Edit, SendHorizontal, ExternalLink, Clock, Check, X, Mail 
+  BarChart3, Edit, SendHorizontal, ExternalLink, Clock, Check, X, Mail // <-- add Mail here
 } from 'lucide-react';
+
+
+
+
+
 
 const EmailMarketingContent = () => {
   const [openSections, setOpenSections] = useState({});
-  const [isMobile, setIsMobile] = useState(false);
-  const [expandedSections, setExpandedSections] = useState({});
-  const [openItems, setOpenItems] = useState({});
-  const [activeSection, setActiveSection] = useState(null);
-  const [openSection, setOpenSection] = useState(null);
+   const [isMobile, setIsMobile] = useState(false);
+   const [expandedSections, setExpandedSections] = useState({});
 
-  const articles = [
-    {
-      id: 1,
-      title: "Email Marketing vs Social Media: Which Drives More Conversions?",
-      image: "/images/img1email.png",
-      author: "Catie",
-      date: "April 5, 2023",
-      excerpt:
-        "Marketing teams often debate which channel deserves more budget allocation. Should you focus on email marketing or invest heavily in social media campaigns...",
-      link: "#",
-    },
-    {
-      id: 2,
-      title: "Mailchimp Email Marketing: Features, Pricing, Pros and Cons",
-      image: "/images/img2email.png",
-      author: "Catie",
-      date: "August 17, 2023",
-      excerpt:
-        "Mailchimp Overview Mailchimp is a popular email marketing platform offering intuitive tools for businesses of all sizes. Their all-in-one marketing solution includes...",
-      link: "#",
-    },
-    {
-      id: 3,
-      title: "7 Key Metrics to Measure Email Marketing Success",
-      image: "/images/img3email.png",
-      author: "Catie",
-      date: "January 22, 2024",
-      excerpt:
-        "As a marketing professional, measuring the effectiveness of your email campaigns is essential for optimizing performance. Beyond basic open rates...",
-      link: "#",
-    },
-  ];
+  
+  
 
-  const steps = [
-    {
-      title: "Define Your Audience",
-      description: "Identify your target audience based on demographics, behavior, and interests.",
-      icon: <Users className="w-12 h-12 text-[#000e54]" />,
-      details: [
-        "Segment customers based on purchase history",
-        "Group by demographics (age, location)",
-        "Segment by website behavior and engagement"
-      ]
-    },
-    {
-      title: "Build Your Email List",
-      description: "Create compelling opt-in forms and landing pages to capture email addresses.",
-      icon: <UserPlus className="w-12 h-12 text-[#000e54]" />,
-      details: [
-        "Create lead magnets (guides, discounts)",
-        "Use sign-up forms on your website",
-        "Implement pop-ups and exit-intent forms"
-      ]
-    },
-    {
-      title: "Choose Email Platform",
-      description: "Select an email service provider that matches your needs and budget.",
-      icon: <Settings className="w-12 h-12 text-[#000e54]" />,
-      details: [
-        "Evaluate deliverability rates",
-        "Compare automation capabilities",
-        "Assess template options and ease of use"
-      ]
-    },
-    {
-      title: "Create Compelling Content",
-      description: "Design emails with engaging subject lines, clear CTAs, and valuable content.",
-      icon: <Edit className="w-12 h-12 text-[#000e54]" />,
-      details: [
-        "Write attention-grabbing subject lines",
-        "Design mobile-responsive templates",
-        "Create clear calls-to-action"
-      ]
-    },
-    {
-      title: "Send Campaigns",
-      description: "Schedule and send your emails at optimal times for engagement.",
-      icon: <SendHorizontal className="w-12 h-12 text-[#000e54]" />,
-      details: [
-        "Test email rendering across devices",
-        "Determine optimal sending times",
-        "Send welcome sequences for new subscribers"
-      ]
-    },
-    {
-      title: "Analyze Performance",
-      description: "Track key metrics like open rates, click rates, conversions, and ROI.",
-      icon: <BarChart3 className="w-12 h-12 text-[#000e54]" />,
-      details: [
-        "Monitor open and click-through rates",
-        "Track conversion and revenue metrics",
-        "Analyze subscriber growth and churn"
-      ]
-    },
-    {
-      title: "Optimize & Improve",
-      description: "Use data to refine your approach, test new strategies, and improve results.",
-      icon: <Repeat className="w-12 h-12 text-[#000e54]" />,
-      details: [
-        "Conduct A/B testing on various elements",
-        "Refine segmentation strategy",
-        "Improve content based on engagement data"
-      ]
-    }
-  ];
+ 
 
-  const faqData = [
+
+
+//   alternative
+
+
+
+
+ 
+
+const articles = [
+  {
+    id: 1,
+    title: "Email Marketing vs Social Media: Which Drives More Conversions?",
+    image: "/images/img1email.png",
+    author: "Catie",
+    date: "April 5, 2023",
+    excerpt:
+      "Marketing teams often debate which channel deserves more budget allocation. Should you focus on email marketing or invest heavily in social media campaigns...",
+    link: "#",
+  },
+  {
+    id: 2,
+    title: "Mailchimp Email Marketing: Features, Pricing, Pros and Cons",
+    image: "/images/img2email.png",
+    author: "Catie",
+    date: "August 17, 2023",
+    excerpt:
+      "Mailchimp Overview Mailchimp is a popular email marketing platform offering intuitive tools for businesses of all sizes. Their all-in-one marketing solution includes...",
+    link: "#",
+  },
+  {
+    id: 3,
+    title: "7 Key Metrics to Measure Email Marketing Success",
+    image: "/images/img3email.png",
+    author: "Catie",
+    date: "January 22, 2024",
+    excerpt:
+      "As a marketing professional, measuring the effectiveness of your email campaigns is essential for optimizing performance. Beyond basic open rates...",
+    link: "#",
+  },
+];
+
+    const steps = [
+        {
+          title: "Define Your Audience",
+          description: "Identify your target audience based on demographics, behavior, and interests.",
+          icon: <Users className="w-12 h-12 text-[#000e54]" />,
+          details: [
+            "Segment customers based on purchase history",
+            "Group by demographics (age, location)",
+            "Segment by website behavior and engagement"
+          ]
+        },
+        {
+          title: "Build Your Email List",
+          description: "Create compelling opt-in forms and landing pages to capture email addresses.",
+          icon: <UserPlus className="w-12 h-12 text-[#000e54]" />,
+          details: [
+            "Create lead magnets (guides, discounts)",
+            "Use sign-up forms on your website",
+            "Implement pop-ups and exit-intent forms"
+          ]
+        },
+        {
+          title: "Choose Email Platform",
+          description: "Select an email service provider that matches your needs and budget.",
+          icon: <Settings className="w-12 h-12 text-[#000e54]" />,
+          details: [
+            "Evaluate deliverability rates",
+            "Compare automation capabilities",
+            "Assess template options and ease of use"
+          ]
+        },
+        {
+          title: "Create Compelling Content",
+          description: "Design emails with engaging subject lines, clear CTAs, and valuable content.",
+          icon: <Edit className="w-12 h-12 text-[#000e54]" />,
+          details: [
+            "Write attention-grabbing subject lines",
+            "Design mobile-responsive templates",
+            "Create clear calls-to-action"
+          ]
+        },
+        {
+          title: "Send Campaigns",
+          description: "Schedule and send your emails at optimal times for engagement.",
+          icon: <SendHorizontal className="w-12 h-12 text-[#000e54]" />,
+          details: [
+            "Test email rendering across devices",
+            "Determine optimal sending times",
+            "Send welcome sequences for new subscribers"
+          ]
+        },
+        {
+          title: "Analyze Performance",
+          description: "Track key metrics like open rates, click rates, conversions, and ROI.",
+          icon: <BarChart3 className="w-12 h-12 text-[#000e54]" />,
+          details: [
+            "Monitor open and click-through rates",
+            "Track conversion and revenue metrics",
+            "Analyze subscriber growth and churn"
+          ]
+        },
+        {
+          title: "Optimize & Improve",
+          description: "Use data to refine your approach, test new strategies, and improve results.",
+          icon: <Repeat className="w-12 h-12 text-[#000e54]" />,
+          details: [
+            "Conduct A/B testing on various elements",
+            "Refine segmentation strategy",
+            "Improve content based on engagement data"
+          ]
+        }
+      ];
+
+const faqData = [
     {
       question: "What are the types of email marketing?",
       answer:
@@ -142,7 +158,7 @@ const EmailMarketingContent = () => {
     {
       question: "Can you automate email marketing blasts?",
       answer:
-        "Yes, you can automate email marketing blasts so they're scheduled for delivery ahead of time. You can set these up to run once or on a recurring basis. However, when setting up automated email marketing blasts repeatedly, you should periodically check the content to ensure it remains accurate and up to date.",
+        "Yes, you can automate email marketing blasts so they’re scheduled for delivery ahead of time. You can set these up to run once or on a recurring basis. However, when setting up automated email marketing blasts repeatedly, you should periodically check the content to ensure it remains accurate and up to date.",
     },
     {
       question: "Is email marketing worth it for your business?",
@@ -150,91 +166,90 @@ const EmailMarketingContent = () => {
     },
   ];
 
-  // Email data for comparison table
-  const emailData = [
-    {
-      id: 1,
-      name: "Ooma Office",
-      image: "/images/ooma.png",
-      alt: "Ooma Office",
-      expertScore: 4.5,
-      bestFor: "Best for small business communication",
-      visitUrl: "ooma",
-      keyFeatures: [
-        "Virtual receptionist",
-        "Voicemail-to-email",
-        "Call forwarding and email alerts",
-      ],
-      freeTrial: true,
-      freeVersion: false,
-    },
-    {
-      id: 2,
-      name: "RingEX",
-      image: "/images/ringcentral.png",
-      alt: "RingEX",
-      expertScore: 4.4,
-      bestFor: "Best for all-in-one communication",
-      visitUrl: "ringex",
-      keyFeatures: [
-        "Integrated email and messaging",
-        "Advanced analytics",
-        "AI transcription and summaries",
-      ],
-      freeTrial: true,
-      freeVersion: false,
-    },
-    {
-      id: 3,
-      name: "Zoom",
-      image: "/images/zoom.png",
-      alt: "Zoom",
-      expertScore: 4.3,
-      bestFor: "Best for webinars and event-based marketing",
-      visitUrl: "zoom",
-      keyFeatures: [
-        "Zoom Mail and Calendar integration",
-        "Webinar tools",
-        "Email campaign automation",
-      ],
-      freeTrial: true,
-      freeVersion: true,
-    },
-    {
-      id: 4,
-      name: "NextivaONE",
-      image: "/images/nextiva.png",
-      alt: "NextivaONE",
-      expertScore: 4.2,
-      bestFor: "Best for unified communication and email support",
-      visitUrl: "nextiva",
-      keyFeatures: [
-        "Email-to-voice features",
-        "CRM + email integration",
-        "Multichannel campaign tracking",
-      ],
-      freeTrial: true,
-      freeVersion: false,
-    },
-    {
-      id: 5,
-      name: "Vonage",
-      image: "/images/vonage.png",
-      alt: "Vonage",
-      expertScore: 4.1,
-      bestFor: "Best for scalable business communication",
-      visitUrl: "vonage",
-      keyFeatures: [
-        "Vonage Campaigns",
-        "Email + SMS marketing suite",
-        "API-driven automation",
-      ],
-      freeTrial: true,
-      freeVersion: false,
-    },
-  ];
-
-  const toggleSection = (sectionKey, labelKey = null) => {
+      //compare email
+     const emailData = [
+  {
+    id: 1,
+    
+    image: "/images/ooma.png",
+    alt: "Ooma Office",
+    expertScore: 4.5,
+    bestFor: "Best for small business communication",
+    visitUrl: "ooma",
+    keyFeatures: [
+      "Virtual receptionist",
+      "Voicemail-to-email",
+      "Call forwarding and email alerts",
+    ],
+    freeTrial: true,
+    freeVersion: false,
+  },
+  {
+    id: 2,
+    
+    image: "/images/ringcentral.png",
+    alt: "RingEX",
+    expertScore: 4.4,
+    bestFor: "Best for all-in-one communication",
+    visitUrl: "ringex",
+    keyFeatures: [
+      "Integrated email and messaging",
+      "Advanced analytics",
+      "AI transcription and summaries",
+    ],
+    freeTrial: true,
+    freeVersion: false,
+  },
+  {
+    id: 3,
+    
+    image: "/images/zoom.png",
+    alt: "Zoom",
+    expertScore: 4.3,
+    bestFor: "Best for webinars and event-based marketing",
+    visitUrl: "zoom",
+    keyFeatures: [
+      "Zoom Mail and Calendar integration",
+      "Webinar tools",
+      "Email campaign automation",
+    ],
+    freeTrial: true,
+    freeVersion: true,
+  },
+  {
+    id: 4,
+   
+    image: "/images/nextiva.png",
+    alt: "NextivaONE",
+    expertScore: 4.2,
+    bestFor: "Best for unified communication and email support",
+    visitUrl: "nextiva",
+    keyFeatures: [
+      "Email-to-voice features",
+      "CRM + email integration",
+      "Multichannel campaign tracking",
+    ],
+    freeTrial: true,
+    freeVersion: false,
+  },
+  {
+    id: 5,
+    
+    image: "/images/vonage.png",
+    alt: "Vonage",
+    expertScore: 4.1,
+    bestFor: "Best for scalable business communication",
+    visitUrl: "vonage",
+    keyFeatures: [
+      "Vonage Campaigns",
+      "Email + SMS marketing suite",
+      "API-driven automation",
+    ],
+    freeTrial: true,
+    freeVersion: false,
+  },
+];
+const toggleSection = (sectionKey, labelKey = null) => {
     setExpandedSections((prev) => ({
       ...prev,
       [sectionKey]: !prev[sectionKey],
@@ -267,380 +282,414 @@ const EmailMarketingContent = () => {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Email marketing statistics
-  const [activeCategory, setActiveCategory] = useState('roi');
-  const categories = {
-    roi: {
-      title: "Return on Investment",
-      icon: <DollarSign className="h-8 w-8 text-[#000e54]" />,
-      color: "bg-blue-50 border-blue-200",
-      textColor: "text-[#000e54]",
-      hoverColor: "hover:bg-blue-100",
-      activeColor: "bg-blue-100",
-      benefits: [
-        {
-          title: "Highest ROI in Digital Marketing",
-          description: "Email marketing generates $42 for every $1 spent, outperforming all other digital marketing channels including social media and PPC advertising.",
-          icon: <TrendingUp />
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const sections = document.querySelectorAll("section[id]");
+  //     const scrollPosition = window.scrollY + 100;
+
+  //     sections.forEach((section) => {
+  //       const sectionTop = section.offsetTop;
+  //       const sectionHeight = section.clientHeight;
+  //       const sectionId = section.getAttribute("id");
+
+  //       if (
+  //         scrollPosition >= sectionTop &&
+  //         scrollPosition < sectionTop + sectionHeight
+  //       ) {
+  //         setTableOfContents((prev) =>
+  //           prev.map((item) => ({
+  //             ...item,
+  //             active: item.id === sectionId,
+  //           }))
+  //         );
+  //       }
+  //     });
+  //   };
+
+  //    handleScroll();
+
+  //   window.addEventListener("scroll", handleScroll);
+  //   retur // Set initial active state
+  // n () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
+
+    
+      // Email marketing statistics
+      
+      const [activeCategory, setActiveCategory] = useState('roi');
+      const categories = {
+        roi: {
+          title: "Return on Investment",
+          icon: <DollarSign className="h-8 w-8 text-[#000e54]" />,
+          color: "bg-blue-50 border-blue-200",
+          textColor: "text-[#000e54]",
+          hoverColor: "hover:bg-blue-100",
+          activeColor: "bg-blue-100",
+          benefits: [
+            {
+              title: "Highest ROI in Digital Marketing",
+              description: "Email marketing generates $42 for every $1 spent, outperforming all other digital marketing channels including social media and PPC advertising.",
+              icon: <TrendingUp />
+            },
+            {
+              title: "Cost-Effective Marketing",
+              description: "Minimal costs compared to traditional marketing methods with no printing or postage expenses and affordable email marketing platforms.",
+              icon: <DollarSign />
+            },
+            {
+              title: "Trackable Results",
+              description: "Precisely measure campaign performance through open rates, click-through rates, conversion rates, and revenue attribution for data-driven decisions.",
+              icon: <BarChart2 />
+            }
+          ]
         },
-        {
-          title: "Cost-Effective Marketing",
-          description: "Minimal costs compared to traditional marketing methods with no printing or postage expenses and affordable email marketing platforms.",
-          icon: <DollarSign />
+        targeting: {
+          title: "Precise Targeting",
+          icon: <Target className="h-8 w-8 text-orange-500" />,
+          color: "bg-orange-50 border-orange-200",
+          textColor: "text-orange-600",
+          hoverColor: "hover:bg-orange-100",
+          activeColor: "bg-orange-100",
+          benefits: [
+            {
+              title: "Advanced Segmentation",
+              description: "Send highly relevant messages by segmenting your audience based on demographics, behavior, purchase history, and engagement levels.",
+              icon: <Users />
+            },
+            {
+              title: "Personalized Communication",
+              description: "Customize content, product recommendations, and offers for each subscriber to increase relevance and strengthen customer relationships.",
+              icon: <MessageSquare />
+            },
+            {
+              title: "Behavior-Triggered Emails",
+              description: "Automatically send perfectly timed emails based on specific customer actions like purchases, abandoned carts, or website browsing behavior.",
+              icon: <Zap />
+            }
+          ]
         },
-        {
-          title: "Trackable Results",
-          description: "Precisely measure campaign performance through open rates, click-through rates, conversion rates, and revenue attribution for data-driven decisions.",
-          icon: <BarChart2 />
+        scalability: {
+          title: "Scalability & Reach",
+          icon: <Maximize className="h-8 w-8 text-purple-500" />,
+          color: "bg-purple-50 border-purple-200",
+          textColor: "text-purple-700",
+          hoverColor: "hover:bg-purple-100",
+          activeColor: "bg-purple-100",
+          benefits: [
+            {
+              title: "Global Reach",
+              description: "Instantly connect with customers worldwide without additional cost, breaking down geographical barriers for your business expansion.",
+              icon: <Globe />
+            },
+            {
+              title: "Automated Campaigns",
+              description: "Scale your marketing efforts through automation workflows that nurture leads and customers without manual intervention.",
+              icon: <Clock />
+            },
+            {
+              title: "A/B Testing Capabilities",
+              description: "Continuously improve performance by testing different elements like subject lines, content, and CTAs to optimize engagement.",
+              icon: <Award />
+            }
+          ]
+        },
+        relationship: {
+          title: "Customer Relationships",
+          icon: <Heart className="h-8 w-8 text-red-500" />,
+          color: "bg-red-50 border-red-200",
+          textColor: "text-red-700",
+          hoverColor: "hover:bg-red-100",
+          activeColor: "bg-red-100",
+          benefits: [
+            {
+              title: "Direct Communication Channel",
+              description: "Maintain direct contact with your audience without dependency on social media algorithms or third-party platform changes.",
+              icon: <MessageSquare />
+            },
+            {
+              title: "Customer Lifetime Value",
+              description: "Increase repeat purchases and customer loyalty through regular engagement, personalized recommendations, and exclusive offers.",
+              icon: <Users />
+            },
+            {
+              title: "Brand Authority",
+              description: "Establish your expertise and build trust by consistently delivering valuable content and personalized experiences to your subscribers.",
+              icon: <Award />
+            }
+          ]
         }
-      ]
+      };
+    
+      //email products
+      const toolsContent = {
+  OomaOffice: {
+    title: "Ooma Office - Best for Small Business Communication Integration",
+    logo: "/images/ooma.png",
+    button: {
+      text: "Visit Website",
+      link: "#",
     },
-    targeting: {
-      title: "Precise Targeting",
-      icon: <Target className="h-8 w-8 text-orange-500" />,
-      color: "bg-orange-50 border-orange-200",
-      textColor: "text-orange-600",
-      hoverColor: "hover:bg-orange-100",
-      activeColor: "bg-orange-100",
-      benefits: [
-        {
-          title: "Advanced Segmentation",
-          description: "Send highly relevant messages by segmenting your audience based on demographics, behavior, purchase history, and engagement levels.",
-          icon: <Users />
-        },
-        {
-          title: "Personalized Communication",
-          description: "Customize content, product recommendations, and offers for each subscriber to increase relevance and strengthen customer relationships.",
-          icon: <MessageSquare />
-        },
-        {
-          title: "Behavior-Triggered Emails",
-          description: "Automatically send perfectly timed emails based on specific customer actions like purchases, abandoned carts, or website browsing behavior.",
-          icon: <Zap />
-        }
-      ]
+    scores: [
+      { label: "Overall Score", score: "4.6/5" },
+      { label: "Pricing", score: "4.7/5" },
+      { label: "Email Features", score: "4.5/5" },
+      { label: "Integrations", score: "4.6/5" },
+      { label: "Ease of Use", score: "4.8/5" },
+      { label: "Support", score: "4.6/5" },
+    ],
+    pros: [
+      "Affordable plans ideal for SMBs",
+      "Combines VoIP and email marketing",
+      "Easy setup and user-friendly dashboard",
+      "Reliable support team",
+    ],
+    cons: [
+      "Limited advanced email automation",
+      "Best suited for smaller teams",
+    ],
+    why: {
+      intro: `Ooma Office stands out for businesses that want simple, integrated communication tools. It combines phone, messaging, and email functionality into one clean system.`,
+      bullets: [
+        "Perfect for small businesses that want VoIP and marketing in one dashboard.",
+        "Highly rated for ease of use, offering strong basic email campaign features.",
+      ],
+      outro: `If you're a small business seeking simplicity and integration with your VoIP system, Ooma Office is a smart choice.`,
     },
-    scalability: {
-      title: "Scalability & Reach",
-      icon: <Maximize className="h-8 w-8 text-purple-500" />,
-      color: "bg-purple-50 border-purple-200",
-      textColor: "text-purple-700",
-      hoverColor: "hover:bg-purple-100",
-      activeColor: "bg-purple-100",
-      benefits: [
-        {
-          title: "Global Reach",
-          description: "Instantly connect with customers worldwide without additional cost, breaking down geographical barriers for your business expansion.",
-          icon: <Globe />
-        },
-        {
-          title: "Automated Campaigns",
-          description: "Scale your marketing efforts through automation workflows that nurture leads and customers without manual intervention.",
-          icon: <Clock />
-        },
-        {
-          title: "A/B Testing Capabilities",
-          description: "Continuously improve performance by testing different elements like subject lines, content, and CTAs to optimize engagement.",
-          icon: <Award />
-        }
-      ]
-    },
-    relationship: {
-      title: "Customer Relationships",
-      icon: <Heart className="h-8 w-8 text-red-500" />,
-      color: "bg-red-50 border-red-200",
-      textColor: "text-red-700",
-      hoverColor: "hover:bg-red-100",
-      activeColor: "bg-red-100",
-      benefits: [
-        {
-          title: "Direct Communication Channel",
-          description: "Maintain direct contact with your audience without dependency on social media algorithms or third-party platform changes.",
-          icon: <MessageSquare />
-        },
-        {
-          title: "Customer Lifetime Value",
-          description: "Increase repeat purchases and customer loyalty through regular engagement, personalized recommendations, and exclusive offers.",
-          icon: <Users />
-        },
-        {
-          title: "Brand Authority",
-          description: "Establish your expertise and build trust by consistently delivering valuable content and personalized experiences to your subscribers.",
-          icon: <Award />
-        }
-      ]
-    }
-  };
+  },
 
-  // Tools content
-  const toolsContent = {
-    OomaOffice: {
-      title: "Ooma Office - Best for Small Business Communication Integration",
-      logo: "/images/ooma.png",
-      button: {
-        text: "Visit Website",
-        link: "#",
-      },
-      scores: [
-        { label: "Overall Score", score: "4.6/5" },
-        { label: "Pricing", score: "4.7/5" },
-        { label: "Email Features", score: "4.5/5" },
-        { label: "Integrations", score: "4.6/5" },
-        { label: "Ease of Use", score: "4.8/5" },
-        { label: "Support", score: "4.6/5" },
-      ],
-      pros: [
-        "Affordable plans ideal for SMBs",
-        "Combines VoIP and email marketing",
-        "Easy setup and user-friendly dashboard",
-        "Reliable support team",
-      ],
-      cons: [
-        "Limited advanced email automation",
-        "Best suited for smaller teams",
-      ],
-      why: {
-        intro: `Ooma Office stands out for businesses that want simple, integrated communication tools. It combines phone, messaging, and email functionality into one clean system.`,
-        bullets: [
-          "Perfect for small businesses that want VoIP and marketing in one dashboard.",
-          "Highly rated for ease of use, offering strong basic email campaign features.",
-        ],
-        outro: `If you're a small business seeking simplicity and integration with your VoIP system, Ooma Office is a smart choice.`,
-      },
+  RingEX: {
+    title: "RingEX - Best for Unified Communication and Email Workflows",
+    logo: "/images/ringcentral.png",
+    button: {
+      text: "Visit Website",
+      link: "#",
     },
-
-    RingEX: {
-      title: "RingEX - Best for Unified Communication and Email Workflows",
-      logo: "/images/ringcentral.png",
-      button: {
-        text: "Visit Website",
-        link: "#",
-      },
-      scores: [
-        { label: "Overall Score", score: "4.7/5" },
-        { label: "Pricing", score: "4.5/5" },
-        { label: "Email Features", score: "4.7/5" },
-        { label: "Integrations", score: "4.9/5" },
-        { label: "Ease of Use", score: "4.6/5" },
-        { label: "Support", score: "4.5/5" },
+    scores: [
+      { label: "Overall Score", score: "4.7/5" },
+      { label: "Pricing", score: "4.5/5" },
+      { label: "Email Features", score: "4.7/5" },
+      { label: "Integrations", score: "4.9/5" },
+      { label: "Ease of Use", score: "4.6/5" },
+      { label: "Support", score: "4.5/5" },
+    ],
+    pros: [
+      "Highly scalable for large teams",
+      "Advanced email campaign management",
+      "Excellent third-party app integrations",
+      "Secure and compliant communication",
+    ],
+    cons: [
+      "Pricing can be steep for smaller teams",
+      "Setup is more complex than basic tools",
+    ],
+    why: {
+      intro: `RingEX delivers powerful communication and marketing tools all under one platform. It’s especially well-suited for growing companies with complex needs.`,
+      bullets: [
+        "Advanced features such as email scheduling, auto-responses, and analytics.",
+        "Seamlessly integrates with CRMs, productivity tools, and VoIP systems.",
       ],
-      pros: [
-        "Highly scalable for large teams",
-        "Advanced email campaign management",
-        "Excellent third-party app integrations",
-        "Secure and compliant communication",
-      ],
-      cons: [
-        "Pricing can be steep for smaller teams",
-        "Setup is more complex than basic tools",
-      ],
-      why: {
-        intro: `RingEX delivers powerful communication and marketing tools all under one platform. It's especially well-suited for growing companies with complex needs.`,
-        bullets: [
-          "Advanced features such as email scheduling, auto-responses, and analytics.",
-          "Seamlessly integrates with CRMs, productivity tools, and VoIP systems.",
-        ],
-        outro: `RingEX is ideal for mid-sized to large businesses that need advanced email workflows tightly connected with voice and messaging solutions.`,
-      },
+      outro: `RingEX is ideal for mid-sized to large businesses that need advanced email workflows tightly connected with voice and messaging solutions.`,
     },
+  },
 
-    Zoom: {
-      title: "Zoom - Best for Webinar and Campaign Integration",
-      logo: "/images/zoom.png",
-      button: {
-        text: "Visit Website",
-        link: "#",
-      },
-      scores: [
-        { label: "Overall Score", score: "4.5/5" },
-        { label: "Pricing", score: "4.3/5" },
-        { label: "Email Features", score: "4.4/5" },
-        { label: "Integrations", score: "4.7/5" },
-        { label: "Ease of Use", score: "4.9/5" },
-        { label: "Support", score: "4.5/5" },
-      ],
-      pros: [
-        "Excellent for event-driven campaigns",
-        "Zoom Webinars and Meetings integration",
-        "User-friendly interface",
-        "Strong reporting and analytics tools",
-      ],
-      cons: [
-        "Limited email design customization",
-        "Not a full-featured email marketing suite",
-      ],
-      why: {
-        intro: `Zoom has expanded beyond video and meetings to offer strong tools for webinar-driven email marketing.`,
-        bullets: [
-          "Integrates event registration with automated follow-up emails.",
-          "Excellent for brands doing webinars, product launches, or onboarding series.",
-        ],
-        outro: `Zoom is a natural fit for content marketers and educators using webinars as the backbone of their email strategy.`,
-      },
+  Zoom: {
+    title: "Zoom - Best for Webinar and Campaign Integration",
+    logo: "/images/zoom.png",
+    button: {
+      text: "Visit Website",
+      link: "#",
     },
-
-    NextivaONE: {
-      title: "NextivaONE - Best All-in-One Communication Suite",
-      logo: "/images/nextiva.png",
-      button: {
-        text: "Visit Website",
-        link: "#",
-      },
-      scores: [
-        { label: "Overall Score", score: "4.6/5" },
-        { label: "Pricing", score: "4.4/5" },
-        { label: "Email Features", score: "4.5/5" },
-        { label: "Integrations", score: "4.6/5" },
-        { label: "Ease of Use", score: "4.7/5" },
-        { label: "Support", score: "4.7/5" },
+    scores: [
+      { label: "Overall Score", score: "4.5/5" },
+      { label: "Pricing", score: "4.3/5" },
+      { label: "Email Features", score: "4.4/5" },
+      { label: "Integrations", score: "4.7/5" },
+      { label: "Ease of Use", score: "4.9/5" },
+      { label: "Support", score: "4.5/5" },
+    ],
+    pros: [
+      "Excellent for event-driven campaigns",
+      "Zoom Webinars and Meetings integration",
+      "User-friendly interface",
+      "Strong reporting and analytics tools",
+    ],
+    cons: [
+      "Limited email design customization",
+      "Not a full-featured email marketing suite",
+    ],
+    why: {
+      intro: `Zoom has expanded beyond video and meetings to offer strong tools for webinar-driven email marketing.`,
+      bullets: [
+        "Integrates event registration with automated follow-up emails.",
+        "Excellent for brands doing webinars, product launches, or onboarding series.",
       ],
-      pros: [
-        "Combines CRM, VoIP, and email in one platform",
-        "Automation and segmentation tools included",
-        "Great customer service",
-        "Reliable infrastructure",
-      ],
-      cons: [
-        "Email builder is less advanced than standalone tools",
-        "Some features locked behind higher tiers",
-      ],
-      why: {
-        intro: `NextivaONE is a true all-in-one business communications hub, ideal for teams looking to consolidate software.`,
-        bullets: [
-          "Email campaigns work smoothly alongside calls, chats, and CRM features.",
-          "Strong automation rules help streamline outreach without complexity.",
-        ],
-        outro: `NextivaONE is for businesses wanting a unified experience without needing five different platforms to manage.`,
-      },
+      outro: `Zoom is a natural fit for content marketers and educators using webinars as the backbone of their email strategy.`,
     },
+  },
 
-    Vonage: {
-      title: "Vonage - Best for Developer-Friendly Email and SMS APIs",
-      logo: "/images/vonage.png",
-      button: {
-        text: "Visit Website",
-        link: "#",
-      },
-      scores: [
-        { label: "Overall Score", score: "4.4/5" },
-        { label: "Pricing", score: "4.3/5" },
-        { label: "Email Features", score: "4.2/5" },
-        { label: "Integrations", score: "4.5/5" },
-        { label: "Ease of Use", score: "4.4/5" },
-        { label: "Support", score: "4.3/5" },
-      ],
-      pros: [
-        "Best-in-class API flexibility",
-        "Supports SMS + Email flows",
-        "Good documentation for dev teams",
-        "Secure and enterprise-ready",
-      ],
-      cons: [
-        "Requires some technical knowledge to set up",
-        "Limited visual marketing tools",
-      ],
-      why: {
-        intro: `Vonage is the best pick for businesses wanting full control via APIs, especially when combining email with SMS, voice, or chat.`,
-        bullets: [
-          "Loved by developers for its documentation and flexibility.",
-          "Ideal for creating custom, automated marketing journeys across channels.",
-        ],
-        outro: `Vonage is a solid pick for SaaS companies, mobile apps, and enterprises that want communication on their terms.`,
-      },
+  NextivaONE: {
+    title: "NextivaONE - Best All-in-One Communication Suite",
+    logo: "/images/nextiva.png",
+    button: {
+      text: "Visit Website",
+      link: "#",
     },
-  };
+    scores: [
+      { label: "Overall Score", score: "4.6/5" },
+      { label: "Pricing", score: "4.4/5" },
+      { label: "Email Features", score: "4.5/5" },
+      { label: "Integrations", score: "4.6/5" },
+      { label: "Ease of Use", score: "4.7/5" },
+      { label: "Support", score: "4.7/5" },
+    ],
+    pros: [
+      "Combines CRM, VoIP, and email in one platform",
+      "Automation and segmentation tools included",
+      "Great customer service",
+      "Reliable infrastructure",
+    ],
+    cons: [
+      "Email builder is less advanced than standalone tools",
+      "Some features locked behind higher tiers",
+    ],
+    why: {
+      intro: `NextivaONE is a true all-in-one business communications hub, ideal for teams looking to consolidate software.`,
+      bullets: [
+        "Email campaigns work smoothly alongside calls, chats, and CRM features.",
+        "Strong automation rules help streamline outreach without complexity.",
+      ],
+      outro: `NextivaONE is for businesses wanting a unified experience without needing five different platforms to manage.`,
+    },
+  },
 
-  // Convert toolsContent object to array for mapping
+  Vonage: {
+    title: "Vonage - Best for Developer-Friendly Email and SMS APIs",
+    logo: "/images/vonage.png",
+    button: {
+      text: "Visit Website",
+      link: "#",
+    },
+    scores: [
+      { label: "Overall Score", score: "4.4/5" },
+      { label: "Pricing", score: "4.3/5" },
+      { label: "Email Features", score: "4.2/5" },
+      { label: "Integrations", score: "4.5/5" },
+      { label: "Ease of Use", score: "4.4/5" },
+      { label: "Support", score: "4.3/5" },
+    ],
+    pros: [
+      "Best-in-class API flexibility",
+      "Supports SMS + Email flows",
+      "Good documentation for dev teams",
+      "Secure and enterprise-ready",
+    ],
+    cons: [
+      "Requires some technical knowledge to set up",
+      "Limited visual marketing tools",
+    ],
+    why: {
+      intro: `Vonage is the best pick for businesses wanting full control via APIs, especially when combining email with SMS, voice, or chat.`,
+      bullets: [
+        "Loved by developers for its documentation and flexibility.",
+        "Ideal for creating custom, automated marketing journeys across channels.",
+      ],
+      outro: `Vonage is a solid pick for SaaS companies, mobile apps, and enterprises that want communication on their terms.`,
+    },
+  },
+};
+
+// Convert toolsContent object to array for mapping
   const toolsArray = Object.entries(toolsContent).map(([key, value]) => ({
     id: key,
     ...value,
   }));
+      // Success stories
+      const successStories = [
+        {
+          company: "Fashion Retailer",
+          result: "143% increase in revenue",
+          strategy: "Implemented personalized product recommendation emails based on browsing history"
+        },
+        {
+          company: "SaaS Provider",
+          result: "27% reduction in churn rate",
+          strategy: "Created educational onboarding email sequence for new customers"
+        },
+        {
+          company: "Online Bookstore",
+          result: "92% boost in repeat purchases",
+          strategy: "Developed interest-based book recommendation campaigns"
+        }
+      ];
+    
+      // Statistics
+      const statistics = [
+        { label: "Average ROI", value: "42x" },
+        { label: "Global Email Users", value: "4.3B" },
+        { label: "Welcome Email Open Rate", value: "82%" },
+        { label: "Personalized Subject Lines", value: "+26%" },
+      ];
+      const features = [
+        {
+          icon: (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M3 3h18a1 1 0 011 1v16a1 1 0 01-1 1H3a1 1 0 01-1-1V4a1 1 0 011-1zm9.06 8.683L5.648 6.238 4.353 7.762l7.72 6.555 7.581-6.56-1.308-1.513-6.285 5.439z"/>
+            </svg>
+          ),
+          title: "Beautiful Email Templates",
+          description: "Choose from 100+ professionally designed, mobile-responsive templates that work across all devices and email clients."
+        },
+        {
+          icon: (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M22 20H2v-2h1v-6a8 8 0 1116 0v6h1v2zm-3-2V12A5 5 0 007 12v6h12zm-5 3v1h-4v-1h4z"/>
+            </svg>
+          ),
+          title: "Advanced Segmentation",
+          description: "Send targeted messages by segmenting your audience based on behavior, demographics, purchase history, and more."
+        },
+        {
+          icon: (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9.973 18H11v-5h2v5h1.027c.132-1.202.745-2.194 1.74-3.277.113-.122.832-.867.917-.973a6 6 0 10-9.37-.002c.086.107.807.853.918.974.996 1.084 1.609 2.076 1.741 3.278zM10 20v1h4v-1h-4zm-4.246-5a8 8 0 1112.49.002C17.624 15.774 16 17 16 18.5V21a2 2 0 01-2 2h-4a2 2 0 01-2-2v-2.5C8 17 6.375 15.774 5.754 15z"/>
+            </svg>
+          ),
+          title: "Smart Analytics",
+          description: "Track opens, clicks, conversions, and revenue with our comprehensive dashboard and detailed reporting tools."
+        },
+        {
+          icon: (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M5.636 12.707l1.828 1.829L8.88 13.12l-1.83-1.827 1.414-1.414 1.829 1.828 1.414-1.414L9.88 8.464l1.414-1.414 1.826 1.83 1.415-1.415-1.829-1.828 1.414-1.414 1.828 1.829 1.415-1.415-1.829-1.828-1.414 1.414-1.827-1.829-1.415 1.415 1.829 1.828-1.414 1.414-1.829-1.829L6.05 6.05l-1.414 1.414 1.829 1.828-1.414 1.415-1.828-1.829-1.414 1.414 1.828 1.828 1.414-1.414zM13.12 15.536l1.829 1.828 1.414-1.414-1.828-1.829 1.414-1.414 1.829 1.828 1.414-1.414-1.828-1.829 1.414-1.414 1.829 1.829 1.414-1.415-1.829-1.828 1.414-1.414 1.828 1.829 1.415-1.415-1.829-1.828-1.414 1.414-1.829-1.829-1.414 1.415 1.828 1.828-1.414 1.414-1.829-1.829-1.414 1.415 1.829 1.828-1.414 1.414-1.828-1.829-1.415 1.415 1.829 1.828-1.414 1.414z"/>
+            </svg>
+          ),
+          title: "Automation Workflows",
+          description: "Set up automated email sequences for welcome series, abandoned carts, re-engagement campaigns, and more."
+        },
+        {
+          icon: (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 100-16 8 8 0 000 16zm-3.5-6H14a.5.5 0 100-1h-4a2.5 2.5 0 010-5h1V6h2v2h2.5v2H10a.5.5 0 000 1h4a2.5 2.5 0 010 5h-1v2h-2v-2H8.5v-2z"/>
+            </svg>
+          ),
+          title: "A/B Testing",
+          description: "Test subject lines, content, send times, and more to optimize your campaigns for maximum engagement."
+        },
+        {
+          icon: (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 100 16 8 8 0 000-16zm3.833 3.337a.5.5 0 01.798.6l-4.5 6a.5.5 0 01-.729.06l-2.5-2.5a.5.5 0 01.708-.708l2.056 2.056 4.167-5.508z"/>
+            </svg>
+          ),
+          title: "List Management",
+          description: "Easily import, organize, and clean your contact lists with our powerful list management tools."
+        }
+      ];
 
-  // Success stories
-  const successStories = [
-    {
-      company: "Fashion Retailer",
-      result: "143% increase in revenue",
-      strategy: "Implemented personalized product recommendation emails based on browsing history"
-    },
-    {
-      company: "SaaS Provider",
-      result: "27% reduction in churn rate",
-      strategy: "Created educational onboarding email sequence for new customers"
-    },
-    {
-      company: "Online Bookstore",
-      result: "92% boost in repeat purchases",
-      strategy: "Developed interest-based book recommendation campaigns"
-    }
-  ];
-
-  // Statistics
-  const statistics = [
-    { label: "Average ROI", value: "42x" },
-    { label: "Global Email Users", value: "4.3B" },
-    { label: "Welcome Email Open Rate", value: "82%" },
-    { label: "Personalized Subject Lines", value: "+26%" },
-  ];
-
-  const features = [
-    {
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M3 3h18a1 1 0 011 1v16a1 1 0 01-1 1H3a1 1 0 01-1-1V4a1 1 0 011-1zm9.06 8.683L5.648 6.238 4.353 7.762l7.72 6.555 7.581-6.56-1.308-1.513-6.285 5.439z"/>
-        </svg>
-      ),
-      title: "Beautiful Email Templates",
-      description: "Choose from 100+ professionally designed, mobile-responsive templates that work across all devices and email clients."
-    },
-    {
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M22 20H2v-2h1v-6a8 8 0 1116 0v6h1v2zm-3-2V12A5 5 0 007 12v6h12zm-5 3v1h-4v-1h4z"/>
-        </svg>
-      ),
-      title: "Advanced Segmentation",
-      description: "Send targeted messages by segmenting your audience based on behavior, demographics, purchase history, and more."
-    },
-    {
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M9.973 18H11v-5h2v5h1.027c.132-1.202.745-2.194 1.74-3.277.113-.122.832-.867.917-.973a6 6 0 10-9.37-.002c.086.107.807.853.918.974.996 1.084 1.609 2.076 1.741 3.278zM10 20v1h4v-1h-4zm-4.246-5a8 8 0 1112.49.002C17.624 15.774 16 17 16 18.5V21a2 2 0 01-2 2h-4a2 2 0 01-2-2v-2.5C8 17 6.375 15.774 5.754 15z"/>
-        </svg>
-      ),
-      title: "Smart Analytics",
-      description: "Track opens, clicks, conversions, and revenue with our comprehensive dashboard and detailed reporting tools."
-    },
-    {
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M5.636 12.707l1.828 1.829L8.88 13.12l-1.83-1.827 1.414-1.414 1.829 1.828 1.414-1.414L9.88 8.464l1.414-1.414 1.826 1.83 1.415-1.415-1.829-1.828 1.414-1.414 1.828 1.829 1.415-1.415-1.829-1.828-1.414 1.414-1.827-1.829-1.415 1.415 1.829 1.828-1.414 1.414-1.829-1.829L6.05 6.05l-1.414 1.414 1.829 1.828-1.414 1.415-1.828-1.829-1.414 1.414 1.828 1.828 1.414-1.414zM13.12 15.536l1.829 1.828 1.414-1.414-1.828-1.829 1.414-1.414 1.829 1.828 1.414-1.414-1.828-1.829 1.414-1.414 1.829 1.829 1.414-1.415-1.829-1.828 1.414-1.414 1.828 1.829 1.415-1.415-1.829-1.828-1.414 1.414-1.829-1.829-1.414 1.415 1.828 1.828-1.414 1.414-1.829-1.829-1.415 1.415 1.829 1.828-1.414 1.414z"/>
-        </svg>
-      ),
-      title: "Automation Workflows",
-      description: "Set up automated email sequences for welcome series, abandoned carts, re-engagement campaigns, and more."
-    },
-    {
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm0-2a8 8 0 100-16 8 8 0 000 16zm-3.5-6H14a.5.5 0 100-1h-4a2.5 2.5 0 010-5h1V6h2v2h2.5v2H10a.5.5 0 000 1h4a2.5 2.5 0 010 5h-1v2h-2v-2H8.5v-2z"/>
-        </svg>
-      ),
-      title: "A/B Testing",
-      description: "Test subject lines, content, send times, and more to optimize your campaigns for maximum engagement."
-    },
-    {
-      icon: (
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 100 16 8 8 0 000-16zm3.833 3.337a.5.5 0 01.798.6l-4.5 6a.5.5 0 01-.729.06l-2.5-2.5a.5.5 0 01.708-.708l2.056 2.056 4.167-5.508z"/>
-        </svg>
-      ),
-      title: "List Management",
-      description: "Easily import, organize, and clean your contact lists with our powerful list management tools."
-    }
-  ];
-
-  const renderStars = (score) => {
+      
+    
+      
+      const renderStars = (score) => {
     const stars = [];
     const fullStars = Math.floor(score);
     const hasHalfStar = score % 1 !== 0;
@@ -710,7 +759,7 @@ const EmailMarketingContent = () => {
           Build Stronger Connections with <span className="text-orange-500">Email Marketing</span>
         </h1>
         <p className="text-base text-gray-800 mb-8 leading-relaxed">
-        Email marketing is still one of the smartest ways to grow — bringing in an average of $36 for every $1 you invest. We've handpicked the best platforms to help you send personalized emails, automate your campaigns, and turn insights into real results.
+        Email marketing is still one of the smartest ways to grow — bringing in an average of $36 for every $1 you invest. We’ve handpicked the best platforms to help you send personalized emails, automate your campaigns, and turn insights into real results.
         </p>
         <div className="flex flex-wrap gap-6 mb-8">
           <div className="flex items-center">
@@ -738,7 +787,12 @@ const EmailMarketingContent = () => {
         </div>
       </div>
 
-      {/* Right side stats */}
+{/* //extra */}
+
+{/* extra */}
+
+
+  {/* Right side stats */}
       <div className="md:w-5/12 md:pl-8 flex items-center justify-center z-10">
         <div className="bg-white/120 rounded-xl shadow-xl p-6 w-full">
           <h3 className="text-xl font-semibold text-gray-800 mb-4 text-center">Why Email Marketing Works</h3>
@@ -778,6 +832,7 @@ const EmailMarketingContent = () => {
       </p>
     </div>
 
+   
 {/* What is Email Marketing */}
 <div className="mb-20 bg-white rounded-2xl  p-8">
   <h3 className="text-4xl font-semibold text-gray-900 mb-6">What is Email Marketing?</h3>
@@ -804,6 +859,51 @@ const EmailMarketingContent = () => {
     </div>
   </div>
 </div>
+
+    {/* Key Components Grid */}
+    {/* <div className="mb-20 max-w-6xl mx-auto p-8">
+      <h3 className="text-4xl font-semibold text-gray-900 text-center mb-10">Key Parts of a Winning Email Strategy </h3>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-base">
+        {[
+          {
+            icon: <svg className="w-10 h-10 text-[#000e54]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+            </svg>,
+            title: "Grow & Segment Your List",
+            description: "Build your email list the right way and group subscribers so you can send them content they care about."
+          },
+          {
+            icon: <svg className="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+            </svg>,
+            title: "Design Emails That Stand Out",
+            description: "Create eye-catching, mobile-ready emails with clear calls-to-action and valuable content your audience loves."
+          },
+          {
+            icon: <svg className="w-10 h-10 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>,
+            title: "Automate Your Campaigns",
+            description: "Use automation to send emails at the perfect time—when someone signs up, buys, or shows interest."
+          },
+          {
+            icon: <svg className="w-10 h-10 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+            </svg>,
+            title: "Measure & Improve",
+            description: "Track open rates and clicks so you can learn what works and keep making your emails better."
+          }
+        ].map((item, index) => (
+          <div key={index} className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <div className="bg-gray-50 w-16 h-16 rounded-full flex items-center justify-center mb-4">
+              {item.icon}
+            </div>
+            <h4 className="text-xl font-semibold text-gray-900 mb-2">{item.title}</h4>
+            <p className="text-gray-800 text-base">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div> */}
 
     {/* Types of Email Campaigns */}
     <div className="mb-20 max-w-6xl mx-auto p-8">
@@ -856,7 +956,7 @@ const EmailMarketingContent = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
             </svg>,
             color: "bg-indigo-600",
-            description: "Reconnect with folks who've gone quiet by offering something special or reminding them what they're missing."
+            description: "Reconnect with folks who’ve gone quiet by offering something special or reminding them what they’re missing."
           }
         ].map((campaign, index) => (
           <div key={index} className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300">
@@ -882,7 +982,7 @@ const EmailMarketingContent = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
             </svg>,
             color: "bg-[#000e54]",
-            description: "Start by setting clear goals, knowing exactly who you want to reach, and deciding how you'll measure success for your email campaigns."
+            description: "Start by setting clear goals, knowing exactly who you want to reach, and deciding how you’ll measure success for your email campaigns."
           },
           {
             step: "2",
@@ -954,11 +1054,11 @@ const EmailMarketingContent = () => {
         {[
           {
             title: "Personalization",
-            description: "It's not just about addressing your recipient by name. Use data to tailor the content to their past interactions, preferences, and what they've bought before. The more relevant the content, the better the engagement."
+            description: "It's not just about addressing your recipient by name. Use data to tailor the content to their past interactions, preferences, and what they’ve bought before. The more relevant the content, the better the engagement."
           },
           {
             title: "Mobile Optimization",
-            description: "Since over 60% of emails are opened on mobile devices, make sure your emails look great on any screen. Ensure they load quickly and have buttons that are easy to tap and text that's easy to read."
+            description: "Since over 60% of emails are opened on mobile devices, make sure your emails look great on any screen. Ensure they load quickly and have buttons that are easy to tap and text that’s easy to read."
           },
           {
             title: "Clear Call-to-Action",
@@ -966,7 +1066,7 @@ const EmailMarketingContent = () => {
           },
           {
             title: "List Segmentation",
-            description: "Don't send the same email to everyone. Break your list into smaller groups based on interests, behavior, or demographics. This ensures your messages are more relevant and personalized."
+            description: "Don’t send the same email to everyone. Break your list into smaller groups based on interests, behavior, or demographics. This ensures your messages are more relevant and personalized."
           },
           {
             title: "Subject Line Optimization",
@@ -978,7 +1078,7 @@ const EmailMarketingContent = () => {
           },
           {
             title: "Send Time Optimization",
-            description: "Don't send your emails at random. Study your audience's behavior and find the best days and times for maximum open and click rates."
+            description: "Don’t send your emails at random. Study your audience’s behavior and find the best days and times for maximum open and click rates."
           },
           {
             title: "Regular List Maintenance",
@@ -1002,7 +1102,7 @@ const EmailMarketingContent = () => {
   </div>
 </section>
 
-{/* working of emailmarketing */}
+{/* working of emailmarkeing */}
 <section id="emailmarketing-working" className="  rounded-lg  max-w-6xl mx-auto p-4">
       <div className="text-center mb-12 max-w-6xl mx-auto p-4">
         <h1 className="text-4xl font-semibold text-gray-900 mb-4">The Email Marketing Process</h1>
@@ -1042,9 +1142,63 @@ const EmailMarketingContent = () => {
           ))}
         </div>
       </div>
-</section>
 
-{/* Benefits of email marketing Section */}
+      {/* Stats section */}
+      {/* <div className="mb-16 p-4 max-w-6xl mx-auto">
+        <h2 className="text-4xl font-semibold text-gray-900 mb-8 text-center">Email Marketing Performance Metrics</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          {stats.map((stat, index) => (
+            <div key={index} className="bg-white p-6 rounded-lg shadow-md text-center">
+              <h3 className="text-gray-800 text-xl mb-2">{stat.label}</h3>
+              <p className="text-[#000e54] text-4xl font-semibold mb-1">{stat.value}</p>
+              <p className="text-gray-800 text-base">{stat.subtext}</p>
+            </div>
+          ))}
+        </div>
+      </div> */}
+
+      {/* Best practices */}
+      {/* <div>
+        <h2 className="text-4xl font-semibold text-gray-900 mb-8 text-center">Email Marketing Best Practices</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="bg-blue-50 p-2 rounded-full">
+                <Target className="w-6 h-6 text-[#000e54]" />
+              </div>
+              <h3 className="font-semibold text-gray-800 text-xl">Segmentation</h3>
+            </div>
+            <p className="text-gray-800 text-base">Split your email list into specific groups. This way, you can send more personalized and relevant content, boosting engagement and conversions.</p>
+          </div>
+          
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="bg-blue-50 p-2 rounded-full">
+                <Mail className="w-6 h-6 text-[#000e54]" />
+              </div>
+              <h3 className="font-semibold text-gray-800 text-xl">Personalization</h3>
+            </div>
+            <p className="text-gray-800 text-base">Use the data you have on your recipients to personalize your emails. Customize the subject lines, content, and offers to make your emails feel more personal and engaging.</p>
+          </div>
+          
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="bg-blue-50 p-2 rounded-full">
+                <PieChart className="w-6 h-6 text-[#000e54]" />
+              </div>
+              <h3 className="font-semibold text-gray-800 text-xl">A/B Testing</h3>
+            </div>
+            <p className="text-gray-800 text-base">Test different elements of your emails to figure out what works best for your audience. Whether it's the subject line, CTA, or layout, A/B testing helps you continuously improve your emails.</p>
+          </div>
+        </div>
+      </div> */}
+    </section>
+
+
+
+ {/* Benefits of email marketing Section */}
  <section id="emailmarketing-benefits" className=" max-w-6xl mx-auto min-h-screen p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
@@ -1084,6 +1238,7 @@ const EmailMarketingContent = () => {
                   <button
                     key={key}
                     className={`flex items-center gap-3 w-full p-3 rounded-xl text-base border transition-all duration-300 
+ 
                       ${activeCategory === key ? categories[key].activeColor : categories[key].color} 
                       ${categories[key].hoverColor}`}
                     onClick={() => setActiveCategory(key)}
@@ -1220,8 +1375,7 @@ const EmailMarketingContent = () => {
         </div>
       </div>
     </section>
-
-    {/* Email Platforms Section */}
+    {/* //scroller */}
     <section id="platforms" className="mt-8">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="text-center mb-8 sm:mb-12">
@@ -1278,7 +1432,7 @@ const EmailMarketingContent = () => {
                                     />
                                   </div>
                                   <div className="text-center sm:text-left">
-                                    <span className="font-medium text-black text-xs sm:text-base">
+                                    <span className="font-medium text-blacktext-xs sm:text-base">
                                       {email.name}
                                     </span>
                                   </div>
@@ -1306,7 +1460,7 @@ const EmailMarketingContent = () => {
                                       key={idx}
                                       className="text-xs sm:text-sm text-black flex items-start sm:items-center"
                                     >
-                                      <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-black rounded-full mr-2 sm:mr-3 flex-shrink-0 mt-1.5 sm:mt-0"></div>
+                                      <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 text-black rounded-full mr-2 sm:mr-3 flex-shrink-0 mt-1.5 sm:mt-0"></div>
                                       <span className="leading-tight sm:leading-normal">
                                         {feature}
                                       </span>
@@ -1341,7 +1495,7 @@ const EmailMarketingContent = () => {
                                 </div>
                               </td>
                               <td className="py-4 sm:py-8 px-2 sm:px-8">
-                                <button className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-600 hover:to-orange-700 text-white font-medium py-2 px-3 sm:py-3 sm:px-6 rounded-lg transition-all duration-200 flex items-center space-x-1 sm:space-x-2 mx-auto text-xs sm:text-sm">
+                                <button className="bg-gradient-to-r from-orange-600 to-orange-700 hover:from-orange-600 hover:to-orange 700 text-white font-medium py-2 px-3 sm:py-3 sm:px-6 rounded-lg transition-all duration-200 flex items-center space-x-1 sm:space-x-2 mx-auto text-xs sm:text-sm">
                                   <span>Visit Website</span>
                                   <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
                                 </button>
@@ -1362,11 +1516,12 @@ const EmailMarketingContent = () => {
                 </div>
               </section>
     
-          {/* Email products details */}
+          {/* //email products */}
+ {/* Map through the tools array */}
                 {toolsArray.map((tool) => (
                   <div
                     key={tool.id}
-                    className="bg-white rounded-2xl sm:rounded-3xl border mt-4 border-gray-200 p-6 mb-8"
+                    className="bg-white rounded-2xl sm:rounded-3xl border mt-4  border-gray-200  p-6 mb-8"
                   >
                     {/* Tool Header */}
                     <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
@@ -1433,98 +1588,617 @@ const EmailMarketingContent = () => {
                         </ul>
                       </div>
                     </div>
-{/* Why I Chose Section */}
-<div className="mb-6 text-black">
-  <h3 className="text-lg font-semibold mb-2">
-    Why I chose {tool.title.split("-")[0].trim()}
-  </h3>
-  <p className="mb-4">{tool.why.intro}</p>
-  {tool.why.bullets && (
-    <ul className="list-disc pl-5 space-y-1 mb-4">
-      {tool.why.bullets.map((bullet, bidx) => (
-        <li key={bidx}>{bullet}</li>
-      ))}
-    </ul>
-  )}
-  <p>{tool.why.outro}</p>
-</div>
 
-{/* Expandable Sections for Extras (if present) */}
-{tool.why.extras &&
-  Object.entries(tool.why.extras).map(([label, content]) => {
-    const sectionKey = `${tool.id}-${label}`;
-    return (
-      <div key={sectionKey} className="border-t text-black pt-4 mb-4">
-        <button
-          onClick={() => toggleSection(sectionKey)}
-          className="w-full flex justify-between items-center font-medium"
-        >
-          <span>{label}</span>
-          <span className="text-orange-600">
-            {openSections[sectionKey] ? (
-              <Minus className="w-5 h-5" />
-            ) : (
-              <Plus className="w-5 h-5" />
-            )}
-          </span>
-        </button>
-        {openSections[sectionKey] && (
-          <div className="mt-2 text-gray-700">
-            {typeof content === "string" ? <p>{content}</p> : content}
-          </div>
-        )}
-      </div>
-    );
-  })}
-</div>
-))}
-{/* Email Features Section */}
-<section id="email-features" className="py-16 px-4 sm:px-6 max-w-6xl mx-auto">
-  <div className="max-w-7xl mx-auto">
-    <div className="text-center">
-      <h2 className="text-4xl font-semibold text-gray-900 sm:text-4xl sm:tracking-tight lg:text-4xl">
-        Powerful Email Marketing Features
-      </h2>
-      <p className="mt-5 max-w-xl mx-auto text-xl text-gray-800">
-        All the tools you need to craft, send, and track email campaigns that really work
-      </p>
-    </div>
-    <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-      {features.map((feature, index) => (
-        <div
-          key={index}
-          className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-        >
-          <div className="p-8">
-            <div className="flex items-center justify-center h-12 w-12 rounded-md bg-orange-600 text-white">
-              {feature.icon}
+                    {/* Why I Chose Section */}
+                    <div className="mb-6 text-black">
+                      <h3 className="text-lg font-semibold mb-2">
+                        Why I chose {tool.title.split(":")[0]}
+                      </h3>
+                      <p className="mb-4">{tool.why.intro}</p>
+                      {tool.why.bullets && (
+                        <ul className="list-disc pl-5 space-y-1 mb-4">
+                          {tool.why.bullets.map((bullet, index) => (
+                            <li key={index}>{bullet}</li>
+                          ))}
+                        </ul>
+                      )}
+                      <p>{tool.why.outro}</p>
+                    </div>
+
+                    {/* Expandable Sections */}
+                    {tool.why.extras &&
+                      Object.entries(tool.why.extras).map(
+                        ([label, content]) => {
+                          const sectionKey = `${tool.id}-${label}`;
+                          return (
+                            <div
+                              key={sectionKey}
+                              className="border-t text-black pt-4 mb-4"
+                            >
+                              <button
+                                onClick={() => toggleSection(sectionKey)}
+                                className="w-full flex justify-between items-center font-medium"
+                              >
+                                <span>{label}</span>
+                                <span className="text-orange-600">
+                                  {openSections[sectionKey] ? (
+                                    <Minus className="w-5 h-5" />
+                                  ) : (
+                                    <Plus className="w-5 h-5" />
+                                  )}
+                                </span>
+                              </button>
+                              {openSections[sectionKey] && (
+                                <div className="mt-2 text-gray-700">
+                                  {typeof content === "string" ? (
+                                    <p>{content}</p>
+                                  ) : (
+                                    content
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          );
+                        }
+                      )}
+                  </div>
+                ))}
+
+{/* features of email marketing section */}
+<section id="email-features" className=" py-16 px-4 sm:px-6  max-w-6xl mx-auto">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center">
+          <h2 className="text-4xl font-semibold text-gray-900 sm:text-4xl sm:tracking-tight lg:text-4xl">
+            Powerful Email Marketing Features
+          </h2>
+          <p className="mt-5 max-w-xl mx-auto text-xl text-gray-800">
+          All the tools you need to craft, send, and track email campaigns that really work
+          </p>
+        </div>
+
+        <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {features.map((feature, index) => (
+            <div 
+              key={index}
+              className="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
+            >
+              <div className="p-8">
+                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-orange-600 text-white">
+                  {feature.icon}
+                </div>
+                <h3 className="mt-4 text-xl font-semibold text-gray-800">{feature.title}</h3>
+                <p className="mt-2 text-base text-black">
+                  {feature.description}
+                </p>
+              </div>
             </div>
-            <h3 className="mt-4 text-xl font-semibold text-gray-800">{feature.title}</h3>
-            <p className="mt-2 text-base text-black">
-              {feature.description}
-            </p>
+          ))}
+        </div>
+      </div>
+    </section>
+
+{/* how to choose the service */}
+    <section id="email-howchoose" className="min-h-screen p-4 md:p-8 max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto bg-white rounded-xl  overflow-hidden">
+        <div className="bg-[#000e54] p-6 md:p-8">
+          <h1 className="text-4xl md:text-3xl font-semibold text-white">Choosing the Right Email Marketing Service</h1>
+          <p className="text-blue-100 mt-2 text-base">A simple guide to help you pick the best email marketing tool for your business</p>
+        </div>
+        
+        <div className="py-10 max-w-6xl mx-auto">
+          <div className="mb-8 bg-blue-50 p-4 rounded-lg border-l-4 border-[#000e54]">
+            <h2 className="text-xl font-semibold text-[#000e54]">Why Your Choice Matters</h2>
+            <p className="text-gray-800 text-base mt-2">Picking the right email platform can boost your open rates, sales, and profits. This guide will make it easier for you to choose the best one.</p>
+          </div>
+          
+          <section className="mb-8">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+              <span className="bg-[#000e54] text-white rounded-full w-8 h-8 inline-flex items-center justify-center mr-2">1</span>
+              List Size and Growth Projections
+            </h2>
+            <div className="pl-10">
+              <ul className="space-y-3">
+                <li className="flex items-start text-base">
+                  <div className="bg-blue-100 p-1 rounded-full mr-2 mt-1">
+                    <div className="w-2 h-2 bg-[#000e54] rounded-full"></div>
+                  </div>
+                  <div>
+                    <span className="font-semibold text-gray-800 text-base">Current subscriber count:</span> Different tools charge based on how many people are on your list. Check your list size so you don’t pay too much.
+                  </div>
+                </li>
+                <li className="flex items-start text-base">
+                  <div className="bg-blue-100 p-1 rounded-full mr-2 mt-1">
+                    <div className="w-2 h-2 bg-[#000e54] rounded-full"></div>
+                  </div>
+                  <div>
+                    <span className="font-semibold text-gray-800 text-base">Growth rate:</span> Pick a service that can grow with you without big price jumps. If you’re growing fast, look for flexible pricing.
+                  </div>
+                </li>
+                <li className="flex items-start text-base">
+                  <div className="bg-blue-100 p-1 rounded-full mr-2 mt-1">
+                    <div className="w-2 h-2 bg-[#000e54] rounded-full"></div>
+                  </div>
+                  <div>
+                    <span className="font-semibold text-base text-gray-800">List segmentation needs:</span> Think about how detailed you want to organize your audience—more advanced features may cost more.
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+          
+          <section className="mb-8">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+              <span className="bg-[#000e54] text-white rounded-full w-8 h-8 inline-flex items-center justify-center mr-2">2</span>
+              Budget Considerations
+            </h2>
+            <div className="pl-10">
+              <ul className="space-y-3">
+                <li className="flex items-start text-base">
+                  <div className="bg-blue-100 p-1 rounded-full mr-2 mt-1">
+                    <div className="w-2 h-2 bg-[#000e54] rounded-full"></div>
+                  </div>
+                  <div>
+                    <span className="font-semibold text-base text-gray-800">Monthly/annual costs:</span> Most tools charge based on list size and features. Paying yearly is usually cheaper than paying monthly.
+                  </div>
+                </li>
+                <li className="flex items-start text-base">
+                  <div className="bg-blue-100 p-1 rounded-full mr-2 mt-1">
+                    <div className="w-2 h-2 bg-[#000e54] rounded-full"></div>
+                  </div>
+                  <div>
+                    <span className="font-semibold text-base text-gray-800">Free tier availability:</span> Some platforms let you start free with limits on features or list size—good for small businesses or testing.
+                  </div>
+                </li>
+                <li className="flex items-start text-base">
+                  <div className="bg-blue-100 p-1 rounded-full mr-2 mt-1">
+                    <div className="w-2 h-2 bg-[#000e54] rounded-full"></div>
+                  </div>
+                  <div>
+                    <span className="font-semibold text-base text-gray-800">Pay-as-you-go options:</span>  If you send emails only sometimes, find a service where you pay per email instead of a monthly fee.
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+          
+        
+          
+          <section className="mb-8">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+              <span className="bg-[#000e54] text-white rounded-full w-8 h-8 inline-flex items-center justify-center mr-2">4</span>
+              Deliverability Rates
+            </h2>
+            <div className="pl-10">
+              <p className="text-gray-800 text-base mb-4">It’s important that your emails actually reach your audience’s inbox. To make sure this happens, check the email provider’s reputation and how good they are at avoiding spam filters.</p>
+              <div className="bg-blue-50 border-l-4 border-[#000e54] p-4 rounded-r">
+                <div className="flex">
+                  <div className="flex-shrink-0">
+                    <svg className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <div className="ml-3">
+                    <p className="text-base text-[#000e54]">
+                      <strong>Pro Tip:</strong> Some providers share their deliverability stats. Aim for ones with a rate over 95% to ensure your emails get through.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          
+          <section className="mb-8">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+              <span className="bg-[#000e54] text-white rounded-full w-8 h-8 inline-flex items-center justify-center mr-2">5</span>
+              Integration Capabilities
+            </h2>
+            <div className="pl-10">
+              <p className="text-gray-800 text-base mb-4"> Your email marketing tool should easily work with the other tools you already use.</p>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+                <div className="bg-gray-100 p-3 rounded-lg text-center">
+                  <p className="font-semibold text-base text-gray-800">CRM Systems</p>
+                </div>
+                <div className="bg-gray-100 p-3 rounded-lg text-center">
+                  <p className="font-semibold text-base text-gray-800">E-commerce Platforms</p>
+                </div>
+                <div className="bg-gray-100 p-3 rounded-lg text-center">
+                  <p className="font-semibold text-base text-gray-800">CMS Solutions</p>
+                </div>
+                <div className="bg-gray-100 p-3 rounded-lg text-center">
+                  <p className="font-semibold text-base text-gray-800">Analytics Tools</p>
+                </div>
+                <div className="bg-gray-100 p-3 rounded-lg text-center">
+                  <p className="font-semibold text-base text-gray-800">Social Media</p>
+                </div>
+                <div className="bg-gray-100 p-3 rounded-lg text-center">
+                  <p className="font-semibold text-base text-gray-800">Payment Processors</p>
+                </div>
+              </div>
+              <p className="text-gray-800 text-base">  Look for both built-in integrations and the option to connect through APIs, so your marketing stays in sync across all your platforms.</p>
+            </div>
+          </section>
+          
+          <section className="mb-8">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+              <span className="bg-[#000e54] text-white rounded-full w-8 h-8 inline-flex items-center justify-center mr-2">6</span>
+              Ease of Use and Support
+            </h2>
+            <div className="pl-10">
+              <div className="bg-gray-50 p-5 rounded-lg border border-gray-200">
+                <h3 className="font-semibold text-base text-gray-800 mb-3">Things to Think About:</h3>
+                <ul className="space-y-2">
+                  <li className="flex items-start">
+                    <svg className="w-5 h-5 text-[#000e54] mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4.002 3 0 1.4-1.274 2.657-3.004 2.878.6.078.12.156.174.236.243.37.487 1.126-.012 1.886m-4.13-.735c-.792-.523-1.033-.936-1.033-1.384v-.01c0-1.173 1.274-2.204 3.003-2.204" />
+                    </svg>
+                    <span className="text-gray-800 text-base">Is the interface easy to use, or will you need lots of training?</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg className="w-5 h-5 text-[#000e54] mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4.002 3 0 1.4-1.274 2.657-3.004 2.878.6.078.12.156.174.236.243.37.487 1.126-.012 1.886m-4.13-.735c-.792-.523-1.033-.936-1.033-1.384v-.01c0-1.173 1.274-2.204 3.003-2.204" />
+                    </svg>
+                    <span className="text-gray-800 text-base">What kind of support is available (chat, phone, email), and when can you reach them?</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg className="w-5 h-5 text-[#000e54] mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4.002 3 0 1.4-1.274 2.657-3.004 2.878.6.078.12.156.174.236.243.37.487 1.126-.012 1.886m-4.13-.735c-.792-.523-1.033-.936-1.033-1.384v-.01c0-1.173 1.274-2.204 3.003-2.204" />
+                    </svg>
+                    <span className="text-gray-800 text-base">Is there a help center, guides, or a community forum where you can find answers?</span>
+                  </li>
+                  <li className="flex items-start">
+                    <svg className="w-5 h-5 text-[#000e54] mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4.002 3 0 1.4-1.274 2.657-3.004 2.878.6.078.12.156.174.236.243.37.487 1.126-.012 1.886m-4.13-.735c-.792-.523-1.033-.936-1.033-1.384v-.01c0-1.173 1.274-2.204 3.003-2.204" />
+                    </svg>
+                    <span className="text-gray-800 text-base">Can you get help with setup or have a dedicated account manager to guide you?</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
+          
+          <section className="mb-8">
+            <h2 className="text-xl font-semibold text-gray-800 mb-4 flex items-center">
+              <span className="bg-[#000e54] text-white rounded-full w-8 h-8 inline-flex items-center justify-center mr-2">7</span>
+              Compliance and Security
+            </h2>
+            <div className="pl-10">
+              <div className="flex flex-col md:flex-row gap-4">
+                <div className="flex-1 bg-gray-50 p-4 rounded-lg border-l-4 border-[#000e54]">
+                  <h3 className="font-semibold text-gray-800 mb-2 text-base">Legal Compliance</h3>
+                  <p className="text-gray-800 text-base">Make sure the service you choose follows important laws and regulations:</p>
+                  <ul className="mt-2 space-y-1">
+                    <li className="flex items-center text-gray-700 text-base">
+                      <svg className="w-4 h-4 text-[#000e54] mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      GDPR (Europe)
+                    </li>
+                    <li className="flex items-center text-gray-700 text-base">
+                      <svg className="w-4 h-4 text-[#000e54] mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      CAN-SPAM (US)
+                    </li>
+                    <li className="flex items-center text-gray-700 text-base">
+                      <svg className="w-4 h-4 text-[#000e54] mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      CASL (Canada)
+                    </li>
+                    <li className="flex items-center text-gray-700 text-base">
+                      <svg className="w-4 h-4 text-[#000e54] mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      Local regulations
+                    </li>
+                  </ul>
+                </div>
+                <div className="flex-1 bg-gray-50 p-4 rounded-lg border-l-4 border-[#000e54] ">
+                  <h3 className="font-semibold text-gray-800 mb-2 text-base">Security Features</h3>
+                  <p className="text-gray-800 text-base">Look for services that offer these important security features:</p>
+                  <ul className="mt-2 space-y-1">
+                    <li className="flex items-center text-gray-700 text-base">
+                      <svg className="w-4 h-4 text-[#000e54]  mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      Two-factor authentication
+                    </li>
+                    <li className="flex items-center text-gray-700 text-base">
+                      <svg className="w-4 h-4 text-[#000e54]  mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      Data encryption
+                    </li>
+                    <li className="flex items-center text-gray-700 text-base">
+                      <svg className="w-4 h-4 text-[#000e54]  mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      HTTPS protection
+                    </li>
+                    <li className="flex items-center text-gray-700 text-base">
+                      <svg className="w-4 h-4 text-[#000e54]  mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      Regular security audits
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </section>
+
+  </div>
+  </div>
+   {/* faq */}
+      
+                    <FAQ faqsData={faqData} />
+  </section>
+         
+
+{/* alternative */}
+{/* <div id="email-alternative" className="max-w-6xl mx-auto p-6  rounded-xl ">
+      <div className="mb-8 text-center">
+        <h1 className="text-4xl font-semibold text-gray-900 mb-4">Email Marketing Service Alternatives</h1>
+        <p className="text-xl text-gray-800">Explore smarter, more effective tools for your email campaigns</p>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {alternatives.map((alt, index) => (
+          <div key={index} className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 border-t-4 border-[#000e54]">
+            <h2 className="text-xl font-bold text-hray-800 mb-3">{alt.name}</h2>
+            <p className="text-gray-800 text-base mb-4">{alt.description}</p>
+            
+            <div className="mb-4">
+              <h3 className="font-semibold text-gray-800 text-base mb-2">Key Features:</h3>
+              <ul className="space-y-1">
+                {alt.features.map((feature, i) => (
+                  <li key={i} className="flex items-start">
+                    <svg className="h-5 w-5 text-[#000e54] mr-2 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span className="text-gray-800 text-base">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            
+            <div className="mt-4 pt-4 border-t border-gray-200">
+              <p className="text-base font-semibold text-gray-800">Ideal for: <span className="text-[#000e54]">{alt.bestFor}</span></p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div> */}
+
+  {/* is email worthit */}
+   {/* <div id="email-worthit" className=" py-16 px-4 sm:px-6 lg:px-8 rounded-xl">
+      <div className="max-w-6xl mx-auto"> */}
+        {/* Header */}
+        {/* <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-4xl font-semibold text-gray-900 mb-4 leading-tight">
+            Is Email Marketing <span className="text-[#000e54]">Worth It?</span>
+          </h2>
+          <p className="text-xl text-gray-800 max-w-3xl mx-auto">
+            Despite the rise of new marketing channels, email marketing remains one of the most effective strategies for businesses of all sizes.
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+          {worthStats.map((stat, index) => (
+            <div key={index} className="bg-white rounded-lg shadow-md p-6 text-center transform hover:-translate-y-1 transition-transform duration-300">
+              <div className="text-4xl md:text-4xl font-semibold text-[#000e54] mb-2">{stat.value}</div>
+              <div className="text-gray-800 text-base font-semibold">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+        
+        <div className="bg-white rounded-xl shadow-xl overflow-hidden mb-10">
+          <div className="p-6 md:p-8 border-b border-gray-100">
+            <div className="flex items-center mb-4">
+              <div className="bg-[#000e54] h-8 w-8 rounded-full flex items-center justify-center mr-3">
+                <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-800">Return on Investment</h3>
+            </div>
+            <p className="mb-4 text-base"> Email marketing is one of the most affordable and effective ways to grow your business. It delivers the highest return on investment (ROI) compared to other digital marketing methods.</p>
+            <p className="mb-4 text-base">  While paid ads keep getting more expensive, email lets you stay in touch with your audience at a much lower cost. On average, businesses earn $42 for every $1 they spend—way better than social media, PPC, or content marketing.</p>
+            <p className="mb-4 text-base">  This great return is thanks to email’s direct approach. You’re connecting with people who already like your brand, so they’re more likely to trust you and make a purchase.</p>
+            <div className="bg-blue-50 p-4 rounded-lg">
+              <p className="font-semibold text-[#000e54] text-xl">ROI Breakdown:</p>
+              <ul className="mt-2 space-y-2">
+                <li className="flex items-center text-base">
+                  <div className="bg-indigo-200 rounded-full p-1 mr-2">
+                    <svg className="h-4 w-4 text-[#000e54]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span>Lower customer acquisition costs</span>
+                </li>
+                <li className="flex items-center text-base">
+                  <div className="bg-indigo-200 rounded-full p-1 mr-2">
+                    <svg className="h-4 w-4 text-[#000e54]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span>Higher conversion rates from targeted messaging</span>
+                </li>
+                <li className="flex items-center text-base">
+                  <div className="bg-indigo-200 rounded-full p-1 mr-2">
+                    <svg className="h-4 w-4 text-[#000e54]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span>Increased customer lifetime value through retention</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
+        
+        <div className="bg-white rounded-xl shadow-xl overflow-hidden mb-10">
+          <div className="p-6 md:p-8 border-b border-gray-100">
+            <div className="flex items-center mb-4">
+              <div className="bg-[#000e54] h-8 w-8 rounded-full flex items-center justify-center mr-3">
+                <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900">Building Relationships</h3>
+            </div>
+            <p className="mb-4 text-base">Email marketing helps you talk directly to your customers, building strong, lasting relationships that keep them coming back.</p>
+            <p className="mb-4 text-base">Unlike social media, where algorithms can hide your posts, email gives you full control. Your messages go straight to your subscribers' inboxes, keeping you connected every step of the way.</p>
+            <p className="mb-4 text-base">By sending personalized messages, you show customers you understand what they like, which builds trust and turns them into loyal fans who recommend you to others.</p>
+            <div className="bg-indigo-50 p-4 rounded-lg">
+              <p className="font-semibold text-[#000e54] text-xl">Relationship Metrics:</p>
+              <ul className="mt-2 space-y-2">
+                <li className="flex items-center text-base">
+                  <div className="bg-indigo-200 rounded-full p-1 mr-2">
+                    <svg className="h-4 w-4 text-[#000e54]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span>44% of people have bought something after getting a promo email</span>
+                </li>
+                <li className="flex items-center text-base">
+                  <div className="bg-indigo-200 rounded-full p-1 mr-2">
+                    <svg className="h-4 w-4 text-[#000e54]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span>Segmented email campaigns can boost your revenue by up to 760%</span>
+                </li>
+                <li className="flex items-center text-base">
+                  <div className="bg-indigo-200 rounded-full p-1 mr-2">
+                    <svg className="h-4 w-4 text-[#000e54]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span>Birthday emails make 342% more money per email</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div> */}
+        
+        {/* Targeting Section */}
+        {/* <div className="bg-white rounded-xl shadow-xl overflow-hidden mb-10">
+          <div className="p-6 md:p-8 border-b border-gray-100">
+            <div className="flex items-center mb-4">
+              <div className="bg-[#000e54] h-8 w-8 rounded-full flex items-center justify-center mr-3">
+                <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900">Targeted Messaging</h3>
+            </div>
+            <p className="mb-4 text-base">Email marketing lets you send the right message to the right people, making it much easier to connect and get results compared to other marketing methods.</p>
+            <p className="mb-4 text-base">Today’s email tools help you group your audience by things like age, interests, shopping habits, or how they’ve interacted with you before. This makes sure each person gets messages that truly fit them.</p>
+            <p className="mb-4 text-base">Personalized emails can make people six times more likely to buy, and targeted campaigns can boost your sales by up to 760%. This personal touch makes your audience feel seen and keeps them engaged.</p>
+            <div className="bg-indigo-50 p-4 rounded-lg">
+              <p className="font-semibold text-xl text-[#000e54]">Targeting Capabilities:</p>
+              <ul className="mt-2 space-y-2">
+                <li className="flex items-center text-base">
+                  <div className="bg-indigo-200 rounded-full p-1 mr-2">
+                    <svg className="h-4 w-4 text-[#000e54]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span>Send emails triggered by what people do on your website</span>
+                </li>
+                <li className="flex items-center text-base">
+                  <div className="bg-indigo-200 rounded-full p-1 mr-2">
+                    <svg className="h-4 w-4 text-[#000e54]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span>Use purchase history to suggest products people may like</span>
+                </li>
+                <li className="flex items-center text-base">
+                  <div className="bg-indigo-200 rounded-full p-1 mr-2">
+                    <svg className="h-4 w-4 text-[#000e54]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span>Target by location or timing to get better responses</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div> */}
+        
+        {/* Analytics Section */}
+        {/* <div className="bg-white rounded-xl shadow-xl overflow-hidden mb-12">
+          <div className="p-6 md:p-8">
+            <div className="flex items-center mb-4">
+              <div className="bg-[#000e54] h-8 w-8 rounded-full flex items-center justify-center mr-3">
+                <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900">Measurable Results</h3>
+            </div>
+            <p className="mb-4 text-base">Email marketing gives you clear data to see how your messages are doing, helping you make them better over time.</p>
+            <p className="mb-4 text-base">You can track things like how many people open your emails, click on links, and make purchases. This shows you what's working and what needs improvement.</p>
+            < p className="mb-4 text-base">By testing different subject lines, content, and send times, you can find out what your audience likes best and improve your results.</p>
+            <div className="bg-indigo-50 p-4 rounded-lg">
+              <p className="font-semibold text-[#000e54] text-xl">Key Metrics to Track:</p>
+              <ul className="mt-2 space-y-2">
+                <li className="flex items-center text-base">
+                  <div className="bg-indigo-200 rounded-full p-1 mr-2">
+                    <svg className="h-4 w-4 text-[#000e54]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span>Open rate, click-through rate, and conversion rate</span>
+                </li>
+                <li className="flex items-center text-base">
+                  <div className="bg-indigo-200 rounded-full p-1 mr-2">
+                    <svg className="h-4 w-4 text-[#000e54]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span>List growth rate and unsubscribe rate</span>
+                </li>
+                <li className="flex items-center text-base">
+                  <div className="bg-indigo-200 rounded-full p-1 mr-2">
+                    <svg className="h-4 w-4 text-[#000e54]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span>Revenue per email and overall ROI</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> */}
 
-{/* Related Articles Section */}
+
+{/* related articles */}
 <section id="d-article">
-  <Article
-    title="Related Articles"
-    items={articles}
-    buttonText="View Post"
-    buttonColor="bg-[#ff8633]"
-  />
-</section>
+        <Article
+          title="Related Articles"
+          items={articles}
+          buttonText="View Post"
+          buttonColor="bg-[#ff8633]"
+        />
+      </section>
 
-{/* FAQ Section */}
-<FAQ faqsData={faqData} />
-
-</>
-);
+      {/* faq */}
+      
+                    {/* <FAQ faqsData={faqData} /> */}
+      {/* <section id="email-faq" className="">
+        <FAQ faqs={ emailFAQs} />
+      </section> */}
+    </>
+  );
+};
 
 export default EmailMarketingContent;
+
+
 
